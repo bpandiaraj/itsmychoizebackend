@@ -1,0 +1,34 @@
+{
+    "superSecret": "license",
+
+    "collectionSoftware": "Software",
+    "collectionLicense": "License",
+    "collectionCompany": "Company",
+    "collectionDevice": "Device",
+    "collectionUser": "User",
+
+    "apiError": "Error Occurred",
+
+    "apiNameUserCreate": "User Created",
+    "apiNameUserlogin": "User Login",
+    "apiErrorNoUser": "User not Found",
+    "apiErrorNotAuthenticated": "User not Authenticated",
+    "apiErrorInvalidPassword": "Password Invalid",
+
+    "apiNameToken": "Token Authentication",
+    "apiErrorTokenExpired": "Token Expired. Please Login",
+    "apiErrorNoToken": "Token not Found",
+    "apiErrorForbidden": "Forbidden without token ",
+
+    "apiNameSoftwareList": "Software List",
+    "apiNameSoftwareCreate": "Software Create",
+
+    "apiNameCompanyCreate": "Company Create",
+    "apiNameCompanyList": "Company List",
+
+    "apiNameDeviceCreate": "Device Create",
+    "apiNameDeviceList": "Device List",
+    "apiNameDeviceListCompany": "Device List Company",
+    "apiNameDeviceUpdate": "Device Update",
+    "apiNameDeviceLicense": "License Check"
+}
