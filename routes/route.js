@@ -14,11 +14,12 @@ module.exports = function (app) {
 
     app.post('/api/v1/admin/login', authenticationController.adminLogin);
 
-    app.get('/api/v1/landingList', tokenVerify, authenticationController.landingList);
-
+    // app.get('/api/v1/landingList', tokenVerify, authenticationController.landingList);
 
     app.get('/api/v1/contestants', tokenVerify, contestantsController.contestantsList);
     app.post('/api/v1/contestants', tokenVerify, contestantsController.contestantsCreate);
     app.put('/api/v1/contestants', tokenVerify, contestantsController.contestantsUpdate);
     app.delete('/api/v1/contestants', tokenVerify, contestantsController.contestantsDelete);
+
+    
 }

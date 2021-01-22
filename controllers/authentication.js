@@ -1,53 +1,60 @@
 // const userModel = require("../models/users.js");
 const adminModel = require("../models/admin.js");
 const constant = require("../util/constant.json")
+const jwt = require("jsonwebtoken");
+const config = require("../config/config.js");
 
 exports.adminLogin = function (req, res) {
+    console.log("login",req.body)
     adminModel.findOne({
-        userName: req.body.userName
-    }, ).lean().exec(function (err, user) {
-        console.log("userId:", user);
-
-        if (err) {
-            return res.status(401).json({
-                "APIName": constant.apiNameUserlogin,
-                "isError": true,
-                "message": constant.apiErrorNotAuthenticated
-            });
+            userName: req.body.userName,
+        },
+        function (err, loginData) {
+            console.log(loginData)
+            if (err) {
+                res.status(401).json({
+                    apiName: "User Login API",
+                    success: false,
+                    message: "Unsuccessful Login",
+                });
+            } else {
+                if (loginData != null) {
+                    if (req.body.password == loginData.password) {
+                        jwt.sign({
+                                loginData,
+                            },
+                            config.secretKey,
+                            (err, encode) => {
+                                res.json({
+                                    apiName: "User Login API",
+                                    success: true,
+                                    message: "User login Successful",
+                                    token: encode,
+                                    profile: {
+                                        _id: loginData._id,
+                                        name: loginData.name,
+                                        userName: loginData.userName,
+                                        profilePicture: loginData.profilePicture,
+                                        status: loginData.status
+                                    }
+                                });
+                            }
+                        );
+                    } else {
+                        res.status(401).json({
+                            apiName: "User Login API",
+                            success: false,
+                            message: "User Name or Password incorrect.",
+                        });
+                    }
+                } else {
+                    res.status(401).json({
+                        apiName: "User Login API",
+                        success: false,
+                        message: "User Not Found",
+                    });
+                }
+            }
         }
-
-        if (!user) {
-            return res.status(401).json({
-                "APIName": constant.apiNameUserlogin,
-                "isError": true,
-                "message": constant.apiErrorNoUser
-            });
-        }
-
-        if (req.body.password != user.password) {
-            return res.status(401).json({
-                "APIName": constant.apiNameUserlogin,
-                "isError": true,
-                "message": constant.apiErrorInvalidPassword
-            });
-        }
-
-        let token = jwt.sign(user, app.get('superSecret'), {
-            expiresIn: "8h" // expires in 8 hour
-        });
-
-        return res.json({
-            "APIName": constant.apiNameUserlogin,
-            "isError": false,
-            "message": constant.apiLoginSuccess,
-            "token": token,
-            "_id": user._id,
-            "email": user.email,
-            "createdTimestamp": user.createdTimestamp
-        });
-    });
-}
-
-exports.landingList = function (req, res) {
-
+    );
 }

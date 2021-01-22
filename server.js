@@ -8,7 +8,7 @@ var constant = require("./util/constant")
 
 mongoose.set('useCreateIndex', true)
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://localhost:27017/license_db", {
+mongoose.connect("mongodb://localhost:27017/it-my-choize", {
     useNewUrlParser: true
 })
 app.set('superSecret', constant.superSecret);

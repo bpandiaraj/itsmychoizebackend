@@ -2,57 +2,40 @@ var jwt = require('jsonwebtoken');
 // let User = require('../models/users');
 var express = require("express");
 var app = express();
-var constant = require("../util/constant")
+var constant = require("../util/constant.json")
 app.set('superSecret', constant.superSecret);
 
 module.exports = function (req, res, next) {
-    var token = req.body.token || req.query.token || req.headers['x-access-token'];
+    var token = req.headers["x-access-token"];
+    var app = req.headers['app'];
     if (token) {
-        // verifies secret and checks exp
-        // jwt.verify(token, app.get('superSecret'), function (err, decoded) {
-        //     if (err) { //failed verification.
-        //         return res.status(401).send({
-        //             "APIName": constant.apiNameToken,
-        //             "isError": true,
-        //             "message": constant.apiErrorTokenExpired
-        //         });
-        //     }
-        //     // req.decoded = decoded;
-        //     global.userId = decoded._id;
+        if (app == 'user') {
 
-        //     console.log("userId:", userId);
-
-        //     User.findById(userId, function (err, user) {
-        //         if (err) {
-        //             return res.status(401).send({
-
-        //                 "APIName": constant.apiNameToken,
-        //                 "isError": true,
-        //                 "message": constant.apiErrorNoUser
-        //                 // }
-        //             });
-        //         }
-        //         if (!user) {
-        //             return res.status(401).send({
-        //                 "APIName": constant.apiNameToken,
-        //                 "isError": true,
-        //                 "message": constant.apiErrorNoToken
-        //             });
-        //         }
-
-        //         console.log("user:", user);
-        //         // Do something with the user
-        //         next(); //no error, proceed
-        //     });
-        // });
+        } else if (app == 'admin') {
+            jwt.verify(token, config.secretKey, function (err, decoded) {
+                if (err) {
+                    res.status(401).json({
+                        apiName: constant.apiNameToken,
+                        success: false,
+                        message: constant.apiErrorTokenExpired,
+                    });
+                } else {
+                    global.decoded = decoded;
+                    next();
+                }
+            });
+        } else {
+            return res.status(403).send({
+                apiName: constant.apiNameToken,
+                success: true,
+                message: constant.apiErrorNoAppName
+            });
+        }
     } else {
-        // forbidden without token
         return res.status(403).send({
-
-            "APIName": constant.apiNameToken,
-            "isError": true,
-            "message": constant.apiErrorForbidden
-            // }
+            apiName: constant.apiNameToken,
+            success: true,
+            message: constant.apiErrorForbidden
         });
     }
 }

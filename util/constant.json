@@ -17,6 +17,7 @@
     "apiNameToken": "Token Authentication",
     "apiErrorTokenExpired": "Token Expired. Please Login",
     "apiErrorNoToken": "Token Not Found",
+    "apiErrorNoAppName": "Application Type Not Found.",
     "apiErrorForbidden": "Forbidden Without Token ",
 
     "apiNameSoftwareList": "Software List",
