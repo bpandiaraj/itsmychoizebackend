@@ -23,7 +23,7 @@ exports.adminLogin = function (req, res) {
                         jwt.sign({
                                 loginData,
                             },
-                            config.secretKey,
+                            config.secret,
                             (err, encode) => {
                                 res.json({
                                     apiName: "User Login API",

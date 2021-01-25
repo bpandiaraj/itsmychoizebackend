@@ -22,7 +22,16 @@ var userSchema = mongoose.Schema({
     gender: {
         type: String,
     },
+    state: {
+        type: String,
+    },
+    country: {
+        type: String,
+    },
     city: {
+        type: String,
+    },
+    pincode: {
         type: String,
     },
     profilePicture: {

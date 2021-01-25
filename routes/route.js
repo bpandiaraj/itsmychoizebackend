@@ -1,5 +1,6 @@
 const authenticationController = require('../controllers/authentication.js');
 const contestantsController = require('../controllers/contestants.js');
+const usersController = require('../controllers/users');
 const tokenVerify = require('../middlewares/verifyToken');
 
 module.exports = function (app) {
@@ -21,5 +22,11 @@ module.exports = function (app) {
     app.put('/api/v1/contestants', tokenVerify, contestantsController.contestantsUpdate);
     app.delete('/api/v1/contestants', tokenVerify, contestantsController.contestantsDelete);
 
-    
+
+    //users apis
+    app.put('/api/v1/user/profile', tokenVerify, usersController.userProfileUpdate);
+    app.get('/api/v1/user/profile', tokenVerify, usersController.getMyProfile);
+    app.get('/api/v1/user/create', usersController.userCheckAndCreate);
+
+
 }
