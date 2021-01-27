@@ -25,7 +25,8 @@ exports.userCheckAndCreate = (req, res) => {
               email: userInfo.email,
               mobile: userInfo.phoneNumber,
               profilePicture: userInfo.photoURL || null,
-              status: 'active'
+              status: 'active',
+              // redeemPoint: req.configure.entryPointForUser || 0
             });
             userData.save(function (err, savedData) {
               if (err) {

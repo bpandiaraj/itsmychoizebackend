@@ -9,6 +9,14 @@ var showSchema = mongoose.Schema({
         type: String,
         require: true,
     },
+    databaseId: {
+        type: String,
+        require: true,
+    },
+    language: {
+        type: String,
+        require: true,
+    },
     createdAt: {
         type: Date,
         default: new Date(),

@@ -8,7 +8,7 @@ module.exports = function (app) {
     app.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT")
         res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, x-access-token, X-Requested-With, Content-Type, Accept");
+        res.header("Access-Control-Allow-Headers", "Origin, x-access-token, X-Requested-With, Content-Type, Accept, app");
         res.header("Access-Control-Allow-Credentials", true);
         next();
     })
@@ -22,11 +22,8 @@ module.exports = function (app) {
     app.put('/api/v1/contestants', tokenVerify, contestantsController.contestantsUpdate);
     app.delete('/api/v1/contestants', tokenVerify, contestantsController.contestantsDelete);
 
-
     //users apis
     app.put('/api/v1/user/profile', tokenVerify, usersController.userProfileUpdate);
     app.get('/api/v1/user/profile', tokenVerify, usersController.getMyProfile);
     app.get('/api/v1/user/create', usersController.userCheckAndCreate);
-
-
 }

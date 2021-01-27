@@ -42,6 +42,9 @@ var eventSchema = mongoose.Schema({
     modifiedBy: {
         type: mongoose.Schema.Types.ObjectId
     },
+    winningContestants: [{
+        type: mongoose.Schema.Types.ObjectId
+    }],
     createdAt: {
         type: Date,
         default: new Date(),

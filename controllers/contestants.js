@@ -119,6 +119,7 @@ exports.contestantsCreate = function (req, res) {
 function saveImages(t, data, files, res) {
     if (files.image != undefined) {
         let newpath = `./images/biggboss_tamil/contestant`;
+        let newpath1 = `/biggboss_tamil/contestant`;
         console.log("files.image.path", files.image.path)
         fs.rename(files.image.path, newpath + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim(), (err) => {
             if (err) {
@@ -126,7 +127,7 @@ function saveImages(t, data, files, res) {
             } else {
                 contestants.findOneAndUpdate(
                     data._doc._id, {
-                        images: [newpath + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim()]
+                        images: [newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim()]
                     },
                     function (err, savedData) {
                         if (err) {
