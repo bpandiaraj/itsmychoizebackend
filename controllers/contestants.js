@@ -1,9 +1,6 @@
-const {
-    text
-} = require("body-parser");
 const contestants = require("../models/contestants.js");
-const constant = require("../util/constant.json")
 const formidable = require("formidable");
+const constant = require("../util/constant.json")
 const moment = require("moment");
 const path = require("path");
 const fs = require("fs");
@@ -168,7 +165,6 @@ exports.contestantsUpdate = function (req, res) {
             message: "Please provide the contestant ID to update.",
         });
     }
-
 
     var contestantsData = {
         name: req.body.name,

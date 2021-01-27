@@ -20,6 +20,9 @@ var eventPlaySchema = mongoose.Schema({
     },
     modifiedAt: {
         type: Date,
+    },
+    userRanking:{
+        type: Number,
     }
 });
 
