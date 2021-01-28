@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
-var showSchema = mongoose.Schema({
+var eventSchema = mongoose.Schema({
     logo: {
         type: String
     },
@@ -14,8 +13,7 @@ var showSchema = mongoose.Schema({
         require: true,
     },
     language: {
-        type: String,
-        require: true,
+        type: Array,
     },
     createdAt: {
         type: Date,
@@ -26,7 +24,4 @@ var showSchema = mongoose.Schema({
     }
 });
 
-showSchema.plugin(mongooseAggregatePaginate);
-
-var show = mongoose.model("show", showSchema);
-module.exports = show;
+module.exports = eventSchema;

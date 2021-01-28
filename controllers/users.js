@@ -1,11 +1,18 @@
 const admin = require("../shared-datas/fire-base.js");
 const userModel = require("../models/users.js");
+const config = require("../config/config.js");
+const {
+  getModelByShow
+} = require("../config/db_connection.js");
 
 exports.userCheckAndCreate = (req, res) => {
-  userModel.findOne({
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+
+  userDB.findOne({
       uid: req.query.uid,
     },
     function (err, user) {
+      console.log("user",user,err)
       if (err) {
         res.status(400).send({
           apiName: "User Check API",
@@ -19,7 +26,7 @@ exports.userCheckAndCreate = (req, res) => {
           .then(function (userRecord) {
             // See the UserRecord reference doc for the contents of userRecord.
             let userInfo = userRecord.toJSON();
-            var userData = new userModel({
+            var userData = new userDB({
               uid: req.query.uid,
               name: userInfo.displayName,
               email: userInfo.email,
@@ -29,6 +36,7 @@ exports.userCheckAndCreate = (req, res) => {
               // redeemPoint: req.configure.entryPointForUser || 0
             });
             userData.save(function (err, savedData) {
+              console.log(err)
               if (err) {
                 res.status(400).send({
                   apiName: "User Check API",

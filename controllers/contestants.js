@@ -4,6 +4,9 @@ const constant = require("../util/constant.json")
 const moment = require("moment");
 const path = require("path");
 const fs = require("fs");
+const {
+    getModelByShow
+} = require("../config/db_connection.js");
 
 exports.contestantsList = function (req, res) {
     var search = req.body.search;
@@ -34,14 +37,16 @@ exports.contestantsList = function (req, res) {
         });
     }
 
-    var aggregate = contestants.aggregate(arr);
+    var contestantModel = getModelByShow(req.db, "contestant", contestants)
+
+    var aggregate = contestantModel.aggregate(arr);
 
     var options = {
         page: req.query.page || 1,
         limit: parseInt(req.query.limit) || 200,
     };
 
-    contestants.aggregatePaginate(aggregate, options, function (
+    contestantModel.aggregatePaginate(aggregate, options, function (
         err,
         listdata,
         pageCount,
@@ -84,7 +89,8 @@ exports.contestantsCreate = function (req, res) {
         } else {
             var body = JSON.parse(fields.contestantInfo);
             console.log("body", body);
-            var contestantsData = new contestants({
+            var contestantModel = getModelByShow(req.db, "contestant", contestants)
+            var contestantsData = new contestantModel({
                 name: body.name,
                 biography: body.biography,
                 professional: body.professional,
@@ -103,7 +109,7 @@ exports.contestantsCreate = function (req, res) {
                     });
                 } else {
                     console.log("saved", savedData)
-                    saveImages('create', savedData, files, res);
+                    saveImages('create', savedData, files, res, contestantModel);
                     // res.json({
                     //     apiName: "Contestant Create API",
                     //     success: true,
@@ -116,7 +122,7 @@ exports.contestantsCreate = function (req, res) {
     })
 }
 
-function saveImages(t, data, files, res) {
+function saveImages(t, data, files, res, db) {
     if (files.image != undefined) {
         let newpath = `./images/biggboss_tamil/contestant`;
         let newpath1 = `/biggboss_tamil/contestant`;
@@ -125,7 +131,7 @@ function saveImages(t, data, files, res) {
             if (err) {
                 console.log("err", err)
             } else {
-                contestants.findOneAndUpdate(
+                db.findOneAndUpdate(
                     data._doc._id, {
                         images: [newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim()]
                     },
@@ -175,8 +181,8 @@ exports.contestantsUpdate = function (req, res) {
         createdAt: new Date(),
         modifiedAt: null,
     };
-
-    contestants.findByIdAndUpdate(req.query.id, contestantsData, function (err, savedData) {
+    var contestantModel = getModelByShow(req.db, "contestant", contestants)
+    contestantModel.findByIdAndUpdate(req.query.id, contestantsData, function (err, savedData) {
         if (err) {
             res.status(400).json({
                 apiName: "Contestant Update API",
@@ -193,6 +199,33 @@ exports.contestantsUpdate = function (req, res) {
     });
 }
 
-exports.contestantsDelete = function (req, res) {
+exports.contestantsDelete = function (req, res) {}
 
+exports.contestantsStatus = function (req, res) {}
+
+exports.contestantsDetails = function (req, res) {
+    if (!req.query.id) {
+        return res.status(400).json({
+            apiName: "Contestant Detail API",
+            success: false,
+            message: "Please provide the contestant ID to get the contestant bio-data.",
+        });
+    }
+    var contestantModel = getModelByShow(req.db, "contestant", contestants);
+    contestantModel.findById(req.query.id, function (err, contestantData) {
+        if (err) {
+            res.status(400).json({
+                apiName: "Contestant Detail API",
+                success: false,
+                message: "Error Occurred",
+            });
+        } else {
+            res.json({
+                apiName: "Contestant Detail API",
+                success: true,
+                message: "Contestant has been updated successfully.",
+                data: contestantData
+            });
+        }
+    });
 }

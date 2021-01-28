@@ -9,6 +9,7 @@ const config = require("../config/config.js");
 module.exports = function (req, res, next) {
     var token = req.headers["x-access-token"];
     var app = req.headers['app'];
+    var showDB = req.headers['show'];
     if (token) {
         if (app == 'user') {
             admin.firebase_admin
@@ -28,6 +29,7 @@ module.exports = function (req, res, next) {
                             } else if (user) {
                                 req.id = user._id;
                                 req.uid = decodedToken.uid;
+                                req.db = showDB ? config.db + "_" + showDB : config.db;
                                 next();
                             }
                         }
@@ -52,6 +54,7 @@ module.exports = function (req, res, next) {
                 } else {
                     req.decoded = decoded;
                     req.id = decoded.loginData._id
+                    req.db = showDB ? config.db + "_" + showDB : config.db;
                     next();
                 }
             });

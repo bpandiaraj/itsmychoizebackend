@@ -1,8 +1,8 @@
 module.exports = {
     secret: 'harrypotter',
-    url: 'mongodb://localhost:27017/Ksign_SAAS',
-    ServerPort: '3050',
+    url: 'mongodb://localhost:27017/its_my_choize',
+    ServerPort: '3250',
     Protocol: 'http',
-    emailId: 'kanmalaitechnologiescbe@gmail.com',
-    password: 'KCkan(61)'
+    db:"its_my_choize",
+    masterDB:"its_my_choize"
 }

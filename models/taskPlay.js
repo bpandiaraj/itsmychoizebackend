@@ -1,14 +1,14 @@
 const mongoose = require("mongoose");
 var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
-var eventPlaySchema = mongoose.Schema({
+var taskPlaySchema = mongoose.Schema({
     user: {
         type: mongoose.Types.ObjectId,
         ref: "Favorites",
     },
-    event: {
+    task: {
         type: mongoose.Types.ObjectId,
-        ref: "Events",
+        ref: "Tasks",
     },
     contestants: {
         type: Array,
@@ -26,7 +26,7 @@ var eventPlaySchema = mongoose.Schema({
     }
 });
 
-eventPlaySchema.plugin(mongooseAggregatePaginate);
+taskPlaySchema.plugin(mongooseAggregatePaginate);
 
-var eventPlay = mongoose.model("eventPlay", eventPlaySchema);
-module.exports = eventPlay;
+var taskPlay = mongoose.model("taskPlay", taskPlaySchema);
+module.exports = taskPlay;

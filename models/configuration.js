@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
 var configurationSchema = mongoose.Schema({
     entryPointForUser: {
@@ -19,7 +18,4 @@ var configurationSchema = mongoose.Schema({
     }
 });
 
-configurationSchema.plugin(mongooseAggregatePaginate);
-
-var configuration = mongoose.model("configuration", configurationSchema);
-module.exports = configuration;
+module.exports = configurationSchema;

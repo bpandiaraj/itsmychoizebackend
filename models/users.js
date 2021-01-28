@@ -16,8 +16,7 @@ var userSchema = mongoose.Schema({
         unique: true
     },
     mobile: {
-        type: String,
-        unique: true
+        type: String
     },
     gender: {
         type: String,
@@ -70,7 +69,7 @@ var userSchema = mongoose.Schema({
     }
 });
 
-userSchema.plugin(mongooseAggregatePaginate);
+// userSchema.plugin(mongooseAggregatePaginate);
 
-var user = mongoose.model("user", userSchema);
-module.exports = user;
+// var user = mongoose.model("user", userSchema);
+module.exports = userSchema;

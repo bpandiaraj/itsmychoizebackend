@@ -1,20 +1,19 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
 var contestantSchema = mongoose.Schema({
     name: {
-        type: String,
+        type: Object,
         require: true,
     },
     images: {
         type: Array,
     },
     biography: {
-        type: String,
+        type: Object,
         unique: true
     },
     professional: {
-        type: String,
+        type: Object,
     },
     status: {
         type: String,
@@ -26,10 +25,10 @@ var contestantSchema = mongoose.Schema({
     },
     modifiedAt: {
         type: Date,
+    },
+    translations: {
+        type: Object
     }
 });
 
-contestantSchema.plugin(mongooseAggregatePaginate);
-
-var contestant = mongoose.model("contestant", contestantSchema);
-module.exports = contestant;
+module.exports = contestantSchema;

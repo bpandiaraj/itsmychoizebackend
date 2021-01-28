@@ -5,12 +5,11 @@ var mongoose = require("mongoose");
 var bodyParser = require('body-parser');
 var nodemon = require('nodemon');
 var constant = require("./util/constant")
-
-mongoose.set('useCreateIndex', true)
+// mongoose.set('useCreateIndex', true)
 mongoose.Promise = global.Promise
-mongoose.connect("mongodb://localhost:27017/it-my-choize", {
-    useNewUrlParser: true
-})
+// mongoose.connect("mongodb://localhost:27017/its_my_choize", {
+//     useNewUrlParser: true
+// })
 app.set('superSecret', constant.superSecret);
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
@@ -18,17 +17,17 @@ app.use(bodyParser.urlencoded({
 }));
 app.use(express.static('images'));
 app.get("/", (req, res) => {
-    res.send("Hello World");
+    res.send("Welcome to Its My Choize......");
 });
 
-mongoose.connection.on('error', function () {
-    console.log("Could not connect to Database.. Exiting Now...")
-    process.exit();
-})
+// mongoose.connection.on('error', function () {
+//     console.log("Could not connect to Database.. Exiting Now...")
+//     process.exit();
+// })
 
-mongoose.connection.once('open', function () {
-    console.log("Database Connected.")
-})
+// mongoose.connection.once('open', function () {
+//     console.log("Database Connected.")
+// })
 require('./routes/route')(app);
 
 process

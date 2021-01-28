@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
-var eventSchema = mongoose.Schema({
+var taskSchema = mongoose.Schema({
     name: {
         type: String,
         require: true,
@@ -54,7 +54,7 @@ var eventSchema = mongoose.Schema({
     }
 });
 
-eventSchema.plugin(mongooseAggregatePaginate);
+taskSchema.plugin(mongooseAggregatePaginate);
 
-var event = mongoose.model("event", eventSchema);
-module.exports = event;
+var task = mongoose.model("task", taskSchema);
+module.exports = task;
