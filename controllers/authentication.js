@@ -3,10 +3,14 @@ const adminModel = require("../models/admin.js");
 const constant = require("../util/constant.json")
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
+const {
+    getModelByShow
+} = require("../config/db_connection.js");
 
 exports.adminLogin = function (req, res) {
-    console.log("login",req.body)
-    adminModel.findOne({
+    console.log("login",req.body);
+    var adminDB = getModelByShow(config.masterDB, "admin", adminModel);
+    adminDB.findOne({
             userName: req.body.userName,
         },
         function (err, loginData) {

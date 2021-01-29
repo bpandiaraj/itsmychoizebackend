@@ -4,7 +4,6 @@ var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 var adminSchema = mongoose.Schema({
     uid: {
         type: String,
-        unique: true,
         require: true,
     },
     name: {
@@ -13,11 +12,11 @@ var adminSchema = mongoose.Schema({
     },
     userName: {
         type: String,
-        unique: true
+        require: true,
     },
     password: {
         type: String,
-        unique: true
+        require: true,
     },
     profilePicture: {
         type: String,
@@ -38,7 +37,7 @@ var adminSchema = mongoose.Schema({
     },
 });
 
-adminSchema.plugin(mongooseAggregatePaginate);
+// adminSchema.plugin(mongooseAggregatePaginate);
 
-var admin = mongoose.model("admin", adminSchema);
-module.exports = admin;
+// var admin = mongoose.model("admin", adminSchema);
+module.exports = adminSchema;

@@ -7,12 +7,11 @@ const {
 
 exports.userCheckAndCreate = (req, res) => {
   var userDB = getModelByShow(config.masterDB, "user", userModel);
-
   userDB.findOne({
       uid: req.query.uid,
     },
     function (err, user) {
-      console.log("user",user,err)
+      console.log("user", user, err)
       if (err) {
         res.status(400).send({
           apiName: "User Check API",

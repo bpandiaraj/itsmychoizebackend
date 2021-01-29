@@ -72,7 +72,6 @@ exports.contestantsList = function (req, res) {
     });
 };
 
-
 exports.contestantsCreate = function (req, res) {
     var form = new formidable.IncomingForm();
     form.multiples = true;
@@ -87,20 +86,28 @@ exports.contestantsCreate = function (req, res) {
                 message: "Error Occurred",
             });
         } else {
+            console.log(fields.contestantInfo)
             var body = JSON.parse(fields.contestantInfo);
             console.log("body", body);
-            var contestantModel = getModelByShow(req.db, "contestant", contestants)
+            var contestantModel = getModelByShow(req.db, "contestant", contestants);
+            var translation = {}
+            translation[req.nativeLanguage] = {
+                ...body.translation
+            };
+
             var contestantsData = new contestantModel({
                 name: body.name,
                 biography: body.biography,
                 professional: body.professional,
-                status: "active",
+                status: body.status,
                 createdAt: new Date(),
                 modifiedAt: null,
+                translation: translation
             });
             console.log("contestantsData", contestantsData);
 
             contestantsData.save(function (err, savedData) {
+                console.log(err)
                 if (err) {
                     res.status(400).json({
                         apiName: "Contestant Create API",
@@ -110,12 +117,6 @@ exports.contestantsCreate = function (req, res) {
                 } else {
                     console.log("saved", savedData)
                     saveImages('create', savedData, files, res, contestantModel);
-                    // res.json({
-                    //     apiName: "Contestant Create API",
-                    //     success: true,
-                    //     message: "Contestant has been saved successfully.",
-                    //     id: savedData._doc._id,
-                    // });
                 }
             });
         }
@@ -131,7 +132,7 @@ function saveImages(t, data, files, res, db) {
             if (err) {
                 console.log("err", err)
             } else {
-                db.findOneAndUpdate(
+                db.findByIdAndUpdate(
                     data._doc._id, {
                         images: [newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim()]
                     },

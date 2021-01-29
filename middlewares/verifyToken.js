@@ -5,17 +5,22 @@ var app = express();
 var constant = require("../util/constant.json")
 app.set('superSecret', constant.superSecret);
 const config = require("../config/config.js");
+const {
+    admin
+} = require("../shared-datas/fire-base.js");
 
 module.exports = function (req, res, next) {
     var token = req.headers["x-access-token"];
     var app = req.headers['app'];
     var showDB = req.headers['show'];
     if (token) {
-        if (app == 'user') {
-            admin.firebase_admin
+        if (app == 'mobile') {
+            console.log("token ", token);
+            admin
                 .auth()
                 .verifyIdToken(token)
                 .then(function (decodedToken) {
+                    console.log("decoded ", decodedToken)
                     userModel.findOne({
                             uid: decodedToken.uid,
                         },
@@ -30,12 +35,14 @@ module.exports = function (req, res, next) {
                                 req.id = user._id;
                                 req.uid = decodedToken.uid;
                                 req.db = showDB ? config.db + "_" + showDB : config.db;
+                                req.show = showDB;
                                 next();
                             }
                         }
                     );
                 })
                 .catch(function (error) {
+                    console.log(error)
                     res.status(403).json({
                         apiName: constant.apiNameToken,
                         success: true,
@@ -55,6 +62,7 @@ module.exports = function (req, res, next) {
                     req.decoded = decoded;
                     req.id = decoded.loginData._id
                     req.db = showDB ? config.db + "_" + showDB : config.db;
+                    req.show = showDB;
                     next();
                 }
             });

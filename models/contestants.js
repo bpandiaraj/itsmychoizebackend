@@ -10,7 +10,6 @@ var contestantSchema = mongoose.Schema({
     },
     biography: {
         type: Object,
-        unique: true
     },
     professional: {
         type: Object,
@@ -26,7 +25,7 @@ var contestantSchema = mongoose.Schema({
     modifiedAt: {
         type: Date,
     },
-    translations: {
+    translation: {
         type: Object
     }
 });

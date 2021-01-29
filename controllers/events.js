@@ -1,14 +1,14 @@
 const eventModel = require("../models/event.js");
 const favoriteEventModel = require("../models/favorite_event.js");
-const config = require("../config/config.js");
 const ObjectId = require("mongodb").ObjectID;
 const {
     getModelByShow
 } = require("../config/db_connection.js");
+const { masterDB } = require("../config/config.js");
 
 exports.getEventList = function (req, res) {
     console.log(req.db)
-    var eventDB = getModelByShow(config.masterDB, "event", eventModel);
+    var eventDB = getModelByShow(masterDB, "event", eventModel);
     var search = req.body.search;
     var arr = [];
     if (search) {
@@ -81,7 +81,7 @@ exports.getEventLanguage = function (req, res) {
         },
     ]
 
-    var eventDB = getModelByShow(config.masterDB, "event", eventModel);
+    var eventDB = getModelByShow(masterDB, "event", eventModel);
     var aggregate = eventDB.aggregate(arr);
 
     var options = {
@@ -120,6 +120,6 @@ exports.getEventLanguage = function (req, res) {
 }
 
 exports.saveFavoriteEvent = function (req, res) {
-    var eventDB = getModelByShow(req.db, "favoriteEvent", favoriteEventModel);
-
+    var eventDB = getModelByShow(masterDB, "favoriteEvent", favoriteEventModel);
+    
 }
