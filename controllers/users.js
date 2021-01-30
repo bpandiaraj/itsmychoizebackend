@@ -1,4 +1,6 @@
-const admin = require("../shared-datas/fire-base.js");
+const {
+  admin
+} = require("../shared-datas/fire-base.js");
 const userModel = require("../models/users.js");
 const config = require("../config/config.js");
 const {
@@ -19,7 +21,7 @@ exports.userCheckAndCreate = (req, res) => {
           message: "Some error occurred",
         });
       } else if (!user) {
-        admin.firebase_admin
+        admin
           .auth()
           .getUser(req.query.uid)
           .then(function (userRecord) {
