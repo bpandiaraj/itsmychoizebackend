@@ -1,11 +1,11 @@
-const {
-  admin
-} = require("../shared-datas/fire-base.js");
 const userModel = require("../models/users.js");
 const config = require("../config/config.js");
 const {
   getModelByShow
 } = require("../config/db_connection.js");
+const {
+  admin
+} = require("../shared-datas/fire-base.js");
 
 exports.userCheckAndCreate = (req, res) => {
   var userDB = getModelByShow(config.masterDB, "user", userModel);

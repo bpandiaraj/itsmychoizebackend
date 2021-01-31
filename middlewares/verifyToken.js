@@ -8,6 +8,9 @@ const config = require("../config/config.js");
 const {
     admin
 } = require("../shared-datas/fire-base.js");
+const {
+    getModelByShow
+} = require("../config/db_connection.js");
 
 module.exports = function (req, res, next) {
     var token = req.headers["x-access-token"];
@@ -20,8 +23,9 @@ module.exports = function (req, res, next) {
                 .auth()
                 .verifyIdToken(token)
                 .then(function (decodedToken) {
-                    console.log("decoded ", decodedToken)
-                    userModel.findOne({
+                    console.log("decoded ", decodedToken);
+                    var userDB = getModelByShow(config.masterDB, "user", userModel);
+                    userDB.findOne({
                             uid: decodedToken.uid,
                         },
                         function (err, user) {

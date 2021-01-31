@@ -58,7 +58,7 @@ module.exports = function (app) {
     */
     app.get('/api/v1/event/list', tokenVerify, eventController.getEventList);
     app.get('/api/v1/event/language', tokenVerify, eventController.getEventLanguage);
-    app.get('/api/v1/event/favorite', tokenVerify, eventController.getEventLanguage);
+    // app.get('/api/v1/event/favorite', tokenVerify, eventController.getEventLanguage);
 
     /*
     Configuration API.
