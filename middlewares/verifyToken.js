@@ -39,6 +39,7 @@ module.exports = function (req, res, next) {
                                             message: constant.apiErrorForbidden
                                         });
                                     } else if (user) {
+                                        console.log(user)
                                         req.id = user._id;
                                         req.uid = uid;
                                         req.db = showDB ? config.db + "_" + showDB : config.db;
