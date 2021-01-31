@@ -174,13 +174,17 @@ exports.contestantsUpdate = function (req, res) {
         });
     }
 
+    var translation = {}
+    translation[req.nativeLanguage] = {
+        ...body.translation
+    };
     var contestantsData = {
         name: req.body.name,
         biography: req.body.biography,
         professional: req.body.professional,
-        status: "active",
-        createdAt: new Date(),
-        modifiedAt: null,
+        status:  req.body.status,
+        modifiedAt: new Date(),
+        translation: translation
     };
     var contestantModel = getModelByShow(req.db, "contestant", contestants)
     contestantModel.findByIdAndUpdate(req.query.id, contestantsData, function (err, savedData) {

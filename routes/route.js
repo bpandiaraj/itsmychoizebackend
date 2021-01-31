@@ -11,7 +11,7 @@ module.exports = function (app) {
     app.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT")
         res.header("Access-Control-Allow-Origin", "*");
-        res.header("Access-Control-Allow-Headers", "Origin, x-access-token, X-Requested-With, Content-Type, Accept, app, show");
+        res.header("Access-Control-Allow-Headers", "Origin, x-access-token, X-Requested-With, Content-Type, Accept, app, show, uid");
         res.header("Access-Control-Allow-Credentials", true);
         next();
     })
