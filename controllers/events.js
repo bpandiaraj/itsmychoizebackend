@@ -8,8 +8,8 @@ const {
     masterDB
 } = require("../config/config.js");
 
-exports.getEventList = function (req, res) {
-    var eventDB = getModelByShow(masterDB, "event", eventModel);
+exports.getEventList = async function (req, res) {
+    var eventDB = await getModelByShow(masterDB, "event", eventModel);
     var search = req.body.search;
     var arr = [];
     if (search) {
