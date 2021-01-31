@@ -22,6 +22,7 @@ const getTenantDB = function getConnections(showId, modelName, schema) {
     const mCon = multitenantPool[showId];
     if (mCon) {
         if (!mCon.modelSchemas[modelName]) {
+            schema.plugin(mongooseAggregatePaginate);
             mCon.model(modelName, schema);
         }
         return mCon;
