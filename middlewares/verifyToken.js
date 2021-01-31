@@ -49,8 +49,8 @@ module.exports = function (req, res, next) {
                     console.log(error)
                     res.status(403).json({
                         apiName: constant.apiNameToken,
-                        success: true,
-                        message: constant.apiErrorForbidden
+                        success: false,
+                        message: error
                     });
                 });
 
