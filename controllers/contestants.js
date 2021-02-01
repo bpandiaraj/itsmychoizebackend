@@ -63,7 +63,7 @@ exports.contestantsList = function (req, res) {
                 apiName: "Contestant List API",
                 success: true,
                 message: "Successfully view Contestant list",
-                list: listdata,
+                contestantList: listdata,
                 currentPage: req.query.page,
                 totalPages: pageCount,
                 dataCount: count,

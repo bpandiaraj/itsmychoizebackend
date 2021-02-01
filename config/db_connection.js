@@ -18,7 +18,6 @@ const mongoOptions = {
 };
 
 const getTenantDB = function getConnections(showId, modelName, schema) {
-    console.log
     const mCon = multitenantPool[showId];
     if (mCon) {
         if (!mCon.modelSchemas[modelName]) {

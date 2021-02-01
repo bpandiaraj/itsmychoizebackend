@@ -49,7 +49,7 @@ exports.getEventList = async function (req, res) {
                 apiName: "Event List API",
                 success: true,
                 message: "Successfully view Event list",
-                list: listdata,
+                eventList: listdata,
                 currentPage: req.query.page,
                 totalPages: pageCount,
                 dataCount: count,
@@ -108,7 +108,7 @@ exports.getEventLanguage = function (req, res) {
                 apiName: "Event List API",
                 success: true,
                 message: "Successfully view Event list",
-                list: listdata.length > 0 ? listdata[0].language : [],
+                languageList: listdata.length > 0 ? listdata[0].language : [],
                 event: {
                     name: listdata[0].name,
                     logo: listdata[0].logo,
