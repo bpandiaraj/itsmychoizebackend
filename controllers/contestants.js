@@ -176,7 +176,7 @@ exports.contestantsUpdate = function (req, res) {
 
     var translation = {}
     translation[req.nativeLanguage] = {
-        ...body.translation
+        ...req.body.translation
     };
     var contestantsData = {
         name: req.body.name,
