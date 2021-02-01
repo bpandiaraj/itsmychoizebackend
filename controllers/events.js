@@ -123,4 +123,29 @@ exports.getEventLanguage = function (req, res) {
 exports.saveFavoriteEvent = function (req, res) {
     var eventDB = getModelByShow(masterDB, "favoriteEvent", favoriteEventModel);
 
+    var eventData = new eventDB({
+        user: req._id,
+        event: body.event,
+        defaultLanguage: body.defaultLanguage || null,
+        createdAt: new Date(),
+    });
+    console.log("eventData", eventData);
+
+    eventData.save(function (err, savedData) {
+        console.log(err)
+        if (err) {
+            res.status(400).json({
+                apiName: "Event Favorite API",
+                success: false,
+                message: "Error Occurred",
+            });
+        } else {
+            console.log("saved", savedData)
+            res.status(400).json({
+                apiName: "Event Favorite API",
+                success: true,
+                message: "Event has been favorited",
+            });
+        }
+    });
 }
