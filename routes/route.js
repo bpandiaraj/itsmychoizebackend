@@ -47,6 +47,7 @@ module.exports = function (app) {
     app.put('/api/v1/user/profile', tokenVerify, usersController.userProfileUpdate);
     app.get('/api/v1/user/profile', tokenVerify, usersController.getMyProfile);
     app.get('/api/v1/user/create', usersController.userCheckAndCreate);
+    app.get('/api/v1/user/list', tokenVerify, usersController.usersList);
 
     /*
     Event API.
@@ -56,7 +57,7 @@ module.exports = function (app) {
     */
     app.get('/api/v1/event/list', tokenVerify, eventController.getEventList);
     app.get('/api/v1/event/language', tokenVerify, eventController.getEventLanguage);
-    app.get('/api/v1/event/favorite', tokenVerify, eventController.saveFavoriteEvent);
+    app.post('/api/v1/event/favorite', tokenVerify, eventController.saveFavoriteEvent);
 
     /*
     Configuration API.

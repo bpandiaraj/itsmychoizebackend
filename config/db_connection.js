@@ -4,6 +4,7 @@ const {
 const mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 const multitenantPool = {};
 const config = require("./config.js");
+var logger = require("./logger");
 
 const mongoOptions = {
     useNewUrlParser: true,
@@ -33,8 +34,8 @@ const getTenantDB = function getConnections(showId, modelName, schema) {
     multitenantPool[showId] = mongoose;
     schema.plugin(mongooseAggregatePaginate);
     mongoose.model(modelName, schema);
-    mongoose.connection.on('error', err => console.log("err ", err));
-    mongoose.connection.once('open', () => console.log("Database connected"));
+    mongoose.connection.on('error', err => logger.error("Could not connect to the database. Exiting now..."));
+    mongoose.connection.once('open', () => logger.info("Successfully connected to the database"));
     return mongoose;
 };
 

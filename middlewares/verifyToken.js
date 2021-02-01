@@ -1,8 +1,8 @@
-var jwt = require('jsonwebtoken');
+const jwt = require('jsonwebtoken');
 const userModel = require("../models/users.js");
-var express = require("express");
-var app = express();
-var constant = require("../util/constant.json")
+const express = require("express");
+const app = express();
+const constant = require("../util/constant.json")
 app.set('superSecret', constant.superSecret);
 const config = require("../config/config.js");
 const {
@@ -25,7 +25,6 @@ module.exports = function (req, res, next) {
                     .auth()
                     .getUser(uid)
                     .then(function (userRecord) {
-                        // See the UserRecord reference doc for the contents of userRecord.
                         if (userRecord) {
                             var userDB = getModelByShow(config.masterDB, "user", userModel);
                             userDB.findOne({
@@ -35,7 +34,7 @@ module.exports = function (req, res, next) {
                                     if (!user) {
                                         res.status(401).send({
                                             apiName: constant.apiNameToken,
-                                            success: true,
+                                            success: false,
                                             message: constant.apiErrorForbidden
                                         });
                                     } else if (user) {
@@ -51,7 +50,7 @@ module.exports = function (req, res, next) {
                         } else {
                             res.status(401).send({
                                 apiName: constant.apiNameToken,
-                                success: true,
+                                success: false,
                                 message: constant.apiErrorForbidden
                             });
                         }
@@ -77,7 +76,7 @@ module.exports = function (req, res, next) {
                                 if (!user) {
                                     res.status(401).send({
                                         apiName: constant.apiNameToken,
-                                        success: true,
+                                        success: false,
                                         message: constant.apiErrorForbidden
                                     });
                                 } else if (user) {
@@ -125,7 +124,7 @@ module.exports = function (req, res, next) {
     } else {
         return res.status(403).send({
             apiName: constant.apiNameToken,
-            success: true,
+            success: false,
             message: constant.apiErrorForbidden
         });
     }

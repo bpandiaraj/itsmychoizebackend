@@ -1,0 +1,240 @@
+2021-02-01T12:49:34.335Z [logs] error: uncaughtException: missing ) after argument list
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\config\db_connection.js:37
+    mongoose.connection.once('open', () => logger.info("Successfully connected to the database"););
+                                                                                               ^
+
+SyntaxError: missing ) after argument list
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\authentication.js:8:5)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:1:34)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-02-01T12:49:48.363Z [logs] error: uncaughtException: missing ) after argument list
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\config\db_connection.js:38
+    mongoose.connection.once('open', () => logger.info("Successfully connected to the database"););
+                                                                                               ^
+
+SyntaxError: missing ) after argument list
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\authentication.js:8:5)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:1:34)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-02-01T12:50:03.922Z [logs] error: uncaughtException: Cannot find module './config/logger'
+Require stack:
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\config\db_connection.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\authentication.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js
+Error: Cannot find module './config/logger'
+Require stack:
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\config\db_connection.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\authentication.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:772:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:677:27)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\config\db_connection.js:7:14)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\authentication.js:8:5)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+2021-02-01T12:50:19.285Z [logs] error: uncaughtException: Cannot find module './config/logger'
+Require stack:
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\config\db_connection.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\authentication.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js
+Error: Cannot find module './config/logger'
+Require stack:
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\config\db_connection.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\authentication.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:772:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:677:27)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\config\db_connection.js:7:14)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\authentication.js:8:5)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+2021-02-01T12:52:21.349Z [logs] info: Successfully connected to the database
+2021-02-01T12:52:21.378Z [logs] info: ::ffff:192.168.86.34 - - [01/Feb/2021:12:52:21 +0000] "GET /api/v1/user/list HTTP/1.1" 200 2088 "-" "PostmanRuntime/7.26.8"
+
+2021-02-01T12:55:18.102Z [logs] info: ::ffff:192.168.86.21 - - [01/Feb/2021:12:55:18 +0000] "OPTIONS /api/v1/event/list HTTP/1.1" 200 8 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+
+2021-02-01T12:55:18.149Z [logs] info: Successfully connected to the database
+2021-02-01T12:55:18.163Z [logs] info: ::ffff:192.168.86.21 - - [01/Feb/2021:12:55:18 +0000] "GET /api/v1/event/list HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+
+2021-02-01T12:55:54.086Z [logs] info: ::ffff:192.168.86.21 - - [01/Feb/2021:12:55:54 +0000] "OPTIONS /api/v1/event/list HTTP/1.1" 200 8 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+
+2021-02-01T12:55:54.101Z [logs] info: ::ffff:192.168.86.21 - - [01/Feb/2021:12:55:54 +0000] "GET /api/v1/event/list HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+
+2021-02-01T12:56:09.816Z [logs] info: ::ffff:192.168.86.21 - - [01/Feb/2021:12:56:09 +0000] "OPTIONS /api/v1/event/list HTTP/1.1" 200 8 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+
+2021-02-01T12:56:09.852Z [logs] info: ::ffff:192.168.86.21 - - [01/Feb/2021:12:56:09 +0000] "GET /api/v1/event/list HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+
+2021-02-01T12:56:13.076Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:13 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:13.618Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:13 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:14.282Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:14 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:14.913Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:14 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:15.471Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:15 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:16.115Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:16 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:16.635Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:16 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:17.142Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:17 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:17.659Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:17 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:18.317Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:18 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:18.828Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:18 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:19.427Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:19 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:19.934Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:19 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:20.440Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:20 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:20.943Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:20 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:21.501Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:21 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:22.006Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:22 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:22.509Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:22 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:23.014Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:23 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:23.520Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:23 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:24.055Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:24 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:24.541Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:24 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:25.035Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:25 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:25.552Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:25 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:26.527Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:26 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:27.083Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:27 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:28.632Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:28 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:29.157Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:29 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:29.722Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:29 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:30.209Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:30 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:30.859Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:30 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:31.424Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:31 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:31.933Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:31 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:32.451Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:32 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:32.968Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:32 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:33.763Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:33 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:34.408Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:34 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:35.030Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:35 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:35.696Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:35 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:36.406Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:36 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:37.077Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:37 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:37.860Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:37 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:38.671Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:38 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:39.511Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:39 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:40.095Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:40 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:40.628Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:40 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:41.184Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:41 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:41.734Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:41 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:42.259Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:42 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:42.788Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:42 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:43.138Z [logs] info: ::ffff:192.168.86.21 - - [01/Feb/2021:12:56:43 +0000] "OPTIONS /api/v1/event/list HTTP/1.1" 200 8 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+
+2021-02-01T12:56:43.150Z [logs] info: ::ffff:192.168.86.21 - - [01/Feb/2021:12:56:43 +0000] "GET /api/v1/event/list HTTP/1.1" 304 - "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/88.0.4324.104 Safari/537.36"
+
+2021-02-01T12:56:43.438Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:43 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:44.089Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:44 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:44.608Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:44 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:45.172Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:45 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:45.862Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:45 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:46.533Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:46 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:47.082Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:47 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:47.611Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:47 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:48.223Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:48 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+
+2021-02-01T12:56:48.908Z [logs] info: ::ffff:192.168.86.29 - - [01/Feb/2021:12:56:48 +0000] "GET /api/v1/event/list HTTP/1.1" 200 303 "-" "Dart/2.10 (dart:io)"
+

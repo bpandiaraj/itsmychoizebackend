@@ -7,6 +7,7 @@ const {
 const {
     masterDB
 } = require("../config/config.js");
+var logger = require("../config/logger");
 
 exports.getEventList = async function (req, res) {
     var eventDB = await getModelByShow(masterDB, "event", eventModel);
@@ -24,6 +25,16 @@ exports.getEventList = async function (req, res) {
             }
         });
     }
+
+    // arr.push({
+    //     $lookup: {
+    //         from: "languages",
+    //         localField: "language",
+    //         foreignField: "language",
+    //         as: "language",
+    //     },
+
+    // })
 
     var aggregate = eventDB.aggregate(arr);
 
@@ -122,29 +133,109 @@ exports.getEventLanguage = function (req, res) {
 
 exports.saveFavoriteEvent = function (req, res) {
     var eventDB = getModelByShow(masterDB, "favoriteEvent", favoriteEventModel);
-
-    var eventData = new eventDB({
-        user: req._id,
-        event: body.event,
-        defaultLanguage: body.defaultLanguage || null,
-        createdAt: new Date(),
-    });
-    console.log("eventData", eventData);
-
-    eventData.save(function (err, savedData) {
-        console.log(err)
+    eventDB.findOne({
+        user: req.id,
+        event: req.body.event
+    }, function (err, eventInfo) {
         if (err) {
             res.status(400).json({
                 apiName: "Event Favorite API",
                 success: false,
                 message: "Error Occurred",
             });
-        } else {
-            console.log("saved", savedData)
-            res.status(400).json({
+        } else if (eventInfo) {
+            res.json({
                 apiName: "Event Favorite API",
                 success: true,
-                message: "Event has been favorited",
+                message: "User already saved this event.",
+            });
+        } else {
+            var eventData = new eventDB({
+                user: req.id,
+                event: req.body.event,
+                defaultLanguage: req.body.defaultLanguage || null,
+                createdAt: new Date(),
+            });
+
+            eventData.save(function (err, savedData) {
+                console.log(err)
+                if (err) {
+                    res.status(400).json({
+                        apiName: "Event Favorite API",
+                        success: false,
+                        message: "Error Occurred",
+                    });
+                } else {
+                    console.log("saved", savedData)
+                    res.json({
+                        apiName: "Event Favorite API",
+                        success: true,
+                        message: "Event has been favorited",
+                    });
+                }
+            });
+        }
+    })
+}
+
+
+exports.favoriteEventForUser = function (req, res) {
+    var arr = [];
+    arr = [{
+            $match: {
+                user: ObjectId(req.id)
+            }
+        },
+        {
+            $lookup: {
+                from: "events",
+                localField: "event",
+                foreignField: "_id",
+                as: "event",
+            },
+        },
+        {
+            $lookup: {
+                from: "languages",
+                localField: "defaultLanguage",
+                foreignField: "language",
+                as: "defaultLanguage",
+            },
+        },
+    ]
+
+
+    var eventDB = getModelByShow(masterDB, "favoriteEvent", favoriteEventModel);
+
+
+    var aggregate = eventDB.aggregate(arr);
+
+    var options = {
+        page: req.query.page || 1,
+        limit: parseInt(req.query.limit) || 200,
+    };
+
+    eventDB.aggregatePaginate(aggregate, options, function (
+        err,
+        listdata,
+        pageCount,
+        count
+    ) {
+        if (err) {
+            res.json({
+                apiName: "Contestant List API",
+                success: false,
+                message: "Some Error Occured",
+            });
+        } else {
+            res.json({
+                apiName: "Contestant List API",
+                success: true,
+                message: "Successfully view Contestant list",
+                contestantList: listdata,
+                currentPage: req.query.page || 1,
+                totalPages: pageCount,
+                dataCount: count,
             });
         }
     });

@@ -6,9 +6,10 @@ const config = require("../config/config.js");
 const {
     getModelByShow
 } = require("../config/db_connection.js");
+var logger = require("../config/logger");
 
 exports.adminLogin = function (req, res) {
-    console.log("login",req.body);
+    console.log("login", req.body);
     var adminDB = getModelByShow(config.masterDB, "admin", adminModel);
     adminDB.findOne({
             userName: req.body.userName,

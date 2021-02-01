@@ -7,9 +7,11 @@ const fs = require("fs");
 const {
     getModelByShow
 } = require("../config/db_connection.js");
+var logger = require("../config/logger");
 
 exports.contestantsList = function (req, res) {
     var search = req.body.search;
+    var language = req.query.language;
     var arr = [];
     if (search) {
         arr.push({
@@ -37,6 +39,62 @@ exports.contestantsList = function (req, res) {
         });
     }
 
+    arr.push({
+        $project: {
+            "_id": 1,
+            "name": 1,
+            "biography": 1,
+            "professional": 1,
+            "status": 1,
+            "images": 1,
+            "translation": 1,
+            "createdAt": 1,
+            "modifiedAt": 1,
+            // "translation": {
+            //     "$set": {
+            //         "en": {
+            //             "name": "$name",
+            //             "biography": "$biography",
+            //             "professional": "$professional"
+            //         }
+            //     }
+            // }
+            // "$set": {
+            //     "translation": {
+            //         "en": {
+            //             "name": "$name",
+            //             "biography": "$biography",
+            //             "professional": "$professional"
+            //         }
+            //     }
+            // }
+            // "translation": {
+            //     "$addFields": {
+            //         "en": {
+            //             "name": "$name",
+            //             "biography": "$biography",
+            //             "professional": "$professional"
+            //         }
+            //     }
+            // },
+            // "translations": {
+            //     $concatArrays: ["$translation", "$english"]
+            // }
+        },
+    })
+
+    // arr.push({
+    //     "translation": {
+    //         "$set": {
+    //             "en": {
+    //                 "name": "$name",
+    //                 "biography": "$biography",
+    //                 "professional": "$professional"
+    //             }
+    //         }
+    //     }
+    // })
+
     var contestantModel = getModelByShow(req.db, "contestant", contestants)
 
     var aggregate = contestantModel.aggregate(arr);
@@ -53,6 +111,7 @@ exports.contestantsList = function (req, res) {
         count
     ) {
         if (err) {
+            console.log(err)
             res.json({
                 apiName: "Contestant List API",
                 success: false,
@@ -182,7 +241,7 @@ exports.contestantsUpdate = function (req, res) {
         name: req.body.name,
         biography: req.body.biography,
         professional: req.body.professional,
-        status:  req.body.status,
+        status: req.body.status,
         modifiedAt: new Date(),
         translation: translation
     };

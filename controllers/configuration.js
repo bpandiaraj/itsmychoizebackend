@@ -3,6 +3,7 @@ const config = require("../config/config.js");
 const {
     getModelByShow
 } = require("../config/db_connection.js");
+var logger = require("../config/logger");
 
 exports.getMaxFavoriteContestant = function (req, res) {
     var configureDB = getModelByShow(config.masterDB, "configuration", configureModel);

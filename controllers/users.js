@@ -6,6 +6,7 @@ const {
 const {
   admin
 } = require("../shared-datas/fire-base.js");
+var logger = require("../config/logger");
 
 exports.userCheckAndCreate = (req, res) => {
   var userDB = getModelByShow(config.masterDB, "user", userModel);
@@ -135,3 +136,81 @@ exports.getMyProfile = (req, res) => {
     }
   });
 };
+
+exports.usersList = (req, res) => {
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  var search = req.body.search;
+  var arr = [];
+  if (search) {
+    arr.push({
+      $match: {
+        $or: [{
+            name: {
+              $regex: search,
+              $options: "i"
+            }
+          }, {
+            city: {
+              $regex: search,
+              $options: "i"
+            }
+          }, {
+            state: {
+              $regex: search,
+              $options: "i"
+            }
+          }, {
+            country: {
+              $regex: search,
+              $options: "i"
+            }
+          },
+          {
+            pincode: {
+              $regex: search,
+              $options: "i"
+            }
+          },
+          {
+            mobile: {
+              $regex: search,
+              $options: "i"
+            }
+          },
+        ]
+      }
+    });
+  }
+
+  var aggregate = userDB.aggregate(arr);
+
+  var options = {
+    page: req.query.page || 1,
+    limit: parseInt(req.query.limit) || 200,
+  };
+
+  userDB.aggregatePaginate(aggregate, options, function (
+    err,
+    listdata,
+    pageCount,
+    count
+  ) {
+    if (err) {
+      res.json({
+        apiName: "Users List API",
+        success: false,
+        message: "Some Error Occured",
+      });
+    } else {
+      res.json({
+        apiName: "Users List API",
+        success: true,
+        message: "Successfully view users list",
+        userList: listdata,
+        currentPage: req.query.page,
+        totalPages: pageCount,
+        dataCount: count,
+      });
+    }
+  });
+}
