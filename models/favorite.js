@@ -1,14 +1,20 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
 var favoriteSchema = mongoose.Schema({
     user: {
         type: mongoose.Types.ObjectId,
-        ref: "Favorites",
+        ref: "Users",
     },
-    contestants: {
-        type: Array,
-        require: true,
+    contestants: [{
+        type: mongoose.Types.ObjectId,
+        ref: "contestants"
+    }],
+    event: {
+        type: mongoose.Types.ObjectId,
+        ref: "Event",
+    },
+    modifiedCount: {
+        type: Number
     },
     createdAt: {
         type: Date,
@@ -19,7 +25,4 @@ var favoriteSchema = mongoose.Schema({
     }
 });
 
-favoriteSchema.plugin(mongooseAggregatePaginate);
-
-var favorite = mongoose.model("favorite", favoriteSchema);
-module.exports = favorite;
+module.exports = favoriteSchema;

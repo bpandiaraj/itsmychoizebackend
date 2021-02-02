@@ -22,6 +22,7 @@ const getTenantDB = function getConnections(showId, modelName, schema) {
     const mCon = multitenantPool[showId];
     if (mCon) {
         if (!mCon.modelSchemas[modelName]) {
+            logger.info(`Successfully connected to the database with DB ${showId} schema ${modelName}`)
             schema.plugin(mongooseAggregatePaginate);
             mCon.model(modelName, schema);
         }
@@ -35,7 +36,7 @@ const getTenantDB = function getConnections(showId, modelName, schema) {
     schema.plugin(mongooseAggregatePaginate);
     mongoose.model(modelName, schema);
     mongoose.connection.on('error', err => logger.error("Could not connect to the database. Exiting now..."));
-    mongoose.connection.once('open', () => logger.info("Successfully connected to the database"));
+    mongoose.connection.once('open', () => logger.info(`Successfully created and connected to the database with DB ${showId} schema ${modelName}`));
     return mongoose;
 };
 

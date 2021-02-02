@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
 var taskPlaySchema = mongoose.Schema({
     user: {
@@ -26,7 +25,4 @@ var taskPlaySchema = mongoose.Schema({
     }
 });
 
-taskPlaySchema.plugin(mongooseAggregatePaginate);
-
-var taskPlay = mongoose.model("taskPlay", taskPlaySchema);
-module.exports = taskPlay;
+module.exports = taskPlaySchema;

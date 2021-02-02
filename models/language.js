@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
 var languageSchema = mongoose.Schema({
     language: {
@@ -14,7 +13,4 @@ var languageSchema = mongoose.Schema({
     }
 });
 
-languageSchema.plugin(mongooseAggregatePaginate);
-
-var language = mongoose.model("language", languageSchema);
-module.exports = language;
+module.exports = languageSchema;

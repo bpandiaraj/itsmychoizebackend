@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
 var taskSchema = mongoose.Schema({
     name: {
@@ -54,7 +53,4 @@ var taskSchema = mongoose.Schema({
     }
 });
 
-taskSchema.plugin(mongooseAggregatePaginate);
-
-var task = mongoose.model("task", taskSchema);
-module.exports = task;
+module.exports = taskSchema;

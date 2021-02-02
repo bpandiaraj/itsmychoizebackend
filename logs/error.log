@@ -98,3 +98,75 @@ Require stack:
     at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
     at Module.load (internal/modules/cjs/loader.js:790:32)
     at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+2021-02-02T09:37:35.224Z [logs] error: uncaughtException: modifiedCount is not defined
+ReferenceError: modifiedCount is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:56:90
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-02T12:13:26.246Z [logs] error: uncaughtException: contestantsData is not defined
+ReferenceError: contestantsData is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:263:31
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-02T12:14:29.372Z [logs] error: uncaughtException: Cannot read property 'translation' of null
+TypeError: Cannot read property 'translation' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:264:35
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-02T12:15:06.125Z [logs] error: uncaughtException: Cannot read property 'translation' of null
+TypeError: Cannot read property 'translation' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:264:35
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-02T12:15:23.212Z [logs] error: uncaughtException: Unexpected token .
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:265
+                ...contestantData?.translation,
+                                  ^
+
+SyntaxError: Unexpected token .
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:2:31)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:26:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-02-02T12:15:33.166Z [logs] error: uncaughtException: Cannot read property 'translation' of null
+TypeError: Cannot read property 'translation' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:265:35
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)

@@ -49,51 +49,19 @@ exports.contestantsList = function (req, res) {
             "images": 1,
             "translation": 1,
             "createdAt": 1,
-            "modifiedAt": 1,
-            // "translation": {
-            //     "$set": {
-            //         "en": {
-            //             "name": "$name",
-            //             "biography": "$biography",
-            //             "professional": "$professional"
-            //         }
-            //     }
-            // }
-            // "$set": {
-            //     "translation": {
-            //         "en": {
-            //             "name": "$name",
-            //             "biography": "$biography",
-            //             "professional": "$professional"
-            //         }
-            //     }
-            // }
-            // "translation": {
-            //     "$addFields": {
-            //         "en": {
-            //             "name": "$name",
-            //             "biography": "$biography",
-            //             "professional": "$professional"
-            //         }
-            //     }
-            // },
-            // "translations": {
-            //     $concatArrays: ["$translation", "$english"]
-            // }
+            "modifiedAt": 1
         },
     })
 
-    // arr.push({
-    //     "translation": {
-    //         "$set": {
-    //             "en": {
-    //                 "name": "$name",
-    //                 "biography": "$biography",
-    //                 "professional": "$professional"
-    //             }
-    //         }
-    //     }
-    // })
+    arr.push({
+        $addFields: {
+            "translation.en": {
+                "name": "$name",
+                "biography": "$biography",
+                "professional": "$professional"
+            }
+        }
+    })
 
     var contestantModel = getModelByShow(req.db, "contestant", contestants)
 
@@ -111,13 +79,15 @@ exports.contestantsList = function (req, res) {
         count
     ) {
         if (err) {
-            console.log(err)
-            res.json({
+            console.log(err);
+            logger.error(`Error while list the contestants.`);
+            res.status(400).json({
                 apiName: "Contestant List API",
                 success: false,
                 message: "Some Error Occured",
             });
         } else {
+            logger.info(`Contestant has been favorited successfully.`);
             res.json({
                 apiName: "Contestant List API",
                 success: true,
@@ -139,6 +109,7 @@ exports.contestantsCreate = function (req, res) {
     form.uploadDir = path.join(__dirname, "../images/");
     form.parse(req, async (err, fields, files) => {
         if (err) {
+            logger.error(`Error while contestant creates.`);
             res.status(400).json({
                 apiName: "Contestant Create API",
                 success: false,
@@ -163,18 +134,17 @@ exports.contestantsCreate = function (req, res) {
                 modifiedAt: null,
                 translation: translation
             });
-            console.log("contestantsData", contestantsData);
-
             contestantsData.save(function (err, savedData) {
                 console.log(err)
                 if (err) {
+                    logger.error(`Error while list the contestants.`);
                     res.status(400).json({
                         apiName: "Contestant Create API",
                         success: false,
                         message: "Error Occurred",
                     });
                 } else {
-                    console.log("saved", savedData)
+                    logger.info(`Contestant created and image will save.`);
                     saveImages('create', savedData, files, res, contestantModel);
                 }
             });
@@ -189,7 +159,8 @@ function saveImages(t, data, files, res, db) {
         console.log("files.image.path", files.image.path)
         fs.rename(files.image.path, newpath + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim(), (err) => {
             if (err) {
-                console.log("err", err)
+                logger.error(`Error while save image of contestants.`);
+                console.log("err", err);
             } else {
                 db.findByIdAndUpdate(
                     data._doc._id, {
@@ -197,12 +168,14 @@ function saveImages(t, data, files, res, db) {
                     },
                     function (err, savedData) {
                         if (err) {
+                            logger.error(`Error while update the image url in contestant collection.`);
                             res.status(400).json({
                                 apiName: "Contestant Create API",
                                 success: false,
                                 message: "Error Occurred",
                             });
                         } else {
+                            logger.info(`Contestant image url updated successfully.`);
                             res.json({
                                 apiName: "Contestant Create API",
                                 success: true,
@@ -214,6 +187,7 @@ function saveImages(t, data, files, res, db) {
             }
         });
     } else {
+        logger.info(`Contant detail has been saved and image not uploaded`);
         res.json({
             apiName: "Contestant Create API",
             success: true,
@@ -265,7 +239,9 @@ exports.contestantsUpdate = function (req, res) {
 
 exports.contestantsDelete = function (req, res) {}
 
-exports.contestantsStatus = function (req, res) {}
+exports.contestantsStatus = function (req, res) {
+
+}
 
 exports.contestantsDetails = function (req, res) {
     if (!req.query.id) {
@@ -283,12 +259,29 @@ exports.contestantsDetails = function (req, res) {
                 success: false,
                 message: "Error Occurred",
             });
+        } else if (!contestantData) {
+            res.status(400).json({
+                apiName: "Contestant Detail API",
+                success: false,
+                message: "Contestant not found.",
+            });
         } else {
+            console.log(contestantData)
+            var translation = {
+                ...contestantData.translation,
+                en: {
+                    name: contestantData.name,
+                    biography: contestantData.biography,
+                    professional: contestantData.professional,
+                }
+            }
+            var contestant = contestantData;
+            contestant.translation = translation;
             res.json({
                 apiName: "Contestant Detail API",
                 success: true,
                 message: "Contestant has been updated successfully.",
-                data: contestantData
+                data: contestant
             });
         }
     });

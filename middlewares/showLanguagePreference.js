@@ -51,8 +51,8 @@ module.exports = function (req, res, next) {
         } else {
             console.log(listdata)
             req.language = listdata.length > 0 ? listdata[0].language : [];
-            req.englishLanguage = listdata[0].language[0].code ? listdata[0].language[0].code : "en-us"
-            req.nativeLanguage = listdata[0].language[1].code ? listdata[0].language[1].code : "en-us"
+            req.englishLanguage = listdata[0].language[0].code ? listdata[0].language[0].code : "en"
+            req.nativeLanguage = listdata[0].language[1].code ? listdata[0].language[1].code : "en"
             next();
         }
     });

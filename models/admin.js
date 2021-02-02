@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
 var adminSchema = mongoose.Schema({
     uid: {
@@ -37,7 +36,4 @@ var adminSchema = mongoose.Schema({
     },
 });
 
-// adminSchema.plugin(mongooseAggregatePaginate);
-
-// var admin = mongoose.model("admin", adminSchema);
 module.exports = adminSchema;

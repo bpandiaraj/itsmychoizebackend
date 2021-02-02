@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-var mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 
 var userSchema = mongoose.Schema({
     uid: {
@@ -69,7 +68,4 @@ var userSchema = mongoose.Schema({
     }
 });
 
-// userSchema.plugin(mongooseAggregatePaginate);
-
-// var user = mongoose.model("user", userSchema);
 module.exports = userSchema;

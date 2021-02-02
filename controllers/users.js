@@ -82,9 +82,33 @@ exports.userProfileUpdate = (req, res) => {
     pincode: req.body.pincode,
     modifiedAt: new Date()
   };
-
-  userModel.findOneAndUpdate(
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  userDB.findByIdAndUpdate(
     req._id, updateObject,
+    function (err, savedData) {
+      if (err) {
+        res.status(400).json({
+          apiName: "Contestant Update API",
+          success: false,
+          message: "Error Occurred",
+        });
+      } else {
+        res.json({
+          apiName: "Contestant Update API",
+          success: true,
+          message: "Contestant has been updated successfully.",
+        });
+      }
+    });
+}
+
+exports.userProfileStatusUpdate = (req, res) => {
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  userDB.findOneAndUpdate({
+      uid: req.query.uid
+    }, {
+      status: req.body.status
+    },
     function (err, savedData) {
       if (err) {
         res.status(400).json({
@@ -110,9 +134,44 @@ exports.getMyProfile = (req, res) => {
       message: "Please provide user uid.",
     });
   }
-
-  userModel.findOne({
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  userDB.findOne({
     uid: req.uid
+  }, function (err, userInfo) {
+    if (err) {
+      return res.status(400).json({
+        apiName: "Get Profile API",
+        success: false,
+        message: "Some Error Occured",
+      });
+    } else if (!userInfo) {
+      return res.status(400).json({
+        apiName: "Get Profile API",
+        success: false,
+        message: "User not found",
+      });
+    } else {
+      res.json({
+        apiName: "Get Profile API",
+        success: true,
+        message: "Profile found successfully.",
+        user: userInfo,
+      });
+    }
+  });
+};
+
+exports.getUserProfileById = (req, res) => {
+  if (!req.query.uid) {
+    return res.status(400).json({
+      apiName: "Get Profile API",
+      success: false,
+      message: "Please provide user uid.",
+    });
+  }
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  userDB.findOne({
+    uid: req.query.uid
   }, function (err, userInfo) {
     if (err) {
       return res.status(400).json({
@@ -181,6 +240,12 @@ exports.usersList = (req, res) => {
       }
     });
   }
+
+  arr.push({
+    $sort: {
+      status: 1
+    }
+  })
 
   var aggregate = userDB.aggregate(arr);
 
