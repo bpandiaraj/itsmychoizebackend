@@ -11,6 +11,14 @@ var logger = require("../config/logger");
 exports.saveFavoriteContestants = function (req, res) {
 
     var favoriteDB = getModelByShow(req.db, "favorite", favoriteModel);
+    console.log("req.body.contestants", req.body.contestants)
+    if (!req.body.contestants) {
+        return res.status(400).json({
+            apiName: "Contestant Favorite API",
+            success: false,
+            message: "Please provide contestant list.",
+        });
+    }
 
     favoriteDB.findOne({
         user: req.id,
@@ -25,6 +33,15 @@ exports.saveFavoriteContestants = function (req, res) {
                 message: "Error Occurred",
             });
         } else if (!favoriteInfo) {
+
+            if (req.body.contestants.length == 0) {
+                return res.status(400).json({
+                    apiName: "Contestant Favorite API",
+                    success: false,
+                    message: "Please provide contestant list.",
+                });
+            }
+
             var favoriteData = new favoriteDB({
                 user: req.id,
                 event: req.show,
@@ -51,9 +68,18 @@ exports.saveFavoriteContestants = function (req, res) {
                 }
             });
         } else {
+
+            if (req.body.contestants.length == 0) {
+                return res.status(400).json({
+                    apiName: "Contestant Favorite API",
+                    success: false,
+                    message: "Please provide contestant list.",
+                });
+            }
+
             favoriteDB.findByIdAndUpdate(favoriteInfo._id, {
                 contestants: req.body.contestants,
-                modifiedCount: favoriteInfo.modifiedCount ? favoriteInfo.modifiedCount + modifiedCount : 1
+                modifiedCount: favoriteInfo.modifiedCount ? favoriteInfo.modifiedCount + 1 : 1
             }, function (err, doc) {
                 if (err) {
                     logger.error(`Error while contestant favorite update.`);
@@ -85,11 +111,29 @@ exports.getMyFavoriteContestants = function (req, res) {
         },
         {
             $lookup: {
-                from: "contestants",
-                localField: "contestants",
-                foreignField: "_id",
-                as: "contestants",
-            },
+                "from": "contestants",
+                "let": {
+                    "contestants": "$contestants"
+                },
+                "pipeline": [{
+                        "$match": {
+                            "$expr": {
+                                "$in": ["$_id", "$$contestants"]
+                            }
+                        },
+                    },
+                    {
+                        "$addFields": {
+                            "translation.en": {
+                                "name": "$name",
+                                "biography": "$biography",
+                                "professional": "$professional"
+                            }
+                        }
+                    }
+                ],
+                "as": "contestants"
+            }
         }
     ]
 
@@ -108,6 +152,7 @@ exports.getMyFavoriteContestants = function (req, res) {
         count
     ) {
         if (err) {
+            console.log(err)
             logger.error(`Error while get my favorite contestant.`);
             res.status(400).json({
                 apiName: "My Favorite Contestants List API",
@@ -120,7 +165,7 @@ exports.getMyFavoriteContestants = function (req, res) {
                 apiName: "My Favorite Contestants List API",
                 success: true,
                 message: "Successfully view favorite Contestant list",
-                favorites: listdata[0].contestants || null,
+                favoriteList: listdata[0].contestants || null,
             });
         }
     });
