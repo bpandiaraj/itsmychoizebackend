@@ -119,6 +119,16 @@ exports.contestantsCreate = function (req, res) {
             console.log(fields.contestantInfo)
             var body = JSON.parse(fields.contestantInfo);
             console.log("body", body);
+
+            if (!body.name || !body.biography || !body.professional || !body.status || !body.translation) {
+                logger.error(`Data not found.`);
+                return res.status(400).json({
+                    apiName: "Contestant Create API",
+                    success: false,
+                    message: "Please provide the contestant information.",
+                });
+            }
+
             var contestantModel = getModelByShow(req.db, "contestant", contestants);
             var translation = {}
             translation[req.nativeLanguage] = {
@@ -145,17 +155,17 @@ exports.contestantsCreate = function (req, res) {
                     });
                 } else {
                     logger.info(`Contestant created and image will save.`);
-                    saveImages('create', savedData, files, res, contestantModel);
+                    saveImages('create', savedData, files, res, req, contestantModel);
                 }
             });
         }
     })
 }
 
-function saveImages(t, data, files, res, db) {
+function saveImages(t, data, files, res, req, db) {
     if (files.image != undefined) {
-        let newpath = `./images/biggboss_tamil/contestant`;
-        let newpath1 = `/biggboss_tamil/contestant`;
+        let newpath = `./images/${req.show}/contestant`;
+        let newpath1 = `/${req.show}/contestant`;
         console.log("files.image.path", files.image.path)
         fs.rename(files.image.path, newpath + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim(), (err) => {
             if (err) {
@@ -187,7 +197,7 @@ function saveImages(t, data, files, res, db) {
             }
         });
     } else {
-        logger.info(`Contant detail has been saved and image not uploaded`);
+        logger.info(`Contestant detail has been saved and image not uploaded`);
         res.json({
             apiName: "Contestant Create API",
             success: true,
@@ -196,7 +206,6 @@ function saveImages(t, data, files, res, db) {
         });
     }
 }
-
 
 exports.contestantsUpdate = function (req, res) {
     if (!req.query.id) {
@@ -237,10 +246,163 @@ exports.contestantsUpdate = function (req, res) {
     });
 }
 
-exports.contestantsDelete = function (req, res) {}
+exports.contestantsImageUpdate = function (req, res) {
+    if (!req.query.id) {
+        return res.status(400).json({
+            apiName: "Contestant Create API",
+            success: false,
+            message: "Please provide the contestant ID to update.",
+        });
+    }
+
+    var form = new formidable.IncomingForm();
+    form.multiples = true;
+    form.maxFileSize = 10 * 1024 * 1024;
+    form.keepExtensions = true;
+    form.uploadDir = path.join(__dirname, "../images/");
+    form.parse(req, async (err, fields, files) => {
+        if (err) {
+            logger.error(`Error while contestant creates.`);
+            res.status(400).json({
+                apiName: "Contestant Create API",
+                success: false,
+                message: "Error Occurred",
+            });
+        } else {
+            var body = JSON.parse(fields.contestantInfo);
+            console.log("body", body);
+
+            if (!body.name || !body.biography || !body.professional || !body.status || !body.translation) {
+                logger.error(`Data not found.`);
+                return res.status(400).json({
+                    apiName: "Contestant Create API",
+                    success: false,
+                    message: "Please provide the contestant information.",
+                });
+            }
+            
+            var translation = {};
+            translation[req.nativeLanguage] = {
+                ...body.translation
+            };
+            var contestantsData = {
+                name: body.name,
+                biography: body.biography,
+                professional: body.professional,
+                status: body.status,
+                modifiedAt: new Date(),
+                translation: translation
+            };
+
+            var contestantModel = getModelByShow(req.db, "contestant", contestants)
+            contestantModel.findByIdAndUpdate(req.query.id, contestantsData, function (err, savedData) {
+                if (err) {
+                    res.status(400).json({
+                        apiName: "Contestant Update API",
+                        success: false,
+                        message: "Error Occurred",
+                    });
+                } else if (!savedData) {
+                    res.status(400).json({
+                        apiName: "Contestant Update API",
+                        success: false,
+                        message: "Contestant info not found.",
+                    });
+                } else {
+                    console.log("savedData", savedData);
+                    fs.unlink("./images/" + savedData.images[0], (err) => {
+                        if (err) {
+                            console.error(err)
+                        }
+                        updateImages('create', body.imageChanged, files, res, req, contestantModel);
+                    })
+                }
+            });
+        }
+    })
+}
+
+function updateImages(t, data, files, res, req, db) {
+    console.log("data.imageChanged", data)
+    if (data) {
+        console.log("image", files.image)
+        if (files.image != undefined) {
+            let newpath = `./images/${req.show}/contestant`;
+            let newpath1 = `/${req.show}/contestant`;
+            let savedDate = moment().startOf('day').format("YMMDDHHmmss");
+            console.log("savedDate", savedDate)
+            fs.rename(files.image.path, newpath + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(), (err) => {
+                if (err) {
+                    logger.error(`Error while save image of contestants.`);
+                    console.log("err", err);
+                } else {
+                    db.findByIdAndUpdate(
+                        req.query.id, {
+                            images: [newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim()]
+                        },
+                        function (err, savedData) {
+                            if (err) {
+                                logger.error(`Error while update the image url in contestant collection.`);
+                                res.status(400).json({
+                                    apiName: "Contestant Create API",
+                                    success: false,
+                                    message: "Error Occurred"
+                                });
+                            } else {
+                                logger.info(`Contestant image url updated successfully.`);
+                                res.json({
+                                    apiName: "Contestant Create API",
+                                    success: true,
+                                    message: "Contestant has been updated successfully."
+                                });
+                            }
+                        })
+                }
+            });
+        } else {
+            logger.info(`Contestant detail has been update and image not updated`);
+            res.json({
+                apiName: "Contestant Update API",
+                success: true,
+                message: "Contestant has been updated successfully."
+            });
+        }
+    } else {
+        logger.info(`Contestant detail has been update and image not updated`);
+        res.json({
+            apiName: "Contestant Update API",
+            success: true,
+            message: "Contestant has been updated successfully."
+        });
+    }
+}
+
+exports.contestantsDelete = function (req, res) {
+
+}
 
 exports.contestantsStatus = function (req, res) {
-
+    var contestantModel = getModelByShow(req.db, "contestant", contestants);
+    contestantModel.findOneAndUpdate({
+            _id: req.query.id
+        }, {
+            status: req.body.status
+        },
+        function (err, savedData) {
+            if (err) {
+                res.status(400).json({
+                    apiName: "Contestant Status Update API",
+                    success: false,
+                    message: "Error Occurred",
+                });
+            } else {
+                res.json({
+                    apiName: "Contestant Status Update API",
+                    success: true,
+                    message: `Contestant status has been updated as ${req.body.status}.`,
+                });
+            }
+        });
 }
 
 exports.contestantsDetails = function (req, res) {

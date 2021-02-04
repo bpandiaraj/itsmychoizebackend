@@ -112,15 +112,15 @@ exports.userProfileStatusUpdate = (req, res) => {
     function (err, savedData) {
       if (err) {
         res.status(400).json({
-          apiName: "Contestant Update API",
+          apiName: "User Status Update API",
           success: false,
           message: "Error Occurred",
         });
       } else {
         res.json({
-          apiName: "Contestant Update API",
+          apiName: "User Status Update API",
           success: true,
-          message: "Contestant has been updated successfully.",
+          message: `User status has been updated as ${req.body.status}.`,
         });
       }
     });
@@ -279,3 +279,39 @@ exports.usersList = (req, res) => {
     }
   });
 }
+
+exports.availableUserPoints = (req, res) => {
+  if (!req.query.uid) {
+    return res.status(400).json({
+      apiName: "Get Profile API",
+      success: false,
+      message: "Please provide user uid.",
+    });
+  }
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  userDB.findOne({
+    uid: req.query.uid
+  }, function (err, userInfo) {
+    if (err) {
+      return res.status(400).json({
+        apiName: "Get Profile API",
+        success: false,
+        message: "Some Error Occured",
+      });
+    } else if (!userInfo) {
+      return res.status(400).json({
+        apiName: "Get Profile API",
+        success: false,
+        message: "User not found",
+      });
+    } else {
+      res.json({
+        apiName: "Get Profile API",
+        success: true,
+        message: "Profile found successfully.",
+        point: userInfo.point || 0,
+        redeemPoint: userInfo.redeem || 0
+      });
+    }
+  });
+};

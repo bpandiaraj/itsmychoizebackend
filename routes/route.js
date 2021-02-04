@@ -4,8 +4,11 @@ const configurationController = require('../controllers/configuration.js');
 const eventController = require('../controllers/events.js');
 const usersController = require('../controllers/users.js');
 const favoriteController = require('../controllers/favorite.js');
+
+//Middlewares
 const tokenVerify = require('../middlewares/verifyToken');
 const showLanguage = require('../middlewares/showLanguagePreference');
+const contestantFolder = require('../middlewares/createContestantImageFolder');
 
 module.exports = function (app) {
 
@@ -35,8 +38,8 @@ module.exports = function (app) {
     */
     app.get('/api/v1/contestants', tokenVerify, contestantsController.contestantsList);
     app.get('/api/v1/contestants/info', tokenVerify, contestantsController.contestantsDetails);
-    app.post('/api/v1/contestants', tokenVerify, showLanguage, contestantsController.contestantsCreate);
-    app.put('/api/v1/contestants', tokenVerify, showLanguage, contestantsController.contestantsUpdate);
+    app.post('/api/v1/contestants', tokenVerify, showLanguage, contestantFolder, contestantsController.contestantsCreate);
+    app.put('/api/v1/contestants', tokenVerify, showLanguage, contestantsController.contestantsImageUpdate);
     app.delete('/api/v1/contestants', tokenVerify, contestantsController.contestantsDelete);
     app.post('/api/v1/contestants/status', tokenVerify, contestantsController.contestantsStatus);
     app.post('/api/v1/contestants/favorite', tokenVerify, favoriteController.saveFavoriteContestants);
@@ -54,6 +57,7 @@ module.exports = function (app) {
     app.get('/api/v1/user/create', usersController.userCheckAndCreate);
     app.get('/api/v1/user/list', tokenVerify, usersController.usersList);
     app.post('/api/v1/user/status', tokenVerify, usersController.userProfileStatusUpdate);
+    app.post('/api/v1/user/point', tokenVerify, usersController.availableUserPoints);
 
     /*
     Event API.

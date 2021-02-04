@@ -170,3 +170,51 @@ TypeError: Cannot read property 'translation' of null
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
     at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-02T13:52:51.807Z [logs] error: Error while list the contestants.
+2021-02-02T13:53:13.640Z [logs] error: uncaughtException: req is not defined
+ReferenceError: req is not defined
+    at saveImages (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:157:35)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:148:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at model.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:502:7)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:316:21
+    at next (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:210:27)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:183:9
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:508:38
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-02T13:53:53.519Z [logs] error: Error while save image of contestants.
+2021-02-02T13:54:39.145Z [logs] error: Error while save image of contestants.
+2021-02-03T04:28:43.551Z [logs] error: Error while contestant creates.
+2021-02-03T04:28:58.190Z [logs] error: Error while contestant creates.
+2021-02-03T04:29:53.917Z [logs] error: Error while contestant creates.
+2021-02-03T04:29:53.949Z [logs] error: Error while contestant creates.
+2021-02-03T04:31:59.481Z [logs] error: Error while contestant creates.
+2021-02-03T04:32:25.095Z [logs] error: Error while contestant creates.
+2021-02-03T04:33:59.527Z [logs] error: Error while contestant creates.
+2021-02-03T04:34:25.134Z [logs] error: Error while contestant creates.
+2021-02-03T10:08:56.245Z [logs] error: Data not found.
+2021-02-03T10:08:56.317Z [logs] error: uncaughtException: Cannot set headers after they are sent to the client
+Error [ERR_HTTP_HEADERS_SENT]: Cannot set headers after they are sent to the client
+    at ServerResponse.setHeader (_http_outgoing.js:485:11)
+    at ServerResponse.header (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\response.js:771:10)
+    at ServerResponse.send (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\response.js:170:12)
+    at ServerResponse.json (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\response.js:267:15)
+    at saveImages (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:201:13)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:158:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at model.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:502:7)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:316:21
+    at next (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:210:27)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:183:9
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:508:38
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-03T10:09:36.035Z [logs] error: Data not found.
+2021-02-03T10:10:15.145Z [logs] error: Data not found.
+2021-02-03T10:10:32.133Z [logs] error: Data not found.
+2021-02-03T10:31:27.966Z [logs] error: Data not found.
+2021-02-03T10:33:45.976Z [logs] error: Data not found.
+2021-02-03T10:36:49.426Z [logs] error: Data not found.
