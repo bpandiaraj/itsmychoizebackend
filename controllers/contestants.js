@@ -11,7 +11,12 @@ var logger = require("../config/logger");
 
 exports.contestantsList = function (req, res) {
     var search = req.body.search;
-    var language = req.query.language;
+    var language = req.query.language || req.eventLanguage;
+
+    if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
+        language = 'en';
+    }
+
     var arr = [];
     if (search) {
         arr.push({
@@ -38,30 +43,45 @@ exports.contestantsList = function (req, res) {
             },
         });
     }
-
-    arr.push({
-        $project: {
-            "_id": 1,
-            "name": 1,
-            "biography": 1,
-            "professional": 1,
-            "status": 1,
-            "images": 1,
-            "translation": 1,
-            "createdAt": 1,
-            "modifiedAt": 1
-        },
-    })
-
-    arr.push({
-        $addFields: {
-            "translation.en": {
-                "name": "$name",
-                "biography": "$biography",
-                "professional": "$professional"
-            }
+    if (language) {
+        if (language == 'both') {
+            arr.push({
+                $addFields: {
+                    "translation.en": {
+                        "name": "$name",
+                        "biography": "$biography",
+                        "professional": "$professional"
+                    }
+                }
+            })
+        } else if (language != 'en') {
+            arr.push({
+                $addFields: {
+                    "name": `$translation.${language}.name`,
+                    "biography": `$translation.${language}.biography`,
+                    "professional": `$translation.${language}.professional`
+                }
+            })
+            arr.push({
+                $project: {
+                    "translation": 0
+                },
+            })
+           
+        } else {
+            arr.push({
+                $project: {
+                    "translation": 0
+                },
+            })
         }
-    })
+    } else {
+        arr.push({
+            $project: {
+                "translation": 0
+            },
+        })
+    }
 
     var contestantModel = getModelByShow(req.db, "contestant", contestants)
 
@@ -280,7 +300,7 @@ exports.contestantsImageUpdate = function (req, res) {
                     message: "Please provide the contestant information.",
                 });
             }
-            
+
             var translation = {};
             translation[req.nativeLanguage] = {
                 ...body.translation
@@ -413,9 +433,12 @@ exports.contestantsDetails = function (req, res) {
             message: "Please provide the contestant ID to get the contestant bio-data.",
         });
     }
+
     var contestantModel = getModelByShow(req.db, "contestant", contestants);
+
     contestantModel.findById(req.query.id, function (err, contestantData) {
         if (err) {
+            console.log("err",err);
             res.status(400).json({
                 apiName: "Contestant Detail API",
                 success: false,
@@ -428,17 +451,43 @@ exports.contestantsDetails = function (req, res) {
                 message: "Contestant not found.",
             });
         } else {
-            console.log(contestantData)
-            var translation = {
-                ...contestantData.translation,
-                en: {
-                    name: contestantData.name,
-                    biography: contestantData.biography,
-                    professional: contestantData.professional,
+            console.log(contestantData);
+
+            var language = req.query.language || req.eventLanguage;
+
+            if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
+                language = 'en';
+            }
+            var translation;
+            var contestant = contestantData._doc;
+
+            if (language) {
+                if (language == 'both') {
+                    translation = {
+                        ...contestant.translation,
+                        en: {
+                            name: contestantData.name,
+                            biography: contestantData.biography,
+                            professional: contestantData.professional,
+                        }
+                    }
+                    contestant.translation = translation;
+                } else if (language != 'en') {
+                    var trans = contestant.translation;
+                    contestant = {
+                        ...contestant,
+                        name:trans[language].name,
+                        biography:trans[language].biography,
+                        professional:trans[language].professional,
+                        translation:null
+                    }
+                    delete contestant.translation;
+                } else {
+                    contestant = contestant;
+                    delete contestant.translation;
                 }
             }
-            var contestant = contestantData;
-            contestant.translation = translation;
+        
             res.json({
                 apiName: "Contestant Detail API",
                 success: true,

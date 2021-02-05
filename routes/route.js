@@ -8,6 +8,7 @@ const favoriteController = require('../controllers/favorite.js');
 //Middlewares
 const tokenVerify = require('../middlewares/verifyToken');
 const showLanguage = require('../middlewares/showLanguagePreference');
+const favoriteshowLanguage = require('../middlewares/myFavoriteShowLanguage');
 const contestantFolder = require('../middlewares/createContestantImageFolder');
 
 module.exports = function (app) {
@@ -36,8 +37,8 @@ module.exports = function (app) {
         6. Contestant Status Update
         7. 
     */
-    app.get('/api/v1/contestants', tokenVerify, contestantsController.contestantsList);
-    app.get('/api/v1/contestants/info', tokenVerify, contestantsController.contestantsDetails);
+    app.get('/api/v1/contestants', tokenVerify, showLanguage, favoriteshowLanguage, contestantsController.contestantsList);
+    app.get('/api/v1/contestants/info', tokenVerify,showLanguage, favoriteshowLanguage, contestantsController.contestantsDetails);
     app.post('/api/v1/contestants', tokenVerify, showLanguage, contestantFolder, contestantsController.contestantsCreate);
     app.put('/api/v1/contestants', tokenVerify, showLanguage, contestantsController.contestantsImageUpdate);
     app.delete('/api/v1/contestants', tokenVerify, contestantsController.contestantsDelete);

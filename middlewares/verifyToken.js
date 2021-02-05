@@ -16,85 +16,41 @@ module.exports = function (req, res, next) {
     if (token) {
         if (app == 'mobile') {
             console.log("token ", token);
-            // var uid = req.headers['uid'];
-            // if (uid) {
-            //     admin
-            //         .auth()
-            //         .getUser(uid)
-            //         .then(function (userRecord) {
-            //             if (userRecord) {
-            //                 var userDB = getModelByShow(config.masterDB, "user", userModel);
-            //                 userDB.findOne({
-            //                         uid: uid,
-            //                     },
-            //                     function (err, user) {
-            //                         if (!user) {
-            //                             res.status(401).send({
-            //                                 apiName: constant.apiNameToken,
-            //                                 success: false,
-            //                                 message: constant.apiErrorForbidden
-            //                             });
-            //                         } else if (user) {
-            //                             console.log(user)
-            //                             req.id = user._id;
-            //                             req.uid = uid;
-            //                             req.db = showDB ? config.db + "_" + showDB : config.db;
-            //                             req.show = showDB;
-            //                             next();
-            //                         }
-            //                     }
-            //                 );
-            //             } else {
-            //                 res.status(401).send({
-            //                     apiName: constant.apiNameToken,
-            //                     success: false,
-            //                     message: constant.apiErrorForbidden
-            //                 });
-            //             }
-            //         })
-            //         .catch(function (error) {
-            //             res.status(403).json({
-            //                 apiName: constant.apiNameToken,
-            //                 success: false,
-            //                 message: error
-            //             });
-            //         });
-            // } else {
-                admin
-                    .auth()
-                    .verifyIdToken(token)
-                    .then(function (decodedToken) {
-                        console.log("decoded ", decodedToken);
-                        var userDB = getModelByShow(config.masterDB, "user", userModel);
-                        userDB.findOne({
-                                uid: decodedToken.uid,
-                            },
-                            function (err, user) {
-                                if (!user) {
-                                    res.status(401).send({
-                                        apiName: constant.apiNameToken,
-                                        success: false,
-                                        message: constant.apiErrorForbidden
-                                    });
-                                } else if (user) {
-                                    req.id = user._id;
-                                    req.uid = decodedToken.uid;
-                                    req.db = showDB ? config.db + "_" + showDB : config.db;
-                                    req.show = showDB;
-                                    next();
-                                }
+            admin
+                .auth()
+                .verifyIdToken(token)
+                .then(function (decodedToken) {
+                    console.log("decoded ", decodedToken);
+                    var userDB = getModelByShow(config.masterDB, "user", userModel);
+                    userDB.findOne({
+                            uid: decodedToken.uid,
+                        },
+                        function (err, user) {
+                            if (!user) {
+                                res.status(401).send({
+                                    apiName: constant.apiNameToken,
+                                    success: false,
+                                    message: constant.apiErrorForbidden
+                                });
+                            } else if (user) {
+                                req.id = user._id;
+                                req.uid = decodedToken.uid;
+                                req.db = showDB ? config.db + "_" + showDB : config.db;
+                                req.show = showDB;
+                                req.user = 'user';
+                                next();
                             }
-                        );
-                    })
-                    .catch(function (error) {
-                        console.log(error)
-                        res.status(403).json({
-                            apiName: constant.apiNameToken,
-                            success: false,
-                            message: error
-                        });
+                        }
+                    );
+                })
+                .catch(function (error) {
+                    console.log(error)
+                    res.status(403).json({
+                        apiName: constant.apiNameToken,
+                        success: false,
+                        message: error
                     });
-            // }
+                });
         } else if (app == 'admin') {
             jwt.verify(token, config.secret, function (err, decoded) {
                 if (err) {
@@ -108,6 +64,7 @@ module.exports = function (req, res, next) {
                     req.id = decoded.loginData._id
                     req.db = showDB ? config.db + "_" + showDB : config.db;
                     req.show = showDB;
+                    req.user = 'admin';
                     next();
                 }
             });

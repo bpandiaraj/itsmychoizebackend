@@ -12,6 +12,9 @@ var favoriteEventSchema = mongoose.Schema({
     defaultLanguage: {
         type: String,
     },
+    defaulted: {    
+        type: Boolean,
+    },
     createdAt: {
         type: Date,
     },

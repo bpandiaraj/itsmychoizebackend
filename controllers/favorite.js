@@ -11,94 +11,98 @@ var logger = require("../config/logger");
 exports.saveFavoriteContestants = function (req, res) {
 
     var favoriteDB = getModelByShow(req.db, "favorite", favoriteModel);
-    console.log("req.body.contestants", req.body.contestants)
-    if (!req.body.contestants) {
+    console.log("req.body.contestants", req.body.contestants);
+    console.log(req.body.contestants instanceof Array)
+    if (!(req.body.contestants instanceof Array)) {
+        console.log("is not array")
         return res.status(400).json({
             apiName: "Contestant Favorite API",
             success: false,
             message: "Please provide contestant list.",
         });
+    } else {
+        console.log("is array");
+
+        favoriteDB.findOne({
+            user: req.id,
+            event: req.show
+        }, function (err, favoriteInfo) {
+            console.log("favoriteInfo", favoriteInfo)
+            if (err) {
+                logger.error(`Error while contestant favorite.`);
+                return res.status(400).json({
+                    apiName: "Contestant Favorite API",
+                    success: false,
+                    message: "Error Occurred",
+                });
+            } else if (!favoriteInfo) {
+
+                if (req.body.contestants.length == 0) {
+                    return res.status(400).json({
+                        apiName: "Contestant Favorite API",
+                        success: false,
+                        message: "Please provide contestant list.",
+                    });
+                }
+
+                var favoriteData = new favoriteDB({
+                    user: req.id,
+                    event: req.show,
+                    contestants: req.body.contestants,
+                    createdAt: new Date(),
+                    modifiedCount: 1
+                });
+
+                favoriteData.save(function (err, savedData) {
+                    if (err) {
+                        logger.error(`Error while contestant favorite.`);
+                        return res.status(400).json({
+                            apiName: "Contestant Favorite API",
+                            success: false,
+                            message: "Error Occurred",
+                        });
+                    } else {
+                        logger.info(`Contestant has been favorited successfully.`);
+                        res.json({
+                            apiName: "Contestant Favorite API",
+                            success: true,
+                            message: "Contestant has been favorited",
+                        });
+                    }
+                });
+            } else {
+
+                if (req.body.contestants.length == 0) {
+                    return res.status(400).json({
+                        apiName: "Contestant Favorite API",
+                        success: false,
+                        message: "Please provide contestant list.",
+                    });
+                }
+
+                favoriteDB.findByIdAndUpdate(favoriteInfo._id, {
+                    contestants: req.body.contestants,
+                    modifiedCount: favoriteInfo.modifiedCount ? favoriteInfo.modifiedCount + 1 : 1
+                }, function (err, doc) {
+                    if (err) {
+                        logger.error(`Error while contestant favorite update.`);
+                        return res.status(400).json({
+                            apiName: "Contestant Update Favorite API",
+                            success: false,
+                            message: "Error Occurred",
+                        });
+                    } else {
+                        logger.info(`Contestant favorite has been updated successfully.`);
+                        res.json({
+                            apiName: "Contestant Favorite API",
+                            success: true,
+                            message: "Contestant favorite has been udpated",
+                        });
+                    }
+                });
+            }
+        });
     }
-
-    favoriteDB.findOne({
-        user: req.id,
-        event: req.show
-    }, function (err, favoriteInfo) {
-        console.log("favoriteInfo", favoriteInfo)
-        if (err) {
-            logger.error(`Error while contestant favorite.`);
-            return res.status(400).json({
-                apiName: "Contestant Favorite API",
-                success: false,
-                message: "Error Occurred",
-            });
-        } else if (!favoriteInfo) {
-
-            if (req.body.contestants.length == 0) {
-                return res.status(400).json({
-                    apiName: "Contestant Favorite API",
-                    success: false,
-                    message: "Please provide contestant list.",
-                });
-            }
-
-            var favoriteData = new favoriteDB({
-                user: req.id,
-                event: req.show,
-                contestants: req.body.contestants,
-                createdAt: new Date(),
-                modifiedCount: 1
-            });
-
-            favoriteData.save(function (err, savedData) {
-                if (err) {
-                    logger.error(`Error while contestant favorite.`);
-                    return res.status(400).json({
-                        apiName: "Contestant Favorite API",
-                        success: false,
-                        message: "Error Occurred",
-                    });
-                } else {
-                    logger.info(`Contestant has been favorited successfully.`);
-                    res.json({
-                        apiName: "Contestant Favorite API",
-                        success: true,
-                        message: "Contestant has been favorited",
-                    });
-                }
-            });
-        } else {
-
-            if (req.body.contestants.length == 0) {
-                return res.status(400).json({
-                    apiName: "Contestant Favorite API",
-                    success: false,
-                    message: "Please provide contestant list.",
-                });
-            }
-
-            favoriteDB.findByIdAndUpdate(favoriteInfo._id, {
-                contestants: req.body.contestants,
-                modifiedCount: favoriteInfo.modifiedCount ? favoriteInfo.modifiedCount + 1 : 1
-            }, function (err, doc) {
-                if (err) {
-                    logger.error(`Error while contestant favorite update.`);
-                    return res.status(400).json({
-                        apiName: "Contestant Update Favorite API",
-                        success: false,
-                        message: "Error Occurred",
-                    });
-                } else {
-                    logger.info(`Contestant favorite has been updated successfully.`);
-                    res.json({
-                        apiName: "Contestant Favorite API",
-                        success: true,
-                        message: "Contestant favorite has been udpated",
-                    });
-                }
-            });
-        }
-    });
 }
 
 exports.getMyFavoriteContestants = function (req, res) {

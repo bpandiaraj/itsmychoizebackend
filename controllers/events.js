@@ -143,16 +143,38 @@ exports.saveFavoriteEvent = function (req, res) {
                 message: "Error Occurred",
             });
         } else if (eventInfo) {
-            res.json({
-                apiName: "Event Favorite API",
-                success: true,
-                message: "User already saved this event.",
+            var eventDataForUpdate = {
+                defaultLanguage: req.body.defaultLanguage || eventInfo.defaultLanguage,
+                defaulted: req.body.defaulted || false,
+            };
+            console.log("eventInfo._id",eventInfo._id)
+            eventDB.findByIdAndUpdate(eventInfo._id, eventDataForUpdate, function (err, savedData) {
+                console.log(err)
+                if (err) {
+                    res.status(400).json({
+                        apiName: "Event Favorite API",
+                        success: false,
+                        message: "Error Occurred",
+                    });
+                } else {
+                    console.log("saved", savedData)
+                    res.json({
+                        apiName: "Event Favorite API",
+                        success: true,
+                        message: "User already saved this event.",
+                        defaultLanguage: req.body.defaultLanguage || eventInfo.defaultLanguage,
+                        defaulted: req.body.defaulted || false
+                    });
+                }
             });
+
+
         } else {
             var eventData = new eventDB({
                 user: req.id,
                 event: req.body.event,
                 defaultLanguage: req.body.defaultLanguage || null,
+                defaulted: req.body.defaulted || false,
                 createdAt: new Date(),
             });
 
@@ -170,13 +192,14 @@ exports.saveFavoriteEvent = function (req, res) {
                         apiName: "Event Favorite API",
                         success: true,
                         message: "Event has been favorited",
+                        defaultLanguage: savedData.defaultLanguage || null,
+                        defaulted: savedData.defaulted || false
                     });
                 }
             });
         }
     })
 }
-
 
 exports.favoriteEventForUser = function (req, res) {
     var arr = [];

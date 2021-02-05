@@ -269,3 +269,154 @@ TypeError: Cannot read property 'length' of undefined
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
     at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-04T11:47:55.700Z [logs] error: uncaughtException: Unexpected token {
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\contestants.js:57
+        {
+        ^
+
+SyntaxError: Unexpected token {
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:2:31)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:44:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-02-04T11:49:21.324Z [logs] error: Error while list the contestants.
+2021-02-04T11:50:33.787Z [logs] error: Error while list the contestants.
+2021-02-04T11:56:42.409Z [logs] error: Error while list the contestants.
+2021-02-04T11:57:28.725Z [logs] error: Error while list the contestants.
+2021-02-04T11:58:55.166Z [logs] error: Error while list the contestants.
+2021-02-04T13:07:55.751Z [logs] error: uncaughtException: Cannot read property 'findByIdAndUpdate' of undefined
+TypeError: Cannot read property 'findByIdAndUpdate' of undefined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:150:23
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T04:04:08.079Z [logs] error: uncaughtException: Cannot read property 'defaultLanguage' of null
+TypeError: Cannot read property 'defaultLanguage' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\middlewares\myFavoriteShowLanguage.js:34:38
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T04:05:29.865Z [logs] error: uncaughtException: Unexpected token )
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\middlewares\myFavoriteShowLanguage.js:18
+    if()
+       ^
+
+SyntaxError: Unexpected token )
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:11:30)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:44:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-02-05T04:05:46.536Z [logs] error: uncaughtException: Unexpected token .
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\middlewares\myFavoriteShowLanguage.js:35
+            req.eventLanguage = data?.defaultLanguage || 'en'
+                                     ^
+
+SyntaxError: Unexpected token .
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:11:30)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:44:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-02-05T04:11:02.378Z [logs] error: uncaughtException: Cannot read property 'defaultLanguage' of null
+TypeError: Cannot read property 'defaultLanguage' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\middlewares\myFavoriteShowLanguage.js:35:38
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T05:31:50.226Z [logs] error: uncaughtException: Cannot read property 'length' of undefined
+TypeError: Cannot read property 'length' of undefined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:65:38
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T05:34:22.023Z [logs] error: uncaughtException: Cannot read property 'length' of undefined
+TypeError: Cannot read property 'length' of undefined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:73:38
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T05:35:26.786Z [logs] error: uncaughtException: Cannot read property 'length' of undefined
+TypeError: Cannot read property 'length' of undefined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:73:38
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T05:36:17.242Z [logs] error: uncaughtException: Cannot read property 'length' of undefined
+TypeError: Cannot read property 'length' of undefined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:72:42
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T05:37:03.665Z [logs] error: uncaughtException: Cannot read property 'length' of undefined
+TypeError: Cannot read property 'length' of undefined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:75:42
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)

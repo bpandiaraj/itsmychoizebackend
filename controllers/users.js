@@ -75,7 +75,7 @@ exports.userCheckAndCreate = (req, res) => {
 exports.userProfileUpdate = (req, res) => {
   var updateObject = {
     mobile: req.body.mobile,
-    gender: req.body.gender,
+    gender: req.body.gender || null,
     state: req.body.state,
     country: req.body.country,
     city: req.body.city,
@@ -83,14 +83,21 @@ exports.userProfileUpdate = (req, res) => {
     modifiedAt: new Date()
   };
   var userDB = getModelByShow(config.masterDB, "user", userModel);
-  userDB.findByIdAndUpdate(
-    req._id, updateObject,
+  userDB.findOneAndUpdate({
+      uid: req.uid
+    }, updateObject,
     function (err, savedData) {
       if (err) {
         res.status(400).json({
           apiName: "Contestant Update API",
           success: false,
           message: "Error Occurred",
+        });
+      } else if(!savedData){
+        res.status(400).json({
+          apiName: "Contestant Update API",
+          success: false,
+          message: "User info not found",
         });
       } else {
         res.json({
