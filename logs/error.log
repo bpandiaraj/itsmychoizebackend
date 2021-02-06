@@ -420,3 +420,33 @@ TypeError: Cannot read property 'length' of undefined
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
     at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T13:12:04.078Z [logs] error: uncaughtException: Cannot read property 'translation' of null
+TypeError: Cannot read property 'translation' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\translation.js:26:36
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T13:13:06.842Z [logs] error: uncaughtException: Cannot read property 'translation' of null
+TypeError: Cannot read property 'translation' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\translation.js:27:36
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-05T13:15:31.415Z [logs] error: uncaughtException: Cannot read property 'translation' of undefined
+TypeError: Cannot read property 'translation' of undefined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\translation.js:27:42
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)

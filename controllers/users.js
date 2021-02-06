@@ -73,6 +73,15 @@ exports.userCheckAndCreate = (req, res) => {
 };
 
 exports.userProfileUpdate = (req, res) => {
+
+  if (!req.body.mobile && !req.body.state && !req.body.country && !req.body.city && !req.body.pincode) {
+    return res.status(400).json({
+      apiName: "User Update API",
+      success: false,
+      message: "Some user information missing.",
+    });
+  }
+
   var updateObject = {
     mobile: req.body.mobile,
     gender: req.body.gender || null,
@@ -89,21 +98,21 @@ exports.userProfileUpdate = (req, res) => {
     function (err, savedData) {
       if (err) {
         res.status(400).json({
-          apiName: "Contestant Update API",
+          apiName: "User Update API",
           success: false,
           message: "Error Occurred",
         });
-      } else if(!savedData){
+      } else if (!savedData) {
         res.status(400).json({
-          apiName: "Contestant Update API",
+          apiName: "User Update API",
           success: false,
           message: "User info not found",
         });
       } else {
         res.json({
-          apiName: "Contestant Update API",
+          apiName: "User Update API",
           success: true,
-          message: "Contestant has been updated successfully.",
+          message: "User has been updated successfully.",
         });
       }
     });

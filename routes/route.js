@@ -4,6 +4,7 @@ const configurationController = require('../controllers/configuration.js');
 const eventController = require('../controllers/events.js');
 const usersController = require('../controllers/users.js');
 const favoriteController = require('../controllers/favorite.js');
+const translationController = require('../controllers/translation.js');
 
 //Middlewares
 const tokenVerify = require('../middlewares/verifyToken');
@@ -75,4 +76,10 @@ module.exports = function (app) {
         1. Count of maximum contestant make favorite
     */
     app.get('/api/v1/favoriteContestantMax', tokenVerify, configurationController.getMaxFavoriteContestant);
+    
+    
+    /*
+    Translation
+    */
+   app.get('/api/v1/translation', tokenVerify, translationController.getTranslation);
 }

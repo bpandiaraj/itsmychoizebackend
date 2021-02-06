@@ -132,24 +132,34 @@ exports.getEventLanguage = function (req, res) {
 
 exports.saveFavoriteEvent = function (req, res) {
     var eventDB = getModelByShow(masterDB, "favoriteEvent", favoriteEventModel);
+    console.log("req.body", req.body)
+    if (!req.body.event) {
+        return res.status(400).json({
+            apiName: "Event Favorite API",
+            success: false,
+            message: "Please provide event id.",
+        });
+    }
+
     eventDB.findOne({
         user: req.id,
         event: req.body.event
     }, function (err, eventInfo) {
         if (err) {
-            res.status(400).json({
+            return res.status(400).json({
                 apiName: "Event Favorite API",
                 success: false,
                 message: "Error Occurred",
             });
         } else if (eventInfo) {
+            console.log("eventInfo", eventInfo);
             var eventDataForUpdate = {
                 defaultLanguage: req.body.defaultLanguage || eventInfo.defaultLanguage,
-                defaulted: req.body.defaulted || false,
+                defaulted: req.body.defaulted || eventInfo.defaulted,
             };
-            console.log("eventInfo._id",eventInfo._id)
+            console.log("eventInfo._id", eventInfo._id);
             eventDB.findByIdAndUpdate(eventInfo._id, eventDataForUpdate, function (err, savedData) {
-                console.log(err)
+                console.log(err);
                 if (err) {
                     res.status(400).json({
                         apiName: "Event Favorite API",
@@ -157,19 +167,18 @@ exports.saveFavoriteEvent = function (req, res) {
                         message: "Error Occurred",
                     });
                 } else {
-                    console.log("saved", savedData)
+                    console.log("saved", savedData);
                     res.json({
                         apiName: "Event Favorite API",
                         success: true,
                         message: "User already saved this event.",
-                        defaultLanguage: req.body.defaultLanguage || eventInfo.defaultLanguage,
-                        defaulted: req.body.defaulted || false
+                        defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
+                        defaulted: req.body.defaulted || savedData.defaulted
                     });
                 }
             });
-
-
         } else {
+            console.log("req.body", req.body);
             var eventData = new eventDB({
                 user: req.id,
                 event: req.body.event,
@@ -179,7 +188,7 @@ exports.saveFavoriteEvent = function (req, res) {
             });
 
             eventData.save(function (err, savedData) {
-                console.log(err)
+                console.log(err);
                 if (err) {
                     res.status(400).json({
                         apiName: "Event Favorite API",
@@ -187,7 +196,7 @@ exports.saveFavoriteEvent = function (req, res) {
                         message: "Error Occurred",
                     });
                 } else {
-                    console.log("saved", savedData)
+                    console.log("saved", savedData);
                     res.json({
                         apiName: "Event Favorite API",
                         success: true,
