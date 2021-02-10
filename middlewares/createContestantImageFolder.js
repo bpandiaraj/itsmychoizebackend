@@ -6,12 +6,18 @@ module.exports = function (req, res, next) {
     if (!fs.existsSync(dirImage)) {
         fs.mkdirSync(dirImage);
         dirImage = dirImage + '/contestant';
+        dirImage1 = dirImage + '/task';
         if (!fs.existsSync(dirImage)) {
             fs.mkdirSync(dirImage);
-            next();
         } else {
-            next();
         }
+        if (!fs.existsSync(dirImage1)) {
+            fs.mkdirSync(dirImage1);
+        } else {
+        }
+        setTimeout(() => {
+            next();
+        }, 500);
     } else {
         next();
     }

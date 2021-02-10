@@ -51,7 +51,8 @@ exports.contestantsList = function (req, res) {
                         "name": "$name",
                         "biography": "$biography",
                         "professional": "$professional"
-                    }
+                    },
+                    "nativeLanguage": req.nativeLanguage
                 }
             })
         } else if (language != 'en') {
@@ -59,15 +60,16 @@ exports.contestantsList = function (req, res) {
                 $addFields: {
                     "name": `$translation.${language}.name`,
                     "biography": `$translation.${language}.biography`,
-                    "professional": `$translation.${language}.professional`
-                }
+                    "professional": `$translation.${language}.professional`,
+                    // "nativeLanguage": req.nativeLanguage
+                },
             })
             arr.push({
                 $project: {
                     "translation": 0
                 },
             })
-           
+
         } else {
             arr.push({
                 $project: {
@@ -438,7 +440,7 @@ exports.contestantsDetails = function (req, res) {
 
     contestantModel.findById(req.query.id, function (err, contestantData) {
         if (err) {
-            console.log("err",err);
+            console.log("err", err);
             res.status(400).json({
                 apiName: "Contestant Detail API",
                 success: false,
@@ -472,14 +474,19 @@ exports.contestantsDetails = function (req, res) {
                         }
                     }
                     contestant.translation = translation;
+                    contestant = {
+                        ...contestant,
+                        nativeLanguage: req.nativeLanguage
+                    }
                 } else if (language != 'en') {
                     var trans = contestant.translation;
                     contestant = {
                         ...contestant,
-                        name:trans[language].name,
-                        biography:trans[language].biography,
-                        professional:trans[language].professional,
-                        translation:null
+                        nativeLanguage: req.nativeLanguage,
+                        name: trans[language].name,
+                        biography: trans[language].biography,
+                        professional: trans[language].professional,
+                        translation: null
                     }
                     delete contestant.translation;
                 } else {
@@ -487,7 +494,7 @@ exports.contestantsDetails = function (req, res) {
                     delete contestant.translation;
                 }
             }
-        
+
             res.json({
                 apiName: "Contestant Detail API",
                 success: true,

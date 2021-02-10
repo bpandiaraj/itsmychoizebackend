@@ -20,7 +20,7 @@ var taskSchema = mongoose.Schema({
     totalChangesAccept: {
         type: Number
     },
-    image: {
+    images: {
         type: Array
     },
     rules: {
@@ -50,6 +50,12 @@ var taskSchema = mongoose.Schema({
     },
     modifiedAt: {
         type: Date
+    },
+    isFeatured:{
+        type: Boolean
+    },
+    translation: {
+        type: Object
     }
 });
 

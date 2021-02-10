@@ -107,6 +107,68 @@ exports.saveFavoriteContestants = function (req, res) {
 
 exports.getMyFavoriteContestants = function (req, res) {
 
+    var language = req.query.language || req.eventLanguage;
+
+    if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
+        language = 'en';
+    }
+
+    var query = {};
+
+    if (language) {
+        if (language == 'both') {
+            query = {
+                "translation.en": {
+                    "name": "$name",
+                    "biography": "$biography",
+                    "professional": "$professional"
+                },
+                "percentage": 20
+            }
+        } else if (language != 'en') {
+            query = {
+                "name": `$translation.${language}.name`,
+                "biography": `$translation.${language}.biography`,
+                "professional": `$translation.${language}.professional`,
+                "percentage": 20
+            }
+            // arr.push({
+            //     $project: {
+            //         "translation": 0
+            //     },
+            // })
+
+        } else {
+            query = {
+                "translation.en": {
+                    "name": "$name",
+                    "biography": "$biography",
+                    "professional": "$professional"
+                },
+                "percentage": 20
+            }
+            // arr.push({
+            //     $project: {
+            //         "translation": 0
+            //     },
+            // })
+        }
+    } else {
+        query = {
+            "translation.en": {
+                "name": "$name",
+                "biography": "$biography",
+                "professional": "$professional"
+            },
+            "percentage": 20
+        }
+        // arr.push({
+        //     $project: {
+        //         "translation": 0
+        //     },
+        // })
+    }
+
     var arr = [];
     arr = [{
             $match: {
@@ -127,13 +189,7 @@ exports.getMyFavoriteContestants = function (req, res) {
                         },
                     },
                     {
-                        "$addFields": {
-                            "translation.en": {
-                                "name": "$name",
-                                "biography": "$biography",
-                                "professional": "$professional"
-                            }
-                        }
+                        "$addFields": query
                     }
                 ],
                 "as": "contestants"

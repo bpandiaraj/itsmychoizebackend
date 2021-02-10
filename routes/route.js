@@ -1,5 +1,6 @@
 const authenticationController = require('../controllers/authentication.js');
 const contestantsController = require('../controllers/contestants.js');
+const taskController = require('../controllers/task.js');
 const configurationController = require('../controllers/configuration.js');
 const eventController = require('../controllers/events.js');
 const usersController = require('../controllers/users.js');
@@ -45,7 +46,7 @@ module.exports = function (app) {
     app.delete('/api/v1/contestants', tokenVerify, contestantsController.contestantsDelete);
     app.post('/api/v1/contestants/status', tokenVerify, contestantsController.contestantsStatus);
     app.post('/api/v1/contestants/favorite', tokenVerify, favoriteController.saveFavoriteContestants);
-    app.get('/api/v1/contestants/favorite/list', tokenVerify, favoriteController.getMyFavoriteContestants);
+    app.get('/api/v1/contestants/favorite/list', tokenVerify,showLanguage, favoriteController.getMyFavoriteContestants);
 
     /*
     Users API.
@@ -71,6 +72,15 @@ module.exports = function (app) {
     app.get('/api/v1/event/language', tokenVerify, eventController.getEventLanguage);
     app.post('/api/v1/event/favorite', tokenVerify, eventController.saveFavoriteEvent);
 
+    /*
+    Task API.
+        1. Task List
+    */
+    app.post('/api/v1/task', tokenVerify, showLanguage, contestantFolder, taskController.taskCreate);
+    app.get('/api/v1/task', tokenVerify, showLanguage, favoriteshowLanguage, taskController.tasksList);
+    app.put('/api/v1/task', tokenVerify, showLanguage, favoriteshowLanguage, taskController.taskImageUpdate);
+    app.get('/api/v1/task/info', tokenVerify, showLanguage, favoriteshowLanguage, taskController.taskDetails);
+  
     /*
     Configuration API.
         1. Count of maximum contestant make favorite

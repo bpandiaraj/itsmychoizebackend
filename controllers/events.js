@@ -1,4 +1,5 @@
 const eventModel = require("../models/event.js");
+const favoriteModel = require("../models/favorite.js");
 const favoriteEventModel = require("../models/favorite_event.js");
 const ObjectId = require("mongodb").ObjectID;
 const {
@@ -168,13 +169,50 @@ exports.saveFavoriteEvent = function (req, res) {
                     });
                 } else {
                     console.log("saved", savedData);
-                    res.json({
-                        apiName: "Event Favorite API",
-                        success: true,
-                        message: "User already saved this event.",
-                        defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
-                        defaulted: req.body.defaulted || savedData.defaulted
-                    });
+
+                    var favoriteDB = getModelByShow(req.db, "favorite", favoriteModel);
+
+                    favoriteDB.findOne({
+                        user: req.id
+                    }, function (err, favoriteContestant) {
+                        console.log("favorite",favoriteContestant)
+                        if (err) {
+                            res.status(400).json({
+                                apiName: "Event Favorite API",
+                                success: false,
+                                message: "Error Occurred",
+                            });
+                        } else if (favoriteContestant) {
+                            if (favoriteContestant.contestants) {
+                                res.json({
+                                    apiName: "Event Favorite API",
+                                    success: true,
+                                    message: "User already saved this event.",
+                                    defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
+                                    defaulted: req.body.defaulted || savedData.defaulted,
+                                    contestantFavorited: true
+                                });
+                            } else {
+                                res.json({
+                                    apiName: "Event Favorite API",
+                                    success: true,
+                                    message: "User already saved this event.",
+                                    defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
+                                    defaulted: req.body.defaulted || savedData.defaulted,
+                                    contestantFavorited: false
+                                });
+                            }
+                        } else {
+                            res.json({
+                                apiName: "Event Favorite API",
+                                success: true,
+                                message: "User already saved this event.",
+                                defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
+                                defaulted: req.body.defaulted || savedData.defaulted,
+                                contestantFavorited: false
+                            });
+                        }
+                    })
                 }
             });
         } else {
@@ -202,7 +240,8 @@ exports.saveFavoriteEvent = function (req, res) {
                         success: true,
                         message: "Event has been favorited",
                         defaultLanguage: savedData.defaultLanguage || null,
-                        defaulted: savedData.defaulted || false
+                        defaulted: savedData.defaulted || false,
+                        contestantFavorited: false
                     });
                 }
             });

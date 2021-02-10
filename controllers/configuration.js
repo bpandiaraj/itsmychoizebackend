@@ -18,7 +18,7 @@ exports.getMaxFavoriteContestant = function (req, res) {
             res.json({
                 apiName: "Max Favorite Contestant API",
                 success: true,
-                message: "Successfully view max mavorite montestant",
+                message: "Successfully view max favorite contestant count.",
                 count: result.maxFavoriteContestant || 5
             });
         }

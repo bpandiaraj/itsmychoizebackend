@@ -50,6 +50,7 @@ exports.userCheckAndCreate = (req, res) => {
                   apiName: "User Check API",
                   success: true,
                   message: "User profile created successfully.",
+                  userProfileUpdated: false
                 });
               }
             });
@@ -62,11 +63,24 @@ exports.userCheckAndCreate = (req, res) => {
             });
           });
       } else {
-        res.json({
-          apiName: "User Check API",
-          success: true,
-          message: "User found",
-        });
+        console.log("user 1",user)
+        if (!user.mobile || !user.state || !user.country || !user.pincode) {
+          console.log("user 2",user)
+          res.json({
+            apiName: "User Check API",
+            success: true,
+            message: "User found",
+            userProfileUpdated: false
+          });
+        } else {
+          console.log("user 3",user)
+          res.json({
+            apiName: "User Check API",
+            success: true,
+            message: "User found",
+            userProfileUpdated: true
+          });
+        }
       }
     }
   );

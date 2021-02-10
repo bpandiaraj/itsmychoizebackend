@@ -450,3 +450,58 @@ TypeError: Cannot read property 'translation' of undefined
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
     at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-08T07:34:01.163Z [logs] error: Error while get my favorite contestant.
+2021-02-08T07:34:11.437Z [logs] error: Error while get my favorite contestant.
+2021-02-09T11:24:46.174Z [logs] error: uncaughtException: eventData is not defined
+ReferenceError: eventData is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:73:70
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at model.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:502:7)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:316:21
+    at next (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:210:27)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:183:9
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:508:38
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-09T11:25:58.931Z [logs] error: Error while save image of task.
+2021-02-10T08:10:05.797Z [logs] error: uncaughtException: contestant is not defined
+ReferenceError: contestant is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:419:33
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-10T09:17:10.658Z [logs] error: Data not found.
+2021-02-10T09:17:18.737Z [logs] error: uncaughtException: Cannot read property 'split' of undefined
+TypeError: Cannot read property 'split' of undefined
+    at saveImages (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:85:92)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:74:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at model.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:502:7)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:316:21
+    at next (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:210:27)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:183:9
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:508:38
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-10T12:11:38.589Z [logs] error: Error while get my favorite contestant.
+2021-02-10T12:24:13.156Z [logs] error: uncaughtException: moment is not defined
+ReferenceError: moment is not defined
+    at updateImages (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:215:29)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:200:25
+    at FSReqCallback.oncomplete (fs.js:154:23)
+2021-02-10T12:24:15.225Z [logs] error: uncaughtException: moment is not defined
+ReferenceError: moment is not defined
+    at updateImages (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:215:29)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:200:25
+    at FSReqCallback.oncomplete (fs.js:154:23)
+2021-02-10T12:25:33.482Z [logs] error: uncaughtException: moment is not defined
+ReferenceError: moment is not defined
+    at updateImages (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:215:29)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:200:25
+    at FSReqCallback.oncomplete (fs.js:154:23)
