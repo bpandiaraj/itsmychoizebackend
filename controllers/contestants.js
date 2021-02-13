@@ -17,6 +17,7 @@ exports.contestantsList = function (req, res) {
         language = 'en';
     }
 
+    var rules;
     var arr = [];
     if (search) {
         arr.push({
@@ -51,6 +52,7 @@ exports.contestantsList = function (req, res) {
                     status: req.query.status
                 },
             });
+           
         }
     } else {
         arr.push({
@@ -86,13 +88,15 @@ exports.contestantsList = function (req, res) {
                     "translation": 0
                 },
             })
-
+            rules = req.eventInformation.translation.rules || '';
         } else {
             arr.push({
                 $project: {
                     "translation": 0
                 },
             })
+            rules = req.eventInformation.rules || '';
+
         }
     } else {
         arr.push({
@@ -102,15 +106,21 @@ exports.contestantsList = function (req, res) {
         })
     }
 
-    console.log("array",req.favoriteContestant)
-    if( Array.isArray(req.favoriteContestant)){
+    arr.push({
+        $sort: {
+            status: 1
+        },
+    });
+    
+    console.log("array", req.favoriteContestant)
+    if (Array.isArray(req.favoriteContestant)) {
         arr.push({
-            $addFields:{
-                "isFavorited":{ $cond: { if: { "$in": [ "$_id", req.favoriteContestant ] }, then: true, else: false } }
+            $addFields: {
+                "isFavorited": { $cond: { if: { "$in": ["$_id", req.favoriteContestant] }, then: true, else: false } }
             }
         })
     }
-        
+
 
     var contestantModel = getModelByShow(req.db, "contestant", contestants)
 
@@ -145,7 +155,8 @@ exports.contestantsList = function (req, res) {
                 currentPage: req.query.page,
                 totalPages: pageCount,
                 dataCount: count,
-                maxSelecteContestant: req.configure.maxFavoriteContestant || 5
+                maxSelecteContestant: req.configure.maxFavoriteContestant || 5,
+                rules: rules
             });
         }
     });
@@ -360,12 +371,17 @@ exports.contestantsImageUpdate = function (req, res) {
                     });
                 } else {
                     console.log("savedData", savedData);
-                    fs.unlink("./images/" + savedData.images[0], (err) => {
-                        if (err) {
-                            console.error(err)
-                        }
+
+                    if (!body.imageChanged) {
                         updateImages('create', body.imageChanged, files, res, req, contestantModel);
-                    })
+                    } else {
+                        fs.unlink("./images/" + savedData.images[0], (err) => {
+                            if (err) {
+                                console.error(err)
+                            }
+                            updateImages('create', body.imageChanged, files, res, req, contestantModel);
+                        })
+                    }
                 }
             });
         }

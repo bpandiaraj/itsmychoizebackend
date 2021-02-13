@@ -2,17 +2,16 @@ const mongoose = require("mongoose");
 
 var taskPlaySchema = mongoose.Schema({
     user: {
-        type: mongoose.Types.ObjectId,
-        ref: "Favorites",
+        type: Object
     },
     task: {
         type: mongoose.Types.ObjectId,
         ref: "Tasks",
     },
-    contestants: {
-        type: Array,
+    contestants: [{
+        type: mongoose.Types.ObjectId,
         require: true,
-    },
+    }],
     createdAt: {
         type: Date,
         default: new Date(),
@@ -20,7 +19,10 @@ var taskPlaySchema = mongoose.Schema({
     modifiedAt: {
         type: Date,
     },
-    userRanking:{
+    earnPoint: {
+        type: Number
+    },
+    userRanking: {
         type: Number,
     }
 });

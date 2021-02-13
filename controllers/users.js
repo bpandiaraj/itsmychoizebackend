@@ -38,12 +38,14 @@ exports.userCheckAndCreate = (req, res) => {
           .then(function (userRecord) {
             // See the UserRecord reference doc for the contents of userRecord.
             let userInfo = userRecord.toJSON();
+            var uniqueName = userInfo.email.split("@")[0];
             var userData = new userDB({
               uid: req.query.uid,
               name: userInfo.displayName,
               email: userInfo.email,
               mobile: userInfo.phoneNumber,
               profilePicture: userInfo.photoURL || null,
+              userName: uniqueName,
               status: 'active',
               point: req.configure.entryPointForUser || 0
             });

@@ -8,6 +8,7 @@ const usersController = require('../controllers/users.js');
 const favoriteController = require('../controllers/favorite.js');
 const translationController = require('../controllers/translation.js');
 const languageController = require('../controllers/language.js');
+const rankingController = require('../controllers/ranking.js');
 
 //Middlewares
 const tokenVerify = require('../middlewares/verifyToken.js');
@@ -51,7 +52,7 @@ module.exports = function (app) {
     app.delete('/api/v1/contestants', tokenVerify, contestantsController.contestantsDelete);
     app.post('/api/v1/contestants/status', tokenVerify, contestantsController.contestantsStatus);
     app.post('/api/v1/contestants/favorite', tokenVerify, configuration, favoriteController.saveFavoriteContestants);
-    app.get('/api/v1/contestants/favorite/list', tokenVerify, showLanguage, favoriteController.getMyFavoriteContestants);
+    app.get('/api/v1/contestants/favorite/list', tokenVerify, showLanguage, favoriteshowLanguage, favoriteController.getMyFavoriteContestants);
 
     /*
     Users API.
@@ -82,6 +83,7 @@ module.exports = function (app) {
     app.post('/api/v1/event/favorite', tokenVerify, eventController.saveFavoriteEvent);
     app.post('/api/v1/event/create', tokenVerify, eventController.eventCreate);
     app.put('/api/v1/event/update', tokenVerify, eventController.eventImageUpdate);
+    app.get('/api/v1/event/info', tokenVerify, eventController.eventInfo);
 
     /*
     Task API.
@@ -117,12 +119,20 @@ module.exports = function (app) {
 
     /*
     Translation
+        1. Get all static information 
     */
     app.get('/api/v1/translation', tokenVerify, translationController.getTranslation);
 
 
     /*
+    Ranking
+        1. Get all static information
+    */
+    app.get('/api/v1/ranking', tokenVerify, rankingController.getRankingList);
+
+
+    /*
     1. User active count
     */
-    app.get('/api/v1/user/active/count', tokenVerify,)
+    // app.get('/api/v1/user/active/count', tokenVerify,)
 }

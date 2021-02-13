@@ -10,9 +10,96 @@ const {
 } = require("../config/config.js");
 var logger = require("../config/logger");
 
+exports.eventInfo = async function (req, res) {
+    if (!req.query.id) {
+        return res.status(400).json({
+            apiName: "Event Detail API",
+            success: false,
+            message: "Please provide the Event ID to get the Event information.",
+        });
+    }
+
+    var eventDB = getModelByShow(req.db, "event", eventModel);
+
+    eventDB.findById(req.query.id, function (err, contestantData) {
+        if (err) {
+            console.log("err", err);
+            res.status(400).json({
+                apiName: "eventDB Detail API",
+                success: false,
+                message: "Error Occurred",
+            });
+        } else if (!eventData) {
+            res.status(400).json({
+                apiName: "eventDB Detail API",
+                success: false,
+                message: "eventDB not found.",
+            });
+        } else {
+            console.log(eventData);
+
+            var language = req.query.language || req.eventLanguage;
+
+            if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
+                language = 'en';
+            }
+            var translation;
+            var event = eventData._doc;
+
+            if (language) {
+                if (language == 'both') {
+                    translation = {
+                        ...event.translation,
+                        en: {
+                            name: event.name,
+                            rules: event.rules,
+                            description: event.description,
+                        }
+                    }
+                    event.translation = translation;
+                    event = {
+                        ...event,
+                        nativeLanguage: req.nativeLanguage
+                    }
+                } else if (language != 'en') {
+                    var trans = event.translation;
+                    event = {
+                        ...event,
+                        nativeLanguage: req.nativeLanguage,
+                        name: trans[language].name,
+                        rules: trans[language].rules,
+                        description: trans[language].description,
+                        translation: null
+                    }
+                    delete event.translation;
+                } else {
+                    event = event;
+                    delete event.translation;
+                }
+            }
+
+            res.json({
+                apiName: "Event Detail API",
+                success: true,
+                message: "Event has been updated successfully.",
+                data: event
+            });
+        }
+    });
+}
+
 exports.getEventList = async function (req, res) {
     var eventDB = await getModelByShow(masterDB, "event", eventModel);
     var search = req.body.search;
+
+    var language = req.query.language ;
+    // console.log(language,req.nativeLanguage)
+    // if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
+    //     language = 'en';
+    // }
+
+    // console.log("language",language,req.eventLanguage,req.nativeLanguage)
+
     var arr = [];
     if (search) {
         arr.push({
@@ -41,6 +128,41 @@ exports.getEventList = async function (req, res) {
                 status: 'active'
             },
         });
+    }
+
+    if (language) {
+        if (language == 'both') {
+            arr.push({
+                $addFields: {
+                    "translation.en": {
+                        "name": "$name",
+                        "rules": "$rules",
+                        "description": "$description"
+                    },
+                //    / "nativeLanguage": req.nativeLanguage
+                }
+            })
+        } else if (language != 'en') {
+            arr.push({
+                $addFields: {
+                    "name": `$translation.name`,
+                    "rules": `$translation.rules`,
+                    "description": `$translation.description`,
+                },
+            })
+        } else {
+            arr.push({
+                $project: {
+                    "translation": 0
+                },
+            })
+        }
+    } else {
+        arr.push({
+            $project: {
+                "translation": 0
+            },
+        })
     }
 
     // arr.push({

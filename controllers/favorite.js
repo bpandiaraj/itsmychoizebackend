@@ -115,7 +115,7 @@ exports.getMyFavoriteContestants = function (req, res) {
     }
 
     var query = {};
-
+    var rules ; 
     if (language) {
         if (language == 'both') {
             query = {
@@ -133,6 +133,7 @@ exports.getMyFavoriteContestants = function (req, res) {
                 "professional": `$translation.${language}.professional`,
                 "percentage": 20
             }
+            rules = req.eventInformation.translation.rules || '';
         } else {
             query = {
                 "translation.en": {
@@ -142,6 +143,7 @@ exports.getMyFavoriteContestants = function (req, res) {
                 },
                 "percentage": 20
             }
+            rules = req.eventInformation.rules || '';
         }
     } else {
         query = {
@@ -220,6 +222,7 @@ exports.getMyFavoriteContestants = function (req, res) {
                 success: true,
                 message: "Successfully view favorite Contestant list",
                 favoriteList: listdata[0].contestants || [],
+                rules: rules
             });
         }
     });

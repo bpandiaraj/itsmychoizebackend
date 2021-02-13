@@ -6,6 +6,11 @@ var userSchema = mongoose.Schema({
         unique: true,
         require: true,
     },
+    userName: {
+        type: String,
+        unique: true,
+        require: true,
+    },
     name: {
         type: String,
         require: true,

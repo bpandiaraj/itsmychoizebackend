@@ -13,7 +13,7 @@ module.exports = function (req, res, next) {
     var token = req.headers["x-access-token"];
     var app = req.headers['app'];
     var showDB = req.headers['show'];
-    console.log("showDB",showDB)
+    console.log("showDB", showDB)
     if (token) {
         if (app == 'mobile') {
             console.log("token ", token);
@@ -24,8 +24,8 @@ module.exports = function (req, res, next) {
                     console.log("decoded ", decodedToken);
                     var userDB = getModelByShow(config.masterDB, "user", userModel);
                     userDB.findOne({
-                            uid: decodedToken.uid,
-                        },
+                        uid: decodedToken.uid,
+                    },
                         function (err, user) {
                             if (!user) {
                                 res.status(401).send({
@@ -34,12 +34,20 @@ module.exports = function (req, res, next) {
                                     message: constant.apiErrorForbidden
                                 });
                             } else if (user) {
+                                console.log("user", user)
                                 req.id = user._id;
                                 req.uid = decodedToken.uid;
                                 req.db = showDB ? config.db + "_" + showDB : config.db;
                                 req.show = showDB;
+                                req.userInfo = {
+                                    _id: user._id,
+                                    uid: user.uid,
+                                    name: user.name,
+                                    // email: user.email,
+                                    userName: user.userName
+                                };
                                 req.user = 'user';
-                                console.log("req.db",req.db)
+                                console.log("req.db", req.db)
                                 next();
                             }
                         }

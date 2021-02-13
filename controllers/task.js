@@ -194,12 +194,16 @@ exports.taskImageUpdate = function (req, res) {
                     });
                 } else {
                     console.log("savedData", savedData);
-                    fs.unlink("./images/" + savedData.images[0], (err) => {
-                        if (err) {
-                            console.error(err)
-                        }
+                    if (!body.imageChanged) {
                         updateImages('create', body.imageChanged, files, res, req, taskDB);
-                    })
+                    } else {
+                        fs.unlink("./images/" + savedData.images[0], (err) => {
+                            if (err) {
+                                console.error(err)
+                            }
+                            updateImages('create', body.imageChanged, files, res, req, taskDB);
+                        })
+                    }
                 }
             });
         }
@@ -331,8 +335,14 @@ exports.tasksList = function (req, res) {
             })
         }
     } else if (req.user == 'user') {
+        var transQuery;
         if (language) {
             if (language != 'en') {
+                transQuery = {
+                    "name": `$translation.${language}.name`,
+                    "biography": `$translation.${language}.biography`,
+                    "professional": `$translation.${language}.professional`,
+                }
                 arr.push({
                     $addFields: {
                         "name": `$translation.${language}.name`,
@@ -345,6 +355,16 @@ exports.tasksList = function (req, res) {
                     },
                 })
             } else {
+                transQuery = {
+                    $addFields: {
+                        "translation.en": {
+                            "name": "$name",
+                            "biography": "$biography",
+                            "professional": "$professional"
+                        },
+                    }
+                }
+
                 arr.push({
                     $project: {
                         "translation": 0
@@ -352,6 +372,16 @@ exports.tasksList = function (req, res) {
                 })
             }
         } else {
+            transQuery = {
+                $addFields: {
+                    "translation.en": {
+                        "name": "$name",
+                        "biography": "$biography",
+                        "professional": "$professional"
+                    },
+                }
+            }
+
             arr.push({
                 $project: {
                     "translation": 0
@@ -360,32 +390,84 @@ exports.tasksList = function (req, res) {
         }
 
         //Need to add lookup for 
-        // arr.push({
-        //     $lookup: {
-        //         "from": "contestants",
-        //         "let": {
-        //             "contestants": "$contestants"
-        //         },
-        //         "pipeline": [{
-        //             "$match": {
-        //                 "$expr": {
-        //                     "$in": ["$_id", "$$contestants"]
-        //                 }
-        //             },
-        //         },
-        //         {
-        //             "$addFields": query
-        //         }
-        //         ],
-        //         "as": "contestants"
-        //     }
-        // })
-
-        arr.push({
+        var secondArr = [{
+            $lookup: {
+                "from": "taskplays",
+                "let": {
+                    "id": "$_id",
+                    "userId": req.id
+                },
+                "pipeline": [{
+                    "$match": {
+                        $and: [
+                            {
+                                "$expr": {
+                                    "$eq": ["$task", "$$id"]
+                                }
+                            },
+                            {
+                                "$expr": {
+                                    "$eq": ["$user._id", "$$userId"]
+                                }
+                            }
+                        ]
+                    },
+                }, {
+                    "$project": {
+                        "_id": 0,
+                        "createdAt": 0,
+                        "user": 0,
+                        "task": 0,
+                        "__v": 0
+                    }
+                }
+                ],
+                "as": "contestants"
+            }
+        },
+        {
+            "$addFields": {
+                selectedContestants: {
+                    $cond:
+                    {
+                        if: { $isArray: "$contestants" },
+                        then: { $arrayElemAt: ["$contestants", 0] },
+                        else: {
+                            "contestants": []
+                        }
+                    }
+                }
+            },
+        },
+        {
+            "$project": {
+                contestants: 0
+            }
+        },
+        {
+            "$addFields": {
+                contestants: "$selectedContestants.contestants"
+            },
+        },
+        {
+            "$project": {
+                selectedContestants: 0
+            }
+        }, {
+            $lookup: {
+                from: "contestants",
+                localField: "contestants",
+                foreignField: "_id",
+                as: "contestants",
+            },
+        },
+        {
             $sort: {
                 isFeatured: -1
             }
-        });
+        }];
+
+        arr = arr.concat(secondArr);
     }
 
     if (req.query.status) {
@@ -412,6 +494,12 @@ exports.tasksList = function (req, res) {
             as: "winningContestants",
         },
     })
+
+    arr.push({
+        $sort: {
+            status: 1
+        },
+    });
 
     var taskDB = getModelByShow(req.db, "task", taskModel)
 

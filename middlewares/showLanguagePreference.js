@@ -8,26 +8,26 @@ const {
 } = require("../config/config.js");
 
 module.exports = function (req, res, next) {
-    console.log("show ",req.show)
+    console.log("show ", req.show)
     if (!req.show) {
         req.language = [];
         next();
         return
     }
-    
+
     arr = [{
-            $match: {
-                _id: ObjectId(req.show)
-            }
+        $match: {
+            _id: ObjectId(req.show)
+        }
+    },
+    {
+        $lookup: {
+            from: "languages",
+            localField: "language",
+            foreignField: "language",
+            as: "language",
         },
-        {
-            $lookup: {
-                from: "languages",
-                localField: "language",
-                foreignField: "language",
-                as: "language",
-            },
-        },
+    },
     ]
 
     var eventDB = getModelByShow(masterDB, "event", eventModel);
@@ -49,7 +49,8 @@ module.exports = function (req, res, next) {
             req.language = [];
             next();
         } else {
-            console.log(listdata)
+            console.log(listdata);
+            req.eventInformation = listdata[0];
             req.language = listdata.length > 0 ? listdata[0].language : [];
             req.englishLanguage = listdata[0].language[0].code ? listdata[0].language[0].code : "en"
             req.nativeLanguage = listdata[0].language[1].code ? listdata[0].language[1].code : "en"
