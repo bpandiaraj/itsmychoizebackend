@@ -6,7 +6,7 @@ const {
     getModelByShow
 } = require("../config/db_connection.js");
 const {
-    masterDB
+    masterDB, db
 } = require("../config/config.js");
 var logger = require("../config/logger");
 
@@ -24,6 +24,22 @@ exports.getEventList = async function (req, res) {
                     }
                 }]
             }
+        });
+    }
+
+    if (req.query.status) {
+        if (req.query.status != 'all') {
+            arr.push({
+                $match: {
+                    status: req.query.status,
+                },
+            });
+        }
+    } else {
+        arr.push({
+            $match: {
+                status: 'active'
+            },
         });
     }
 
@@ -79,18 +95,18 @@ exports.getEventLanguage = function (req, res) {
     }
 
     arr = [{
-            $match: {
-                _id: ObjectId(req.query.id)
-            }
+        $match: {
+            _id: ObjectId(req.query.id)
+        }
+    },
+    {
+        $lookup: {
+            from: "languages",
+            localField: "language",
+            foreignField: "language",
+            as: "language",
         },
-        {
-            $lookup: {
-                from: "languages",
-                localField: "language",
-                foreignField: "language",
-                as: "language",
-            },
-        },
+    },
     ]
 
     var eventDB = getModelByShow(masterDB, "event", eventModel);
@@ -153,12 +169,10 @@ exports.saveFavoriteEvent = function (req, res) {
                 message: "Error Occurred",
             });
         } else if (eventInfo) {
-            console.log("eventInfo", eventInfo);
             var eventDataForUpdate = {
                 defaultLanguage: req.body.defaultLanguage || eventInfo.defaultLanguage,
                 defaulted: req.body.defaulted || eventInfo.defaulted,
             };
-            console.log("eventInfo._id", eventInfo._id);
             eventDB.findByIdAndUpdate(eventInfo._id, eventDataForUpdate, function (err, savedData) {
                 console.log(err);
                 if (err) {
@@ -168,14 +182,12 @@ exports.saveFavoriteEvent = function (req, res) {
                         message: "Error Occurred",
                     });
                 } else {
-                    console.log("saved", savedData);
-
-                    var favoriteDB = getModelByShow(req.db, "favorite", favoriteModel);
-
+                    var dbId = db + '_' + req.body.event;
+                    var favoriteDB = getModelByShow(dbId, "favorite", favoriteModel);
                     favoriteDB.findOne({
                         user: req.id
                     }, function (err, favoriteContestant) {
-                        console.log("favorite",favoriteContestant)
+                        console.log("favorite", favoriteContestant)
                         if (err) {
                             res.status(400).json({
                                 apiName: "Event Favorite API",
@@ -226,7 +238,6 @@ exports.saveFavoriteEvent = function (req, res) {
             });
 
             eventData.save(function (err, savedData) {
-                console.log(err);
                 if (err) {
                     res.status(400).json({
                         apiName: "Event Favorite API",
@@ -234,7 +245,6 @@ exports.saveFavoriteEvent = function (req, res) {
                         message: "Error Occurred",
                     });
                 } else {
-                    console.log("saved", savedData);
                     res.json({
                         apiName: "Event Favorite API",
                         success: true,
@@ -252,26 +262,26 @@ exports.saveFavoriteEvent = function (req, res) {
 exports.favoriteEventForUser = function (req, res) {
     var arr = [];
     arr = [{
-            $match: {
-                user: ObjectId(req.id)
-            }
+        $match: {
+            user: ObjectId(req.id)
+        }
+    },
+    {
+        $lookup: {
+            from: "events",
+            localField: "event",
+            foreignField: "_id",
+            as: "event",
         },
-        {
-            $lookup: {
-                from: "events",
-                localField: "event",
-                foreignField: "_id",
-                as: "event",
-            },
+    },
+    {
+        $lookup: {
+            from: "languages",
+            localField: "defaultLanguage",
+            foreignField: "language",
+            as: "defaultLanguage",
         },
-        {
-            $lookup: {
-                from: "languages",
-                localField: "defaultLanguage",
-                foreignField: "language",
-                as: "defaultLanguage",
-            },
-        },
+    },
     ]
 
 
@@ -370,45 +380,54 @@ exports.eventCreate = function (req, res) {
 }
 
 function saveImages(t, data, files, res, req, db) {
-    if (files.image != undefined) {
+    if (files.image != undefined && files.banner != undefined) {
         let newpath = `./images/shows`;
         let newpath1 = `/shows`;
         fs.rename(files.image.path, newpath + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim(), (err) => {
             if (err) {
-                logger.error(`Error while save image of show.`);
+                logger.error(`Error while save image of event.`);
                 console.log("err", err);
             } else {
-                db.findByIdAndUpdate(
-                    data._doc._id, {
-                        logo: newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim(),
-                        databaseId: data._doc._id
-                    },
-                    function (err, savedData) {
-                        if (err) {
-                            logger.error(`Error while update the image url in show collection.`);
-                            res.status(400).json({
-                                apiName: "Show Create API",
-                                success: false,
-                                message: "Error Occurred",
-                            });
-                        } else {
-                            logger.info(`Show image url updated successfully.`);
-                            res.json({
-                                apiName: "Show Create API",
-                                success: true,
-                                message: "Show has been saved successfully.",
-                                id: data._doc._id,
-                            });
-                        }
-                    })
+                fs.rename(files.banner.path, newpath + "/banner_" + data._doc._id + "." + files.image.path.split(".").pop().trim(), (err) => {
+                    if (err) {
+                        logger.error(`Error while save image of event.`);
+                        console.log("err", err);
+                    } else {
+                        db.findByIdAndUpdate(
+                            data._doc._id,
+                            {
+                                logo: newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim(),
+                                banner: newpath1 + "/banner_" + data._doc._id + "." + files.image.path.split(".").pop().trim(),
+                                databaseId: data._doc._id
+                            },
+                            function (err, savedData) {
+                                if (err) {
+                                    logger.error(`Error while update the image url in event collection.`);
+                                    res.status(400).json({
+                                        apiName: "Event Create API",
+                                        success: false,
+                                        message: "Error Occurred",
+                                    });
+                                } else {
+                                    logger.info(`Event image url updated successfully.`);
+                                    res.json({
+                                        apiName: "Show Create API",
+                                        success: true,
+                                        message: "Event has been saved successfully.",
+                                        id: data._doc._id,
+                                    });
+                                }
+                            })
+                    }
+                });
             }
         });
     } else {
-        logger.info(`Show detail has been saved and image not uploaded`);
+        logger.info(`Event detail has been saved and image not uploaded`);
         res.json({
-            apiName: "Show Create API",
+            apiName: "Event Create API",
             success: true,
-            message: "Show has been saved successfully.",
+            message: "Event has been saved successfully without image.",
             id: data._doc._id,
         });
     }
@@ -505,9 +524,9 @@ function updateImages(t, data, files, res, req, db) {
                 } else {
                     db.findByIdAndUpdate(
                         req.query.id, {
-                            logo: newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(),
-                            databaseId: req.query.id
-                        },
+                        logo: newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(),
+                        databaseId: req.query.id
+                    },
                         function (err, savedData) {
                             if (err) {
                                 logger.error(`Error while update the image url in event collection.`);

@@ -9,13 +9,23 @@ const {
 var logger = require("../config/logger");
 
 exports.userCheckAndCreate = (req, res) => {
+  if (!req.query.uid) {
+    logger.info("User uid not provide.")
+    return res.status(400).send({
+      apiName: "User Check API",
+      success: false,
+      message: "Please provide the user uid.",
+    });
+  }
+
   var userDB = getModelByShow(config.masterDB, "user", userModel);
+  logger.info("User create api")
   userDB.findOne({
-      uid: req.query.uid,
-    },
+    uid: req.query.uid,
+  },
     function (err, user) {
-      console.log("user", user, err)
       if (err) {
+        logger.info("Error occured while find user")
         res.status(400).send({
           apiName: "User Check API",
           success: false,
@@ -35,17 +45,18 @@ exports.userCheckAndCreate = (req, res) => {
               mobile: userInfo.phoneNumber,
               profilePicture: userInfo.photoURL || null,
               status: 'active',
-              // redeemPoint: req.configure.entryPointForUser || 0
+              point: req.configure.entryPointForUser || 0
             });
             userData.save(function (err, savedData) {
-              console.log(err)
               if (err) {
+                logger.info("Error occured while create user")
                 res.status(400).send({
                   apiName: "User Check API",
                   success: false,
                   message: "Some error occurred",
                 });
               } else {
+                logger.info(`User created successfully and point has been added ${req.configure.entryPointForUser}`);
                 res.json({
                   apiName: "User Check API",
                   success: true,
@@ -56,6 +67,7 @@ exports.userCheckAndCreate = (req, res) => {
             });
           })
           .catch(function (error) {
+            logger.info("Error occured while create user")
             res.status(400).send({
               apiName: "User Check API",
               success: false,
@@ -63,22 +75,29 @@ exports.userCheckAndCreate = (req, res) => {
             });
           });
       } else {
-        console.log("user 1",user)
-        if (!user.mobile || !user.state || !user.country || !user.pincode) {
-          console.log("user 2",user)
-          res.json({
-            apiName: "User Check API",
-            success: true,
-            message: "User found",
-            userProfileUpdated: false
-          });
+        if (user.status == 'active') {
+          if (!user.mobile || !user.state || !user.country || !user.pincode) {
+            logger.info("User found and profile not updated")
+            res.json({
+              apiName: "User Check API",
+              success: true,
+              message: "User found",
+              userProfileUpdated: false
+            });
+          } else {
+            logger.info("User found and profile updated")
+            res.json({
+              apiName: "User Check API",
+              success: true,
+              message: "User found",
+              userProfileUpdated: true
+            });
+          }
         } else {
-          console.log("user 3",user)
-          res.json({
+          res.status(401).json({
             apiName: "User Check API",
-            success: true,
-            message: "User found",
-            userProfileUpdated: true
+            success: false,
+            message: "User found and status was inactive.",
           });
         }
       }
@@ -87,8 +106,9 @@ exports.userCheckAndCreate = (req, res) => {
 };
 
 exports.userProfileUpdate = (req, res) => {
-
+  logger.info("At user update.");
   if (!req.body.mobile && !req.body.state && !req.body.country && !req.body.city && !req.body.pincode) {
+    logger.info("Some value missing while update");
     return res.status(400).json({
       apiName: "User Update API",
       success: false,
@@ -103,26 +123,30 @@ exports.userProfileUpdate = (req, res) => {
     country: req.body.country,
     city: req.body.city,
     pincode: req.body.pincode,
+    dob: req.body.dob || null,
     modifiedAt: new Date()
   };
   var userDB = getModelByShow(config.masterDB, "user", userModel);
   userDB.findOneAndUpdate({
-      uid: req.uid
-    }, updateObject,
+    uid: req.uid
+  }, updateObject,
     function (err, savedData) {
       if (err) {
+        logger.info("Error occured profile update.")
         res.status(400).json({
           apiName: "User Update API",
           success: false,
           message: "Error Occurred",
         });
       } else if (!savedData) {
+        logger.info("User not found for update profile.")
         res.status(400).json({
           apiName: "User Update API",
           success: false,
           message: "User info not found",
         });
       } else {
+        logger.info("User profile updated successfully.")
         res.json({
           apiName: "User Update API",
           success: true,
@@ -135,10 +159,10 @@ exports.userProfileUpdate = (req, res) => {
 exports.userProfileStatusUpdate = (req, res) => {
   var userDB = getModelByShow(config.masterDB, "user", userModel);
   userDB.findOneAndUpdate({
-      uid: req.query.uid
-    }, {
-      status: req.body.status
-    },
+    uid: req.query.uid
+  }, {
+    status: req.body.status
+  },
     function (err, savedData) {
       if (err) {
         res.status(400).json({
@@ -234,40 +258,56 @@ exports.usersList = (req, res) => {
     arr.push({
       $match: {
         $or: [{
-            name: {
-              $regex: search,
-              $options: "i"
-            }
-          }, {
-            city: {
-              $regex: search,
-              $options: "i"
-            }
-          }, {
-            state: {
-              $regex: search,
-              $options: "i"
-            }
-          }, {
-            country: {
-              $regex: search,
-              $options: "i"
-            }
-          },
-          {
-            pincode: {
-              $regex: search,
-              $options: "i"
-            }
-          },
-          {
-            mobile: {
-              $regex: search,
-              $options: "i"
-            }
-          },
+          name: {
+            $regex: search,
+            $options: "i"
+          }
+        }, {
+          city: {
+            $regex: search,
+            $options: "i"
+          }
+        }, {
+          state: {
+            $regex: search,
+            $options: "i"
+          }
+        }, {
+          country: {
+            $regex: search,
+            $options: "i"
+          }
+        },
+        {
+          pincode: {
+            $regex: search,
+            $options: "i"
+          }
+        },
+        {
+          mobile: {
+            $regex: search,
+            $options: "i"
+          }
+        },
         ]
       }
+    });
+  }
+
+  if (req.query.status) {
+    if (req.query.status != 'all') {
+      arr.push({
+        $match: {
+          status: req.query.status
+        },
+      });
+    }
+  } else {
+    arr.push({
+      $match: {
+        status: 'active'
+      },
     });
   }
 
@@ -311,34 +351,28 @@ exports.usersList = (req, res) => {
 }
 
 exports.availableUserPoints = (req, res) => {
-  if (!req.query.uid) {
-    return res.status(400).json({
-      apiName: "Get Profile API",
-      success: false,
-      message: "Please provide user uid.",
-    });
-  }
+
   var userDB = getModelByShow(config.masterDB, "user", userModel);
   userDB.findOne({
-    uid: req.query.uid
+    _id: req.id
   }, function (err, userInfo) {
     if (err) {
       return res.status(400).json({
-        apiName: "Get Profile API",
+        apiName: "Get User Point API",
         success: false,
         message: "Some Error Occured",
       });
     } else if (!userInfo) {
       return res.status(400).json({
-        apiName: "Get Profile API",
+        apiName: "Get User Point API",
         success: false,
         message: "User not found",
       });
     } else {
       res.json({
-        apiName: "Get Profile API",
+        apiName: "Get User Point API",
         success: true,
-        message: "Profile found successfully.",
+        message: "User point founded.",
         point: userInfo.point || 0,
         redeemPoint: userInfo.redeem || 0
       });

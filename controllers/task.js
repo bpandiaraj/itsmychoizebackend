@@ -90,8 +90,8 @@ function saveImages(t, data, files, res, req, db) {
             } else {
                 db.findByIdAndUpdate(
                     data._doc._id, {
-                        images: [newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim()]
-                    },
+                    images: [newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim()]
+                },
                     function (err, savedData) {
                         if (err) {
                             logger.error(`Error while update the image url in task collection.`);
@@ -222,8 +222,8 @@ function updateImages(t, data, files, res, req, db) {
                 } else {
                     db.findByIdAndUpdate(
                         req.query.id, {
-                            images: [newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim()]
-                        },
+                        images: [newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim()]
+                    },
                         function (err, savedData) {
                             if (err) {
                                 logger.error(`Error while update the image url in task collection.`);
@@ -275,17 +275,17 @@ exports.tasksList = function (req, res) {
         arr.push({
             $match: {
                 $or: [{
-                        name: {
-                            $regex: search,
-                            $options: "i",
-                        },
+                    name: {
+                        $regex: search,
+                        $options: "i",
                     },
-                    {
-                        rules: {
-                            $regex: search,
-                            $options: "i",
-                        },
-                    }
+                },
+                {
+                    rules: {
+                        $regex: search,
+                        $options: "i",
+                    },
+                }
                 ],
             },
         });
@@ -359,17 +359,27 @@ exports.tasksList = function (req, res) {
             })
         }
 
-        arr.push({
-            $match: {
-                $and: [{
-                        status: {
-                            $regex: 'active',
-                            $options: "i",
-                        },
-                    }
-                ],
-            }
-        });
+        //Need to add lookup for 
+        // arr.push({
+        //     $lookup: {
+        //         "from": "contestants",
+        //         "let": {
+        //             "contestants": "$contestants"
+        //         },
+        //         "pipeline": [{
+        //             "$match": {
+        //                 "$expr": {
+        //                     "$in": ["$_id", "$$contestants"]
+        //                 }
+        //             },
+        //         },
+        //         {
+        //             "$addFields": query
+        //         }
+        //         ],
+        //         "as": "contestants"
+        //     }
+        // })
 
         arr.push({
             $sort: {
@@ -377,6 +387,31 @@ exports.tasksList = function (req, res) {
             }
         });
     }
+
+    if (req.query.status) {
+        if (req.query.status != 'all') {
+            arr.push({
+                $match: {
+                    status: req.query.status
+                },
+            });
+        }
+    } else {
+        arr.push({
+            $match: {
+                status: 'active'
+            },
+        });
+    }
+
+    arr.push({
+        $lookup: {
+            from: "contestants",
+            localField: "winningContestants",
+            foreignField: "_id",
+            as: "winningContestants",
+        },
+    })
 
     var taskDB = getModelByShow(req.db, "task", taskModel)
 
@@ -484,8 +519,55 @@ exports.taskDetails = function (req, res) {
             res.json({
                 apiName: "Task Detail API",
                 success: true,
-                message: "Task has been updated successfully.",
+                message: "Task has been found.",
                 data: task
+            });
+        }
+    });
+}
+
+exports.taskWinningContestant = function (req, res) {
+    if (!req.query.id) {
+        return res.status(400).json({
+            apiName: "Task Winner Contestant Update API",
+            success: false,
+            message: "Please provide the task ID to update winning contestant.",
+        });
+    }
+
+    if (!Array.isArray(req.body.winningContestants)) {
+        return res.status(400).json({
+            apiName: "Task Winner Contestant Update API",
+            success: false,
+            message: "Please provide the Winning Contestants list.",
+        });
+    }
+
+    var taskDB = getModelByShow(req.db, "task", taskModel);
+
+    var body = {
+        winningContestants: req.body.winningContestants
+    }
+
+    taskDB.findByIdAndUpdate(req.query.id, body, function (err, taskInfo) {
+        if (err) {
+            console.log("err", err);
+            res.status(400).json({
+                apiName: "Task Winner Contestant Update API",
+                success: false,
+                message: "Error Occurred",
+            });
+        } else if (!taskInfo) {
+            res.status(400).json({
+                apiName: "Task Winner Contestant Update API",
+                success: false,
+                message: "Task not found.",
+            });
+        } else {
+            res.json({
+                apiName: "Task Winner Contestant Update API",
+                success: true,
+                message: "Task winner contestant has been updated successfully.",
             });
         }
     });

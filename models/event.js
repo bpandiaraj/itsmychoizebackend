@@ -4,6 +4,9 @@ var eventSchema = mongoose.Schema({
     logo: {
         type: String
     },
+    banner: {
+        type: String
+    },
     name: {
         type: String,
         require: true,
@@ -11,6 +14,9 @@ var eventSchema = mongoose.Schema({
     databaseId: {
         type: String,
         require: true,
+    },
+    status: {
+        type: String,
     },
     language: {
         type: Array,
@@ -21,6 +27,24 @@ var eventSchema = mongoose.Schema({
     },
     modifiedAt: {
         type: Date,
+    },
+    translation: {
+        type: Object
+    },
+    startedDate: {
+        type: Date
+    },
+    endDate: {
+        type: Date
+    },
+    rules: {
+        type: String
+    },
+    description: {
+        type: String
+    },
+    eventOccurance: {
+        type: String
     }
 });
 

@@ -505,3 +505,96 @@ ReferenceError: moment is not defined
     at updateImages (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:215:29)
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:200:25
     at FSReqCallback.oncomplete (fs.js:154:23)
+2021-02-11T10:19:29.023Z [logs] error: Data not found.
+2021-02-11T10:23:29.704Z [logs] error: Data not found.
+2021-02-11T10:24:44.048Z [logs] error: Data not found.
+2021-02-11T12:10:34.070Z [logs] error: uncaughtException: Route.post() requires a callback function but got a [object Undefined]
+Error: Route.post() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as post] (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\router\route.js:202:15)
+    at Function.app.<computed> [as post] (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\application.js:482:19)
+    at module.exports (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:88:9)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:44:26)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:999:10)
+    at internal/main/run_main_module.js:17:11
+2021-02-11T12:40:26.192Z [logs] error: Error while get my favorite contestant.
+2021-02-11T13:18:28.844Z [logs] error: Data not found.
+2021-02-11T13:20:39.015Z [logs] error: Data not found.
+2021-02-12T06:19:01.264Z [logs] error: uncaughtException: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\router\route.js:202:15)
+    at Function.app.<computed> [as get] (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\application.js:482:19)
+    at module.exports (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:113:9)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:44:26)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:999:10)
+    at internal/main/run_main_module.js:17:11
+2021-02-12T06:21:20.949Z [logs] error: uncaughtException: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\router\route.js:202:15)
+    at Function.app.<computed> [as get] (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\application.js:482:19)
+    at module.exports (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:113:9)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:44:26)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:999:10)
+    at internal/main/run_main_module.js:17:11
+2021-02-12T06:21:44.720Z [logs] error: uncaughtException: Route.get() requires a callback function but got a [object Undefined]
+Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\router\route.js:202:15)
+    at Function.app.<computed> [as get] (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\express\lib\application.js:482:19)
+    at module.exports (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:113:9)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:44:26)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:999:10)
+    at internal/main/run_main_module.js:17:11
+2021-02-12T09:44:24.901Z [logs] error: Error while list the contestants.
+2021-02-12T09:45:30.488Z [logs] error: Error while list the contestants.
+2021-02-12T09:45:30.787Z [logs] error: Error while list the contestants.
+2021-02-12T09:46:03.517Z [logs] error: Error while list the contestants.
+2021-02-12T09:48:56.923Z [logs] error: Error while get my favorite contestant.
+2021-02-12T09:49:23.743Z [logs] error: uncaughtException: Unexpected token .
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:228
+                favoriteList: listdata[0]?.contestants || null,
+                                          ^
+
+SyntaxError: Unexpected token .
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:8:28)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:44:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-02-12T09:50:17.990Z [logs] error: Error while get my favorite contestant.
+2021-02-12T09:50:42.867Z [logs] error: Error while get my favorite contestant.
+2021-02-12T11:10:44.899Z [logs] error: uncaughtException: saved is not defined
+ReferenceError: saved is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:189:53
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)

@@ -8,10 +8,6 @@ const {
 } = require("../config/config.js");
 var logger = require("../config/logger");
 
-const formidable = require("formidable");
-const path = require("path");
-const fs = require("fs");
-
 exports.taskPlayCreate = function (req, res) {
 
     var taskPlayData = getModelByShow(req.db, "taskPlay", taskPlayModel);

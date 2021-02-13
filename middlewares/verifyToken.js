@@ -13,6 +13,7 @@ module.exports = function (req, res, next) {
     var token = req.headers["x-access-token"];
     var app = req.headers['app'];
     var showDB = req.headers['show'];
+    console.log("showDB",showDB)
     if (token) {
         if (app == 'mobile') {
             console.log("token ", token);
@@ -38,6 +39,7 @@ module.exports = function (req, res, next) {
                                 req.db = showDB ? config.db + "_" + showDB : config.db;
                                 req.show = showDB;
                                 req.user = 'user';
+                                console.log("req.db",req.db)
                                 next();
                             }
                         }

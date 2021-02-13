@@ -1,10 +1,16 @@
 'use strict';
 const configurationModel = require("../models/configuration.js");
-const config = require("../config/config.js");
+const {
+    getModelByShow
+} = require("../config/db_connection.js");
+const {
+    masterDB
+} = require("../config/config.js");
 
 module.exports = function (req, res, next) {
-    var configurationDB = getModelByShow(config.masterDB, "configuration", configurationModel);
-    configurationDB.find(function (err, configureData) {
+    var configurationDB = getModelByShow(masterDB, "configuration", configurationModel);
+    configurationDB.findOne(function (err, configureData) {
+        console.log("configuration",configureData)
         if (err) {
             req.configure = null;
         } else if (!configureData) {

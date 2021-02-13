@@ -18,29 +18,32 @@ var userSchema = mongoose.Schema({
         type: String
     },
     gender: {
-        type: String,
+        type: String
+    },
+    dob: {
+        type: Date
     },
     state: {
-        type: String,
+        type: String
     },
     country: {
-        type: String,
+        type: String
     },
     city: {
-        type: String,
+        type: String
     },
     pincode: {
-        type: String,
+        type: String
     },
     profilePicture: {
-        type: String,
+        type: String
     },
     status: {
         type: String,
-        require: true,
+        require: true
     },
     isMobileVerified: {
-        type: Boolean,
+        type: Boolean
     },
     redeemPoint: {
         type: Number
@@ -50,21 +53,21 @@ var userSchema = mongoose.Schema({
     },
     otp: {
         otp: String,
-        time: Date,
+        time: Date
     },
     createdAt: {
         type: Date,
-        default: new Date(),
+        default: new Date()
     },
     modifiedAt: {
-        type: Date,
+        type: Date
     },
     lastLogin: {
-        type: String,
+        type: String
     },
     favoriteContestant: {
         type: mongoose.Types.ObjectId,
-        ref: "Favorites",
+        ref: "Favorites"
     }
 });
 

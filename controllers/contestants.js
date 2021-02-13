@@ -22,27 +22,44 @@ exports.contestantsList = function (req, res) {
         arr.push({
             $match: {
                 $or: [{
-                        name: {
-                            $regex: search,
-                            $options: "i",
-                        },
+                    name: {
+                        $regex: search,
+                        $options: "i",
                     },
-                    {
-                        professional: {
-                            $regex: search,
-                            $options: "i",
-                        },
+                },
+                {
+                    professional: {
+                        $regex: search,
+                        $options: "i",
                     },
-                    {
-                        biography: {
-                            $regex: search,
-                            $options: "i",
-                        },
+                },
+                {
+                    biography: {
+                        $regex: search,
+                        $options: "i",
                     },
+                },
                 ],
             },
         });
     }
+
+    if (req.query.status) {
+        if (req.query.status != 'all') {
+            arr.push({
+                $match: {
+                    status: req.query.status
+                },
+            });
+        }
+    } else {
+        arr.push({
+            $match: {
+                status: 'active'
+            },
+        });
+    }
+
     if (language) {
         if (language == 'both') {
             arr.push({
@@ -85,6 +102,16 @@ exports.contestantsList = function (req, res) {
         })
     }
 
+    console.log("array",req.favoriteContestant)
+    if( Array.isArray(req.favoriteContestant)){
+        arr.push({
+            $addFields:{
+                "isFavorited":{ $cond: { if: { "$in": [ "$_id", req.favoriteContestant ] }, then: true, else: false } }
+            }
+        })
+    }
+        
+
     var contestantModel = getModelByShow(req.db, "contestant", contestants)
 
     var aggregate = contestantModel.aggregate(arr);
@@ -118,6 +145,7 @@ exports.contestantsList = function (req, res) {
                 currentPage: req.query.page,
                 totalPages: pageCount,
                 dataCount: count,
+                maxSelecteContestant: req.configure.maxFavoriteContestant || 5
             });
         }
     });
@@ -196,8 +224,8 @@ function saveImages(t, data, files, res, req, db) {
             } else {
                 db.findByIdAndUpdate(
                     data._doc._id, {
-                        images: [newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim()]
-                    },
+                    images: [newpath1 + "/" + data._doc._id + "." + files.image.path.split(".").pop().trim()]
+                },
                     function (err, savedData) {
                         if (err) {
                             logger.error(`Error while update the image url in contestant collection.`);
@@ -360,8 +388,8 @@ function updateImages(t, data, files, res, req, db) {
                 } else {
                     db.findByIdAndUpdate(
                         req.query.id, {
-                            images: [newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim()]
-                        },
+                        images: [newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim()]
+                    },
                         function (err, savedData) {
                             if (err) {
                                 logger.error(`Error while update the image url in contestant collection.`);
@@ -406,10 +434,10 @@ exports.contestantsDelete = function (req, res) {
 exports.contestantsStatus = function (req, res) {
     var contestantModel = getModelByShow(req.db, "contestant", contestants);
     contestantModel.findOneAndUpdate({
-            _id: req.query.id
-        }, {
-            status: req.body.status
-        },
+        _id: req.query.id
+    }, {
+        status: req.body.status
+    },
         function (err, savedData) {
             if (err) {
                 res.status(400).json({
