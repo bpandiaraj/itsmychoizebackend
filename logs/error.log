@@ -668,3 +668,13 @@ TypeError: Cannot read property 'findByIdAndUpdate' of undefined
     at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
     at processTicksAndRejections (internal/process/task_queues.js:75:11)
 2021-02-13T11:32:32.809Z [logs] error: Error while list the tasks.
+2021-02-15T12:42:26.764Z [logs] error: uncaughtException: eventData is not defined
+ReferenceError: eventData is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:28:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)

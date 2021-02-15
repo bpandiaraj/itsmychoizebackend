@@ -3,19 +3,15 @@ const adminModel = require("../models/admin.js");
 const constant = require("../util/constant.json")
 const jwt = require("jsonwebtoken");
 const config = require("../config/config.js");
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-var logger = require("../config/logger");
+const { getModelByShow } = require("../config/db_connection.js");
+const logger = require("../config/logger");
 
 exports.adminLogin = function (req, res) {
     console.log("login", req.body);
     var adminDB = getModelByShow(config.masterDB, "admin", adminModel);
-    adminDB.findOne({
-            userName: req.body.userName,
-        },
+    adminDB.findOne(
+        { userName: req.body.userName },
         function (err, loginData) {
-            console.log(loginData)
             if (err) {
                 res.status(401).json({
                     apiName: "User Login API",
@@ -26,8 +22,8 @@ exports.adminLogin = function (req, res) {
                 if (loginData != null) {
                     if (req.body.password == loginData.password) {
                         jwt.sign({
-                                loginData,
-                            },
+                            loginData,
+                        },
                             config.secret,
                             (err, encode) => {
                                 res.json({
@@ -62,4 +58,4 @@ exports.adminLogin = function (req, res) {
             }
         }
     );
-}
+};

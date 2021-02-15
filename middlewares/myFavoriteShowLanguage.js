@@ -1,10 +1,6 @@
 const favoriteEventModel = require("../models/favorite_event");
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-const {
-    masterDB
-} = require("../config/config.js");
+const { getModelByShow } = require("../config/db_connection.js");
+const { masterDB } = require("../config/config.js");
 
 module.exports = function (req, res, next) {
     if (!req.show) {
@@ -15,7 +11,7 @@ module.exports = function (req, res, next) {
         });
     }
 
-  
+
     var favoriteEventDB = getModelByShow(masterDB, "favoriteEvent", favoriteEventModel);
 
     favoriteEventDB.findOne({
@@ -31,11 +27,11 @@ module.exports = function (req, res, next) {
                 success: false,
                 message: "Some Error Occured",
             });
-        } else if(!data){
+        } else if (!data) {
             req.eventLanguage = 'en'
             next();
-        
-        }else {
+
+        } else {
             req.eventLanguage = data.defaultLanguage || 'en'
             next();
         }

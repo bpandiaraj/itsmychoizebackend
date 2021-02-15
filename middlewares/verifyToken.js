@@ -2,12 +2,8 @@ const jwt = require('jsonwebtoken');
 const userModel = require("../models/users.js");
 const constant = require("../util/constant.json")
 const config = require("../config/config.js");
-const {
-    admin
-} = require("../shared-datas/fire-base.js");
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
+const { admin } = require("../shared-datas/fire-base.js");
+const { getModelByShow } = require("../config/db_connection.js");
 
 module.exports = function (req, res, next) {
     var token = req.headers["x-access-token"];

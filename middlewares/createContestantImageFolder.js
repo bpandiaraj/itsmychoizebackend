@@ -9,15 +9,11 @@ module.exports = function (req, res, next) {
         dirImage1 = dirImage + '/task';
         if (!fs.existsSync(dirImage)) {
             fs.mkdirSync(dirImage);
-        } else {
         }
         if (!fs.existsSync(dirImage1)) {
             fs.mkdirSync(dirImage1);
-        } else {
         }
-        setTimeout(() => {
-            next();
-        }, 500);
+        setTimeout(() => { next() }, 500);
     } else {
         next();
     }

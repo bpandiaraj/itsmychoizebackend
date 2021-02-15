@@ -16,9 +16,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({
     extended: true
 }));
-app.use(morgan("combined", {
-    stream: logger.stream
-  }));
+app.use(morgan("combined", { stream: logger.stream }));
 app.use(express.static('images'));
 app.get("/", (req, res) => {
     res.send("Welcome to Its My Choize......");
@@ -32,12 +30,12 @@ app.get("/", (req, res) => {
  * */
 
 var dir = './logs';
-if (!fs.existsSync(dir)){
+if (!fs.existsSync(dir)) {
     fs.mkdirSync(dir);
 }
 
 var dirImage = './images';
-if (!fs.existsSync(dirImage)){
+if (!fs.existsSync(dirImage)) {
     fs.mkdirSync(dirImage);
 }
 

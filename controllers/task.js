@@ -1,12 +1,8 @@
 const taskModel = require("../models/task.js");
 const ObjectId = require("mongodb").ObjectID;
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-const {
-    masterDB
-} = require("../config/config.js");
-var logger = require("../config/logger");
+const { getModelByShow } = require("../config/db_connection.js");
+const { masterDB } = require("../config/config.js");
+const logger = require("../config/logger");
 const formidable = require("formidable");
 const path = require("path");
 const fs = require("fs");
@@ -77,7 +73,7 @@ exports.taskCreate = function (req, res) {
             });
         }
     })
-}
+};
 
 function saveImages(t, data, files, res, req, db) {
     if (files.image != undefined) {
@@ -121,7 +117,7 @@ function saveImages(t, data, files, res, req, db) {
             id: data._doc._id,
         });
     }
-}
+};
 
 exports.taskImageUpdate = function (req, res) {
     if (!req.query.id) {
@@ -208,10 +204,9 @@ exports.taskImageUpdate = function (req, res) {
             });
         }
     })
-}
+};
 
 function updateImages(t, data, files, res, req, db) {
-    console.log("data.imageChanged", data)
     if (data) {
         console.log("image", files.image)
         if (files.image != undefined) {
@@ -263,10 +258,10 @@ function updateImages(t, data, files, res, req, db) {
             message: "Task has been updated successfully."
         });
     }
-}
+};
 
 exports.tasksList = function (req, res) {
-    var search = req.body.search;
+    var search = req.query.search;
     var language = req.query.language || req.eventLanguage;
 
     if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
@@ -612,7 +607,7 @@ exports.taskDetails = function (req, res) {
             });
         }
     });
-}
+};
 
 exports.taskWinningContestant = function (req, res) {
     if (!req.query.id) {
@@ -659,4 +654,4 @@ exports.taskWinningContestant = function (req, res) {
             });
         }
     });
-}
+};

@@ -1,12 +1,8 @@
 const userModel = require("../models/users.js");
 const config = require("../config/config.js");
-const {
-  getModelByShow
-} = require("../config/db_connection.js");
-const {
-  admin
-} = require("../shared-datas/fire-base.js");
-var logger = require("../config/logger");
+const { getModelByShow } = require("../config/db_connection.js");
+const { admin } = require("../shared-datas/fire-base.js");
+const logger = require("../config/logger");
 
 exports.userCheckAndCreate = (req, res) => {
   if (!req.query.uid) {
@@ -156,7 +152,7 @@ exports.userProfileUpdate = (req, res) => {
         });
       }
     });
-}
+};
 
 exports.userProfileStatusUpdate = (req, res) => {
   var userDB = getModelByShow(config.masterDB, "user", userModel);
@@ -180,7 +176,7 @@ exports.userProfileStatusUpdate = (req, res) => {
         });
       }
     });
-}
+};
 
 exports.getMyProfile = (req, res) => {
   if (!req.uid) {
@@ -254,7 +250,7 @@ exports.getUserProfileById = (req, res) => {
 
 exports.usersList = (req, res) => {
   var userDB = getModelByShow(config.masterDB, "user", userModel);
-  var search = req.body.search;
+  var search = req.query.search;
   var arr = [];
   if (search) {
     arr.push({
@@ -291,8 +287,7 @@ exports.usersList = (req, res) => {
             $regex: search,
             $options: "i"
           }
-        },
-        ]
+        }]
       }
     });
   }
@@ -350,7 +345,7 @@ exports.usersList = (req, res) => {
       });
     }
   });
-}
+};
 
 exports.availableUserPoints = (req, res) => {
 

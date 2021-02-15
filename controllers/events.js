@@ -2,13 +2,9 @@ const eventModel = require("../models/event.js");
 const favoriteModel = require("../models/favorite.js");
 const favoriteEventModel = require("../models/favorite_event.js");
 const ObjectId = require("mongodb").ObjectID;
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-const {
-    masterDB, db
-} = require("../config/config.js");
-var logger = require("../config/logger");
+const { getModelByShow } = require("../config/db_connection.js");
+const { masterDB, db } = require("../config/config.js");
+const logger = require("../config/logger");
 
 exports.eventInfo = async function (req, res) {
     if (!req.query.id) {
@@ -86,13 +82,13 @@ exports.eventInfo = async function (req, res) {
             });
         }
     });
-}
+};
 
 exports.getEventList = async function (req, res) {
     var eventDB = await getModelByShow(masterDB, "event", eventModel);
-    var search = req.body.search;
+    var search = req.query.search;
 
-    var language = req.query.language ;
+    var language = req.query.language;
     // console.log(language,req.nativeLanguage)
     // if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
     //     language = 'en';
@@ -139,7 +135,7 @@ exports.getEventList = async function (req, res) {
                         "rules": "$rules",
                         "description": "$description"
                     },
-                //    / "nativeLanguage": req.nativeLanguage
+                    //    / "nativeLanguage": req.nativeLanguage
                 }
             })
         } else if (language != 'en') {
@@ -205,7 +201,7 @@ exports.getEventList = async function (req, res) {
             });
         }
     });
-}
+};
 
 exports.getEventLanguage = function (req, res) {
     if (!req.query.id) {
@@ -216,19 +212,18 @@ exports.getEventLanguage = function (req, res) {
         });
     }
 
-    arr = [{
-        $match: {
-            _id: ObjectId(req.query.id)
-        }
-    },
-    {
-        $lookup: {
-            from: "languages",
-            localField: "language",
-            foreignField: "language",
-            as: "language",
+    var arr = [
+        {
+            $match: { _id: ObjectId(req.query.id) }
         },
-    },
+        {
+            $lookup: {
+                from: "languages",
+                localField: "language",
+                foreignField: "language",
+                as: "language",
+            },
+        }
     ]
 
     var eventDB = getModelByShow(masterDB, "event", eventModel);
@@ -267,7 +262,7 @@ exports.getEventLanguage = function (req, res) {
             });
         }
     });
-}
+};
 
 exports.saveFavoriteEvent = function (req, res) {
     var eventDB = getModelByShow(masterDB, "favoriteEvent", favoriteEventModel);
@@ -280,52 +275,61 @@ exports.saveFavoriteEvent = function (req, res) {
         });
     }
 
-    eventDB.findOne({
-        user: req.id,
-        event: req.body.event
-    }, function (err, eventInfo) {
-        if (err) {
-            return res.status(400).json({
-                apiName: "Event Favorite API",
-                success: false,
-                message: "Error Occurred",
-            });
-        } else if (eventInfo) {
-            var eventDataForUpdate = {
-                defaultLanguage: req.body.defaultLanguage || eventInfo.defaultLanguage,
-                defaulted: req.body.defaulted || eventInfo.defaulted,
-            };
-            eventDB.findByIdAndUpdate(eventInfo._id, eventDataForUpdate, function (err, savedData) {
-                console.log(err);
-                if (err) {
-                    res.status(400).json({
-                        apiName: "Event Favorite API",
-                        success: false,
-                        message: "Error Occurred",
-                    });
-                } else {
-                    var dbId = db + '_' + req.body.event;
-                    var favoriteDB = getModelByShow(dbId, "favorite", favoriteModel);
-                    favoriteDB.findOne({
-                        user: req.id
-                    }, function (err, favoriteContestant) {
-                        console.log("favorite", favoriteContestant)
-                        if (err) {
-                            res.status(400).json({
-                                apiName: "Event Favorite API",
-                                success: false,
-                                message: "Error Occurred",
-                            });
-                        } else if (favoriteContestant) {
-                            if (favoriteContestant.contestants) {
-                                res.json({
+    eventDB.findOne(
+        { user: req.id, event: req.body.event },
+        function (err, eventInfo) {
+            if (err) {
+                return res.status(400).json({
+                    apiName: "Event Favorite API",
+                    success: false,
+                    message: "Error Occurred",
+                });
+            } else if (eventInfo) {
+                var eventDataForUpdate = {
+                    defaultLanguage: req.body.defaultLanguage || eventInfo.defaultLanguage,
+                    defaulted: req.body.defaulted || eventInfo.defaulted,
+                };
+                eventDB.findByIdAndUpdate(eventInfo._id, eventDataForUpdate, function (err, savedData) {
+                    console.log(err);
+                    if (err) {
+                        res.status(400).json({
+                            apiName: "Event Favorite API",
+                            success: false,
+                            message: "Error Occurred",
+                        });
+                    } else {
+                        var dbId = db + '_' + req.body.event;
+                        var favoriteDB = getModelByShow(dbId, "favorite", favoriteModel);
+                        favoriteDB.findOne({
+                            user: req.id
+                        }, function (err, favoriteContestant) {
+                            console.log("favorite", favoriteContestant)
+                            if (err) {
+                                res.status(400).json({
                                     apiName: "Event Favorite API",
-                                    success: true,
-                                    message: "User already saved this event.",
-                                    defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
-                                    defaulted: req.body.defaulted || savedData.defaulted,
-                                    contestantFavorited: true
+                                    success: false,
+                                    message: "Error Occurred",
                                 });
+                            } else if (favoriteContestant) {
+                                if (favoriteContestant.contestants) {
+                                    res.json({
+                                        apiName: "Event Favorite API",
+                                        success: true,
+                                        message: "User already saved this event.",
+                                        defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
+                                        defaulted: req.body.defaulted || savedData.defaulted,
+                                        contestantFavorited: true
+                                    });
+                                } else {
+                                    res.json({
+                                        apiName: "Event Favorite API",
+                                        success: true,
+                                        message: "User already saved this event.",
+                                        defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
+                                        defaulted: req.body.defaulted || savedData.defaulted,
+                                        contestantFavorited: false
+                                    });
+                                }
                             } else {
                                 res.json({
                                     apiName: "Event Favorite API",
@@ -336,50 +340,40 @@ exports.saveFavoriteEvent = function (req, res) {
                                     contestantFavorited: false
                                 });
                             }
-                        } else {
-                            res.json({
-                                apiName: "Event Favorite API",
-                                success: true,
-                                message: "User already saved this event.",
-                                defaultLanguage: req.body.defaultLanguage || savedData.defaultLanguage,
-                                defaulted: req.body.defaulted || savedData.defaulted,
-                                contestantFavorited: false
-                            });
-                        }
-                    })
-                }
-            });
-        } else {
-            console.log("req.body", req.body);
-            var eventData = new eventDB({
-                user: req.id,
-                event: req.body.event,
-                defaultLanguage: req.body.defaultLanguage || null,
-                defaulted: req.body.defaulted || false,
-                createdAt: new Date(),
-            });
+                        })
+                    }
+                });
+            } else {
+                console.log("req.body", req.body);
+                var eventData = new eventDB({
+                    user: req.id,
+                    event: req.body.event,
+                    defaultLanguage: req.body.defaultLanguage || null,
+                    defaulted: req.body.defaulted || false,
+                    createdAt: new Date(),
+                });
 
-            eventData.save(function (err, savedData) {
-                if (err) {
-                    res.status(400).json({
-                        apiName: "Event Favorite API",
-                        success: false,
-                        message: "Error Occurred",
-                    });
-                } else {
-                    res.json({
-                        apiName: "Event Favorite API",
-                        success: true,
-                        message: "Event has been favorited",
-                        defaultLanguage: savedData.defaultLanguage || null,
-                        defaulted: savedData.defaulted || false,
-                        contestantFavorited: false
-                    });
-                }
-            });
-        }
-    })
-}
+                eventData.save(function (err, savedData) {
+                    if (err) {
+                        res.status(400).json({
+                            apiName: "Event Favorite API",
+                            success: false,
+                            message: "Error Occurred",
+                        });
+                    } else {
+                        res.json({
+                            apiName: "Event Favorite API",
+                            success: true,
+                            message: "Event has been favorited",
+                            defaultLanguage: savedData.defaultLanguage || null,
+                            defaulted: savedData.defaulted || false,
+                            contestantFavorited: false
+                        });
+                    }
+                });
+            }
+        })
+};
 
 exports.favoriteEventForUser = function (req, res) {
     var arr = [];
@@ -441,7 +435,7 @@ exports.favoriteEventForUser = function (req, res) {
             });
         }
     });
-}
+};
 
 exports.eventCreate = function (req, res) {
     var form = new formidable.IncomingForm();
@@ -499,7 +493,7 @@ exports.eventCreate = function (req, res) {
             });
         }
     })
-}
+};
 
 function saveImages(t, data, files, res, req, db) {
     if (files.image != undefined && files.banner != undefined) {
@@ -553,7 +547,7 @@ function saveImages(t, data, files, res, req, db) {
             id: data._doc._id,
         });
     }
-}
+};
 
 exports.eventImageUpdate = function (req, res) {
     if (!req.query.id) {
@@ -629,7 +623,7 @@ exports.eventImageUpdate = function (req, res) {
             });
         }
     })
-}
+};
 
 function updateImages(t, data, files, res, req, db) {
     if (data) {
@@ -684,4 +678,4 @@ function updateImages(t, data, files, res, req, db) {
             message: "Contestant has been updated successfully."
         });
     }
-}
+};

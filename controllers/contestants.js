@@ -4,13 +4,11 @@ const constant = require("../util/constant.json")
 const moment = require("moment");
 const path = require("path");
 const fs = require("fs");
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-var logger = require("../config/logger");
+const { getModelByShow } = require("../config/db_connection.js");
+const logger = require("../config/logger");
 
 exports.contestantsList = function (req, res) {
-    var search = req.body.search;
+    var search = req.query.search;
     var language = req.query.language || req.eventLanguage;
 
     if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
@@ -52,7 +50,7 @@ exports.contestantsList = function (req, res) {
                     status: req.query.status
                 },
             });
-           
+
         }
     } else {
         arr.push({
@@ -111,7 +109,7 @@ exports.contestantsList = function (req, res) {
             status: 1
         },
     });
-    
+
     console.log("array", req.favoriteContestant)
     if (Array.isArray(req.favoriteContestant)) {
         arr.push({
@@ -221,7 +219,7 @@ exports.contestantsCreate = function (req, res) {
             });
         }
     })
-}
+};
 
 function saveImages(t, data, files, res, req, db) {
     if (files.image != undefined) {
@@ -266,7 +264,7 @@ function saveImages(t, data, files, res, req, db) {
             id: data._doc._id,
         });
     }
-}
+};
 
 exports.contestantsUpdate = function (req, res) {
     if (!req.query.id) {
@@ -305,7 +303,7 @@ exports.contestantsUpdate = function (req, res) {
             });
         }
     });
-}
+};
 
 exports.contestantsImageUpdate = function (req, res) {
     if (!req.query.id) {
@@ -386,7 +384,7 @@ exports.contestantsImageUpdate = function (req, res) {
             });
         }
     })
-}
+};
 
 function updateImages(t, data, files, res, req, db) {
     console.log("data.imageChanged", data)
@@ -441,19 +439,17 @@ function updateImages(t, data, files, res, req, db) {
             message: "Contestant has been updated successfully."
         });
     }
-}
+};
 
 exports.contestantsDelete = function (req, res) {
 
-}
+};
 
 exports.contestantsStatus = function (req, res) {
     var contestantModel = getModelByShow(req.db, "contestant", contestants);
-    contestantModel.findOneAndUpdate({
-        _id: req.query.id
-    }, {
-        status: req.body.status
-    },
+    contestantModel.findOneAndUpdate(
+        { _id: req.query.id },
+        { status: req.body.status },
         function (err, savedData) {
             if (err) {
                 res.status(400).json({
@@ -469,7 +465,7 @@ exports.contestantsStatus = function (req, res) {
                 });
             }
         });
-}
+};
 
 exports.contestantsDetails = function (req, res) {
     if (!req.query.id) {
@@ -547,4 +543,4 @@ exports.contestantsDetails = function (req, res) {
             });
         }
     });
-}
+};

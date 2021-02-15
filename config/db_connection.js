@@ -1,10 +1,8 @@
-const {
-    Mongoose
-} = require('mongoose');
+const { Mongoose } = require('mongoose');
 const mongooseAggregatePaginate = require("mongoose-aggregate-paginate");
 const multitenantPool = {};
 const config = require("./config.js");
-var logger = require("./logger");
+const logger = require("./logger");
 
 const mongoOptions = {
     useNewUrlParser: true,

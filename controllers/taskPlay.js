@@ -1,12 +1,8 @@
 const taskPlayModel = require("../models/taskPlay.js");
 const ObjectId = require("mongodb").ObjectID;
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-const {
-    masterDB
-} = require("../config/config.js");
-var logger = require("../config/logger");
+const { getModelByShow } = require("../config/db_connection.js");
+const { masterDB } = require("../config/config.js");
+const logger = require("../config/logger");
 
 exports.taskPlayCreate = function (req, res) {
 
@@ -29,7 +25,7 @@ exports.taskPlayCreate = function (req, res) {
                 message: "Error Occurred"
             });
         } else if (!taskInformation) {
-            console.log("taskInformation",taskInformation)
+            console.log("taskInformation", taskInformation)
             var taskPlayInfo = new taskPlayData({
                 user: req.userInfo,
                 task: req.body.task,
@@ -76,4 +72,4 @@ exports.taskPlayCreate = function (req, res) {
             });
         }
     });
-}
+};

@@ -1,6 +1,5 @@
-"use strict";
-var appRoot = require("app-root-path");
-var winston = require("winston");
+const appRoot = require("app-root-path");
+const winston = require("winston");
 const { createLogger, format, transports } = require("winston");
 const { combine, timestamp, label, printf, prettyPrint } = format;
 
@@ -8,7 +7,7 @@ const myFormat = printf(({ level, message, label, timestamp }) => {
   return `${timestamp} [${label}] ${level}: ${message}`;
 });
 
-var options = {
+const options = {
   file: {
     level: "info",
     filename: `${appRoot}/logs/app.log`,
@@ -36,15 +35,17 @@ var options = {
   },
 };
 
-var logger = winston.createLogger({
-  format: combine(label({ label: "logs" }), timestamp(), myFormat),
-  transports: [
-    new winston.transports.Console(options.console),
-    new winston.transports.File(options.errorFile),
-    new winston.transports.File(options.file),
-  ],
-  exitOnError: false,
-});
+var logger = winston.createLogger(
+  {
+    format: combine(label({ label: "logs" }), timestamp(), myFormat),
+    transports: [
+      new winston.transports.Console(options.console),
+      new winston.transports.File(options.errorFile),
+      new winston.transports.File(options.file),
+    ],
+    exitOnError: false,
+  }
+);
 
 logger.stream = {
   write: function (message, encoding) {

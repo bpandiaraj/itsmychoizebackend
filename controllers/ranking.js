@@ -1,29 +1,17 @@
 const taskPlayModel = require("../models/taskPlay.js");
 const ObjectId = require("mongodb").ObjectID;
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-const {
-    masterDB
-} = require("../config/config.js");
-var logger = require("../config/logger");
+const { getModelByShow } = require("../config/db_connection.js");
+const { masterDB } = require("../config/config.js");
+const logger = require("../config/logger");
 
 exports.getRankingList = function (req, res) {
-
     var arr = [];
-
     arr = [
         {
             "$group": {
-                _id: {
-                    user: "$user"
-                },
-                earnPoint: {
-                    $sum: "$earnPoint"
-                },
-                tasks: {
-                    "$push": "$task"
-                }
+                _id: { user: "$user" },
+                earnPoint: { $sum: "$earnPoint" },
+                tasks: { "$push": "$task" }
             },
         },
         {
@@ -124,7 +112,6 @@ exports.getRankingList = function (req, res) {
         count
     ) {
         if (err) {
-            console.log(err);
             logger.error(`Error while list the tasks.`);
             res.status(400).json({
                 apiName: "Ranking List API",
@@ -144,5 +131,4 @@ exports.getRankingList = function (req, res) {
             });
         }
     });
-
-}
+};

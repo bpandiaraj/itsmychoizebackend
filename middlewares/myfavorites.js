@@ -1,13 +1,11 @@
 const favoriteModel = require("../models/favorite");
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
+const { getModelByShow } = require("../config/db_connection.js");
 
 module.exports = function (req, res, next) {
 
     var favoriteDB = getModelByShow(req.db, "favorite", favoriteModel);
 
-    console.log("id",req.id,"show",req.show)
+    console.log("id", req.id, "show", req.show)
     favoriteDB.findOne({
         user: req.id,
         event: req.show
@@ -16,7 +14,7 @@ module.exports = function (req, res, next) {
         data
     ) {
 
-        console.log("data",data)
+        console.log("data", data)
         if (err) {
             return res.status(400).json({
                 apiName: "Show Check",

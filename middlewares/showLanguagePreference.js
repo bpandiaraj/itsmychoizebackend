@@ -1,11 +1,7 @@
 const eventModel = require("../models/event.js");
 const ObjectId = require("mongodb").ObjectID;
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-const {
-    masterDB
-} = require("../config/config.js");
+const { getModelByShow } = require("../config/db_connection.js");
+const { masterDB } = require("../config/config.js");
 
 module.exports = function (req, res, next) {
     console.log("show ", req.show)

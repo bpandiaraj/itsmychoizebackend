@@ -1,12 +1,8 @@
 const translationModel = require("../models/translation.js");
 const config = require("../config/config.js");
-const {
-    getModelByShow
-} = require("../config/db_connection.js");
-const {
-    admin
-} = require("../shared-datas/fire-base.js");
-var logger = require("../config/logger");
+const { getModelByShow } = require("../config/db_connection.js");
+const { admin } = require("../shared-datas/fire-base.js");
+const logger = require("../config/logger");
 
 exports.getTranslation = (req, res) => {
     var translationDB = getModelByShow(config.masterDB, "translation", translationModel);
@@ -14,7 +10,7 @@ exports.getTranslation = (req, res) => {
     translationDB.findOne({
         code: code
     }, function (err, translationInfo) {
-        console.log("translation",translationInfo)
+        console.log("translation", translationInfo)
         var docs = translationInfo._doc;
         if (err) {
             return res.status(400).json({
