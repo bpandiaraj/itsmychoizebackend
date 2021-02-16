@@ -9,7 +9,6 @@ module.exports = function (req, res, next) {
     var token = req.headers["x-access-token"];
     var app = req.headers['app'];
     var showDB = req.headers['show'];
-    console.log("showDB", showDB)
     if (token) {
         if (app == 'mobile') {
             console.log("token ", token);
@@ -17,11 +16,9 @@ module.exports = function (req, res, next) {
                 .auth()
                 .verifyIdToken(token)
                 .then(function (decodedToken) {
-                    console.log("decoded ", decodedToken);
                     var userDB = getModelByShow(config.masterDB, "user", userModel);
-                    userDB.findOne({
-                        uid: decodedToken.uid,
-                    },
+                    userDB.findOne(
+                        { uid: decodedToken.uid },
                         function (err, user) {
                             if (!user) {
                                 res.status(401).send({
@@ -30,7 +27,6 @@ module.exports = function (req, res, next) {
                                     message: constant.apiErrorForbidden
                                 });
                             } else if (user) {
-                                console.log("user", user)
                                 req.id = user._id;
                                 req.uid = decodedToken.uid;
                                 req.db = showDB ? config.db + "_" + showDB : config.db;
@@ -39,18 +35,15 @@ module.exports = function (req, res, next) {
                                     _id: user._id,
                                     uid: user.uid,
                                     name: user.name,
-                                    // email: user.email,
-                                    userName: user.userName
+                                    userName: user.userName,
+                                    profilePicture: user.profilePicture
                                 };
                                 req.user = 'user';
-                                console.log("req.db", req.db)
                                 next();
                             }
                         }
                     );
-                })
-                .catch(function (error) {
-                    console.log(error)
+                }).catch(function (error) {
                     res.status(403).json({
                         apiName: constant.apiNameToken,
                         success: false,
@@ -60,7 +53,7 @@ module.exports = function (req, res, next) {
         } else if (app == 'admin') {
             jwt.verify(token, config.secret, function (err, decoded) {
                 if (err) {
-                    res.status(401).json({
+                    return res.status(401).json({
                         apiName: constant.apiNameToken,
                         success: false,
                         message: constant.apiErrorTokenExpired,
@@ -75,7 +68,7 @@ module.exports = function (req, res, next) {
                 }
             });
         } else {
-            return res.status(403).send({
+            return res.status(400).send({
                 apiName: constant.apiNameToken,
                 success: false,
                 message: constant.apiErrorNoAppName

@@ -16,7 +16,7 @@ exports.adminLogin = function (req, res) {
                 res.status(401).json({
                     apiName: "User Login API",
                     success: false,
-                    message: "Unsuccessful Login",
+                    message: "Unsuccessful Login"
                 });
             } else {
                 if (loginData != null) {
@@ -45,14 +45,14 @@ exports.adminLogin = function (req, res) {
                         res.status(401).json({
                             apiName: "User Login API",
                             success: false,
-                            message: "User Name or Password incorrect.",
+                            message: "User Name or Password incorrect."
                         });
                     }
                 } else {
                     res.status(401).json({
                         apiName: "User Login API",
                         success: false,
-                        message: "User Not Found",
+                        message: "User Not Found"
                     });
                 }
             }

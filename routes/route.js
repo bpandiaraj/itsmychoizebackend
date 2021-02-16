@@ -21,7 +21,7 @@ const myFavorite = require('../middlewares/myfavorites.js');
 module.exports = function (app) {
 
     app.use(function (req, res, next) {
-        res.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT")
+        res.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE,OPTION")
         res.header("Access-Control-Allow-Origin", "*");
         res.header("Access-Control-Allow-Headers", "Origin, x-access-token, X-Requested-With, Content-Type, Accept, app, show, uid");
         res.header("Access-Control-Allow-Credentials", true);
@@ -123,16 +123,16 @@ module.exports = function (app) {
     */
     app.get('/api/v1/translation', tokenVerify, translationController.getTranslation);
 
-
     /*
     Ranking
         1. Get all static information
     */
     app.get('/api/v1/ranking', tokenVerify, rankingController.getRankingList);
 
-
     /*
     1. User active count
     */
     // app.get('/api/v1/user/active/count', tokenVerify,)
+
+    
 }

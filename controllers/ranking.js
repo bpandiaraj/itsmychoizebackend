@@ -23,23 +23,6 @@ exports.getRankingList = function (req, res) {
             }
         },
         {
-            "$group": {
-                _id: {
-                    earnPoint: "$earnPoint"
-                },
-                participants: {
-                    "$push": "$$ROOT"
-                }
-            },
-        },
-        {
-            "$project": {
-                earnPoint: "$_id.earnPoint",
-                _id: 0,
-                participants: 1
-            }
-        },
-        {
             "$sort": {
                 "earnPoint": -1
             }
@@ -61,12 +44,74 @@ exports.getRankingList = function (req, res) {
         {
             "$project": {
                 "_id": 0,
-                "participants": "$rankings.participants",
+                "tasks": "$rankings.tasks",
+                "user": "$rankings.user",
                 "earnPoint": "$rankings.earnPoint",
                 "rank": 1,
-                "sameRankCount": { $size: "$rankings.participants" }
+                // "sameRankCount": { $size: "$rankings.participants" }
             }
-        }
+        },
+        {
+            "$sort": {
+                "earnPoint": -1
+            }
+        },
+        {
+            "$group": {
+                _id: {
+                    earnPoint: "$earnPoint"
+                },
+                participants: {
+                    "$push": "$$ROOT"
+                }
+            },
+        },
+        {
+            "$project": {
+                earnPoint: "$_id.earnPoint",
+                _id: 0,
+                participants: 1,
+                "sameRankCount": { $size: "$participants" },
+                rank: { $arrayElemAt: ["$participants", 0] }
+            }
+        },
+        {
+            "$project": {
+                earnPoint: 1,
+                participants: 1,
+                sameRankCount: 1,
+                profilePicture: "$rank.user.profilePicture",
+                rank: "$rank.rank"
+            }
+        },
+        {
+            "$sort": {
+                "earnPoint": -1
+            }
+        },
+        // { // push all documents, sorted, into an array
+        //     $group: {
+        //         _id: "",
+        //         rankings: {
+        //             $push: "$$ROOT"
+        //         }
+        //     }
+        // },
+        // { // unwind the formed array back into separate documents, but pass the index
+        //     $unwind: {
+        //         path: "$rankings",
+        //         includeArrayIndex: "rank"
+        //     }
+        // },
+        // {
+        //     "$project": {
+        //         "_id": 0,
+        //         "participants": "$rankings.participants",
+        //         "earnPoint": "$rankings.earnPoint",
+        //         "rank": 1,
+        //         "sameRankCount": { $size: "$rankings.participants" }
+        //     }
+        // }
         // {
         //     "$project": {
         //         "user": "$_id.user",
@@ -96,7 +141,7 @@ exports.getRankingList = function (req, res) {
         // }
     ]
 
-    var taskPlayDB = getModelByShow(req.db, "taskplay", taskPlayModel)
+    var taskPlayDB = getModelByShow(req.db, "taskplay", taskPlayModel);
 
     var aggregate = taskPlayDB.aggregate(arr);
 
@@ -120,11 +165,17 @@ exports.getRankingList = function (req, res) {
             });
         } else {
             logger.info(`Ranking has been listed successfully.`);
+            var bannerRankingList = [];
+            for (let i = 0; i < 3; i++) {
+                bannerRankingList.push(listdata[i]);
+            }
+            listdata.splice(0, 3);
             res.json({
                 apiName: "Ranking List API",
                 success: true,
                 message: "Successfully view ranking list",
                 rankingList: listdata,
+                bannerRankingList: bannerRankingList,
                 currentPage: req.query.page,
                 totalPages: pageCount,
                 dataCount: count,

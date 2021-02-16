@@ -4,26 +4,24 @@ const { getModelByShow } = require("../config/db_connection.js");
 const { masterDB } = require("../config/config.js");
 
 module.exports = function (req, res, next) {
-    console.log("show ", req.show)
     if (!req.show) {
         req.language = [];
         next();
         return
     }
 
-    arr = [{
-        $match: {
-            _id: ObjectId(req.show)
-        }
-    },
-    {
-        $lookup: {
-            from: "languages",
-            localField: "language",
-            foreignField: "language",
-            as: "language",
+    arr = [
+        {
+            $match: { _id: ObjectId(req.show) }
         },
-    },
+        {
+            $lookup: {
+                from: "languages",
+                localField: "language",
+                foreignField: "language",
+                as: "language",
+            },
+        }
     ]
 
     var eventDB = getModelByShow(masterDB, "event", eventModel);
