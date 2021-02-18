@@ -1,22 +1,30 @@
-var gcm = require('node-gcm');
+var FCM = require('fcm-node');
+const { admin } = require("../shared-datas/fire-base.js");
 
-exports.sendPushNotification = function () {
-    var message = new gcm.Message({
-        collapseKey: 'demo',
-        priority: 'high',
-        contentAvailable: true,
-        delayWhileIdle: true,
-        timeToLive: 3,
-        restrictedPackageName: "somePackageName",
-        dryRun: true,
-        data: {
-            key1: 'message1',
-            key2: 'message2'
-        },
-        notification: {
-            title: "Hello, World",
-            icon: "ic_launcher",
-            body: "This is a notification that will be displayed if your app is in the background."
-        }
-    });
+exports.sendPushNotification = async function (token, title, body) {
+    console.log("messageID", token);
+    
+    var fcm = new FCM('AAAAz5ZkRfs:APA91bG2_xTjLExYwXolxSKU4pvFsHNYmSfnCPWqe-wh004JOtWE9a6X5PYbYRwgxw9EpgZLFsQ3UHoK-z54lIMK3Gwwb8J0T7XLkwRoeaZg7EAS0PhYaxsqFm0VarJaFASefuN7kIZQ');
+
+    if (token) {
+        token.forEach(element => {
+            var message = {
+                to: element,
+                collapse_key: 'com.its_my_choize',
+
+                notification: {
+                    title: title, // Event Name ex : Bigg Boss Tamil
+                    body: body  // task notification
+                },
+                data: {
+                    app: "Its My Choize"
+                }
+            };
+
+            fcm.send(message, function (err, response) {
+                if (err) console.error(err);
+                else console.log(response);
+            });
+        });
+    }
 }

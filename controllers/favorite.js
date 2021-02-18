@@ -2,7 +2,9 @@ const favoriteModel = require("../models/favorite.js");
 const ObjectId = require("mongodb").ObjectID;
 const { getModelByShow } = require("../config/db_connection.js");
 const { masterDB } = require("../config/config.js");
+const { allArrayIsEqual } = require("../shared-function/compareArrays.js");
 const logger = require("../config/logger");
+const userModel = require("../models/users.js");
 
 exports.saveFavoriteContestants = function (req, res) {
     var favoriteDB = getModelByShow(req.db, "favorite", favoriteModel);
@@ -67,6 +69,7 @@ exports.saveFavoriteContestants = function (req, res) {
                     }
                 });
             } else {
+
                 if (req.body.contestants.length == 0) {
                     return res.status(400).json({
                         apiName: "Contestant Favorite API",
@@ -74,26 +77,52 @@ exports.saveFavoriteContestants = function (req, res) {
                         message: "Please provide contestant list.",
                     });
                 }
-                favoriteDB.findByIdAndUpdate(favoriteInfo._id, {
-                    contestants: req.body.contestants,
-                    modifiedCount: favoriteInfo.modifiedCount ? favoriteInfo.modifiedCount + 1 : 1
-                }, function (err, doc) {
-                    if (err) {
-                        logger.error(`Error while contestant favorite update.`);
-                        return res.status(400).json({
-                            apiName: "Contestant Update Favorite API",
-                            success: false,
-                            message: "Error Occurred",
-                        });
-                    } else {
-                        logger.info(`Contestant favorite has been updated successfully.`);
-                        res.json({
-                            apiName: "Contestant Favorite API",
-                            success: true,
-                            message: "Contestant favorite has been udpated",
-                        });
-                    }
-                });
+
+                var contestantMatch = allArrayIsEqual(req.body.contestants, favoriteInfo.contestants)
+                console.log("array check", contestantMatch);
+                console.log("req.configure", req.configure.pointToMinus);
+                if (contestantMatch > 0) {
+
+
+                    favoriteDB.findByIdAndUpdate(favoriteInfo._id, {
+                        contestants: req.body.contestants,
+                        modifiedCount: favoriteInfo.modifiedCount ? favoriteInfo.modifiedCount + 1 : 1
+                    }, function (err, doc) {
+                        if (err) {
+                            logger.error(`Error while contestant favorite update.`);
+                            return res.status(400).json({
+                                apiName: "Contestant Update Favorite API",
+                                success: false,
+                                message: "Error Occurred",
+                            });
+                        } else {
+
+                            var userDB = getModelByShow(masterDB, "user", userModel);
+                            userDB.findOne(req.id, function (err, userInfo) {
+                                if (err) {
+
+                                } else {
+                                    var point = userInfo.point - (contestantMatch * req.configure.pointToMinus);
+                                    userDB.findByIdAndUpdate(req.id, { point: point }, function (err, updatedInfo) {
+                                        logger.info(`Contestant favorite has been updated successfully.`);
+                                        res.json({
+                                            apiName: "Contestant Favorite API",
+                                            success: true,
+                                            message: "Contestant favorite has been updated",
+                                        });
+                                    })
+                                }
+                            })
+                        }
+                    });
+                } else {
+                    logger.info(`Contestants are already favorite.`);
+                    res.json({
+                        apiName: "Contestant Favorite API",
+                        success: true,
+                        message: "Contestants are already favorited",
+                    });
+                }
             }
         });
 };

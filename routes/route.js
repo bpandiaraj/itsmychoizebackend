@@ -9,6 +9,7 @@ const favoriteController = require('../controllers/favorite.js');
 const translationController = require('../controllers/translation.js');
 const languageController = require('../controllers/language.js');
 const rankingController = require('../controllers/ranking.js');
+const notificationController = require('../controllers/pushnotification.js');
 
 //Middlewares
 const tokenVerify = require('../middlewares/verifyToken.js');
@@ -128,11 +129,21 @@ module.exports = function (app) {
         1. Get all static information
     */
     app.get('/api/v1/ranking', tokenVerify, rankingController.getRankingList);
+    app.get('/api/v1/ranking/banner', tokenVerify, rankingController.getRankingBannerList);
+    app.get('/api/v1/ranking/user', tokenVerify, rankingController.getUserCurrentRanking);
 
     /*
     1. User active count
     */
     // app.get('/api/v1/user/active/count', tokenVerify,)
 
-    
+    /*
+    1. Notification check
+    */
+    app.post('/api/v1/deviceToken', tokenVerify, notificationController.saveDeviceTokenForUser);
+
+    /*
+    1. Dashboard
+    */
+    app.get('/api/v1/event/remainingDate', tokenVerify, eventController.eventStartAndRemainingDay);
 }

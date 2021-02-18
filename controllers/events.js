@@ -5,6 +5,7 @@ const ObjectId = require("mongodb").ObjectID;
 const { getModelByShow } = require("../config/db_connection.js");
 const { masterDB, db } = require("../config/config.js");
 const logger = require("../config/logger");
+const moment = require("moment");
 
 exports.eventInfo = async function (req, res) {
     if (!req.query.id) {
@@ -15,21 +16,21 @@ exports.eventInfo = async function (req, res) {
         });
     }
 
-    var eventDB = getModelByShow(req.db, "event", eventModel);
+    var eventDB = getModelByShow(masterDB, "event", eventModel);
 
-    eventDB.findById(req.query.id, function (err, contestantData) {
+    eventDB.findById(req.query.id, function (err, eventData) {
         if (err) {
             console.log("err", err);
             res.status(400).json({
-                apiName: "eventDB Detail API",
+                apiName: "Event Detail API",
                 success: false,
                 message: "Error Occurred",
             });
         } else if (!eventData) {
             res.status(400).json({
-                apiName: "eventDB Detail API",
+                apiName: "Event Detail API",
                 success: false,
-                message: "eventDB not found.",
+                message: "Event not found.",
             });
         } else {
             console.log(eventData);
@@ -592,6 +593,10 @@ exports.eventImageUpdate = function (req, res) {
             var eventsDataToSave = {
                 name: body.name,
                 language: body.language,
+                rules: body.rules,
+                description: body.description,
+                startedDate: body.startedDate,
+                endDate: body.endDate,
                 status: body.status,
                 createdAt: new Date(),
                 modifiedAt: null,
@@ -613,34 +618,37 @@ exports.eventImageUpdate = function (req, res) {
                         message: "Contestant info not found.",
                     });
                 } else {
-                    fs.unlink("./images/" + savedData.images[0], (err) => {
-                        if (err) {
-                            console.error(err)
-                        }
+                    if (!body.imageChanged && !body.logoChanged) {
                         updateImages('create', body.imageChanged, files, res, req, eventData);
-                    })
+                    } else {
+                        fs.unlink("./images/" + savedData.images[0], (err) => {
+                            if (err) {
+                                console.error(err)
+                            }
+                            updateImages('create', body.imageChanged, body.logoChanged, files, res, req, eventData);
+                        })
+                    }
                 }
             });
         }
     })
 };
 
-function updateImages(t, data, files, res, req, db) {
-    if (data) {
-        console.log("image", files.image)
-        if (files.image != undefined) {
+function updateImages(t, banner, logo, files, res, req, db) {
+    if (banner || logo) {
+        if (banner) {
             let newpath = `./images/shows`;
             let newpath1 = `/shows`;
             let savedDate = moment().startOf('day').format("YMMDDHHmmss");
             console.log("savedDate", savedDate)
-            fs.rename(files.image.path, newpath + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(), (err) => {
+            fs.rename(files.image.path, newpath + "/banner_" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(), (err) => {
                 if (err) {
                     logger.error(`Error while save image of contestants.`);
                     console.log("err", err);
                 } else {
                     db.findByIdAndUpdate(
                         req.query.id, {
-                        logo: newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(),
+                        logo: newpath1 + "/banner_" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(),
                         databaseId: req.query.id
                     },
                         function (err, savedData) {
@@ -662,20 +670,76 @@ function updateImages(t, data, files, res, req, db) {
                         })
                 }
             });
-        } else {
-            logger.info(`Contestant detail has been update and image not updated`);
-            res.json({
-                apiName: "Contestant Update API",
-                success: true,
-                message: "Contestant has been updated successfully."
+        }
+
+        if (logo) {
+            let newpath = `./images/shows`;
+            let newpath1 = `/shows`;
+            let savedDate = moment().startOf('day').format("YMMDDHHmmss");
+            console.log("savedDate", savedDate)
+            fs.rename(files.logo.path, newpath + "/" + req.query.id + '_' + savedDate + "." + files.logo.path.split(".").pop().trim(), (err) => {
+                if (err) {
+                    logger.error(`Error while save image of contestants.`);
+                    console.log("err", err);
+                } else {
+                    db.findByIdAndUpdate(
+                        req.query.id,
+                        {
+                            logo: newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.logo.path.split(".").pop().trim(),
+                            databaseId: req.query.id
+                        },
+                        function (err, savedData) { })
+                }
             });
         }
     } else {
-        logger.info(`Contestant detail has been update and image not updated`);
+        logger.info(`Event updated successfully without images change.`);
         res.json({
-            apiName: "Contestant Update API",
+            apiName: "Event Create API",
             success: true,
-            message: "Contestant has been updated successfully."
+            message: "Event has been updated successfully."
         });
     }
+};
+
+exports.eventStartAndRemainingDay = function (req, res) {
+
+    var eventDB = getModelByShow(masterDB, "event", eventModel);
+
+    eventDB.findById(req.show, function (err, eventData) {
+        if (err) {
+            console.log("err", err);
+            res.status(400).json({
+                apiName: "Event Detail API",
+                success: false,
+                message: "Error Occurred",
+            });
+        } else if (!eventData) {
+            res.status(400).json({
+                apiName: "Event Detail API",
+                success: false,
+                message: "Event not found.",
+            });
+        } else {
+            // if(eventData.eventOccurance){
+
+            // }else{
+
+            // }
+            var startDate = moment(eventData.startedDate, "DD.MM.YYYY");
+            var endDate = moment(eventData.endDate, "DD.MM.YYYY");
+            var today = moment();
+            var totalDays = endDate.diff(startDate, 'days');
+            var remainingDays = endDate.diff(today, 'days');
+            var endDateFormated = moment(endDate).format('DD-MM-YYYY')
+            res.json({
+                apiName: "Event Detail API",
+                success: true,
+                message: "Event Details founded.",
+                totalDays: totalDays,
+                remainingDays: remainingDays,
+                endDate: endDateFormated
+            });
+        }
+    });
 };
