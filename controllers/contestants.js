@@ -69,7 +69,7 @@ exports.contestantsList = function (req, res) {
                         "biography": "$biography",
                         "professional": "$professional"
                     },
-                    "nativeLanguage": req.nativeLanguage
+                    "nativeLanguage": req.nativeLanguage,
                 }
             })
         } else if (language != 'en') {
@@ -114,6 +114,7 @@ exports.contestantsList = function (req, res) {
     if (Array.isArray(req.favoriteContestant)) {
         arr.push({
             $addFields: {
+                "percentage": 20,
                 "isFavorited": { $cond: { if: { "$in": ["$_id", req.favoriteContestant] }, then: true, else: false } }
             }
         })

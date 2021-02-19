@@ -10,6 +10,8 @@ const translationController = require('../controllers/translation.js');
 const languageController = require('../controllers/language.js');
 const rankingController = require('../controllers/ranking.js');
 const notificationController = require('../controllers/pushnotification.js');
+const reportController = require('../controllers/report.js');
+const dashboardController = require('../controllers/dashboard.js');
 
 //Middlewares
 const tokenVerify = require('../middlewares/verifyToken.js');
@@ -117,6 +119,7 @@ module.exports = function (app) {
         1. Supported Language list
     */
     app.get('/api/v1/language', tokenVerify, languageController.getLanguageList);
+    app.get('/api/v1/language/withoutEnglish', tokenVerify, languageController.getLanguageListWithOutEnglish);
 
     /*
     Translation
@@ -131,6 +134,7 @@ module.exports = function (app) {
     app.get('/api/v1/ranking', tokenVerify, rankingController.getRankingList);
     app.get('/api/v1/ranking/banner', tokenVerify, rankingController.getRankingBannerList);
     app.get('/api/v1/ranking/user', tokenVerify, rankingController.getUserCurrentRanking);
+    app.get('/api/v1/ranking/all', tokenVerify, rankingController.getOverAllRankingList);
 
     /*
     1. User active count
@@ -146,4 +150,15 @@ module.exports = function (app) {
     1. Dashboard
     */
     app.get('/api/v1/event/remainingDate', tokenVerify, eventController.eventStartAndRemainingDay);
+    app.get('/api/v1/dashboard/tiles', tokenVerify, dashboardController.dashboardTileCounts);
+    app.get('/api/v1/top3/ranking', tokenVerify, rankingController.getTop3RankingList);
+    app.get('/api/v1/top10/ranking', tokenVerify, rankingController.getTop10RankingList);
+
+    /*
+    1. Report
+    */
+    app.get('/api/v1/report', tokenVerify, reportController.reportGenerate);
+    app.get('/api/v1/user/country', tokenVerify, usersController.listUsersCountry);
+    app.get('/api/v1/user/state', tokenVerify, usersController.listUsersState);
+    app.get('/api/v1/user/city', tokenVerify, usersController.listUsersCity);
 }

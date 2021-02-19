@@ -63,8 +63,7 @@ exports.userCheckAndCreate = (req, res) => {
                 });
               }
             });
-          })
-          .catch(function (error) {
+          }).catch(function (error) {
             logger.info("Error occured while create user")
             res.status(400).send({
               apiName: "User Check API",
@@ -73,24 +72,31 @@ exports.userCheckAndCreate = (req, res) => {
             });
           });
       } else {
-        if (user.status == 'active') {
-          if (!user.mobile || !user.state || !user.country || !user.pincode) {
-            logger.info("User found and profile not updated")
-            res.json({
-              apiName: "User Check API",
-              success: true,
-              message: "User found",
-              userProfileUpdated: false
-            });
-          } else {
-            logger.info("User found and profile updated")
-            res.json({
-              apiName: "User Check API",
-              success: true,
-              message: "User found",
-              userProfileUpdated: true
-            });
-          }
+        if (user.status == 'active' || user.status == 'offline') {
+          userDB.findOneAndUpdate({
+            uid: req.query.uid,
+          }, { lastLogin: new Date(), status: "active" }, function (err, userUpdatedData) {
+            if (err) {
+            } else {
+              if (!user.mobile || !user.state || !user.country || !user.pincode) {
+                logger.info("User found and profile not updated")
+                res.json({
+                  apiName: "User Check API",
+                  success: true,
+                  message: "User found",
+                  userProfileUpdated: false
+                });
+              } else {
+                logger.info("User found and profile updated")
+                res.json({
+                  apiName: "User Check API",
+                  success: true,
+                  message: "User found",
+                  userProfileUpdated: true
+                });
+              }
+            }
+          })
         } else {
           res.status(401).json({
             apiName: "User Check API",
@@ -376,3 +382,207 @@ exports.availableUserPoints = (req, res) => {
     }
   });
 };
+
+exports.listUsersCountry = (req, res) => {
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  var search = req.query.search;
+  var arr = []
+  if (req.query.search) {
+    arr.push({
+      $match: {
+        country: {
+          $regex: req.query.search,
+          $options: "i"
+        }
+      }
+    });
+  }
+
+  var arr1 = [
+    {
+      $group: {
+        _id: "$country"
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        country: "$_id"
+      }
+    },
+    {
+      $sort: {
+        country: 1
+      }
+    }
+  ];
+
+  arr = arr.concat(arr1)
+  var aggregate = userDB.aggregate(arr);
+
+  var options = {
+    page: req.query.page || 1,
+    limit: parseInt(req.query.limit) || 50,
+  };
+
+  userDB.aggregatePaginate(aggregate, options, function (
+    err,
+    listdata,
+    pageCount,
+    count
+  ) {
+    if (err) {
+      res.json({
+        apiName: "Users List API",
+        success: false,
+        message: "Some Error Occured",
+      });
+    } else {
+      res.json({
+        apiName: "Users List API",
+        success: true,
+        message: "Successfully view users list",
+        countryList: listdata,
+        currentPage: req.query.page,
+        totalPages: pageCount,
+        dataCount: count,
+      });
+    }
+  });
+}
+
+exports.listUsersState = (req, res) => {
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  var search = req.query.search;
+  var arr = []
+  if (req.query.search) {
+    arr.push({
+      $match: {
+        state: {
+          $regex: req.query.search,
+          $options: "i"
+        }
+      }
+    });
+  }
+
+  var arr1 = [
+    {
+      $group: {
+        _id: "$state"
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        state: "$_id"
+      }
+    },
+    {
+      $sort: {
+        state: 1
+      }
+    }
+  ];
+
+  arr = arr.concat(arr1)
+  var aggregate = userDB.aggregate(arr);
+
+  var options = {
+    page: req.query.page || 1,
+    limit: parseInt(req.query.limit) || 50,
+  };
+
+  userDB.aggregatePaginate(aggregate, options, function (
+    err,
+    listdata,
+    pageCount,
+    count
+  ) {
+    if (err) {
+      res.json({
+        apiName: "Users List API",
+        success: false,
+        message: "Some Error Occured",
+      });
+    } else {
+      res.json({
+        apiName: "Users List API",
+        success: true,
+        message: "Successfully view users list",
+        stateList: listdata,
+        currentPage: req.query.page,
+        totalPages: pageCount,
+        dataCount: count,
+      });
+    }
+  });
+}
+
+exports.listUsersCity = (req, res) => {
+  var userDB = getModelByShow(config.masterDB, "user", userModel);
+  var search = req.query.search;
+  var arr = []
+  if (req.query.search) {
+    arr.push({
+      $match: {
+        city: {
+          $regex: req.query.search,
+          $options: "i"
+        }
+      }
+    });
+  }
+
+  var arr1 = [
+    {
+      $group: {
+        _id: "$city"
+      }
+    },
+    {
+      $project: {
+        _id: 0,
+        city: "$_id"
+      }
+    },
+    {
+      $sort: {
+        city: 1
+      }
+    }
+  ];
+
+  arr = arr.concat(arr1)
+  var aggregate = userDB.aggregate(arr);
+
+  var options = {
+    page: req.query.page || 1,
+    limit: parseInt(req.query.limit) || 50,
+  };
+
+  userDB.aggregatePaginate(aggregate, options, function (
+    err,
+    listdata,
+    pageCount,
+    count
+  ) {
+    if (err) {
+      res.json({
+        apiName: "Users List API",
+        success: false,
+        message: "Some Error Occured",
+      });
+    } else {
+      res.json({
+        apiName: "Users List API",
+        success: true,
+        message: "Successfully view users list",
+        cityList: listdata,
+        currentPage: req.query.page,
+        totalPages: pageCount,
+        dataCount: count,
+      });
+    }
+  });
+}

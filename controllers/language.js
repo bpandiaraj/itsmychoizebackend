@@ -22,3 +22,24 @@ exports.getLanguageList = async function (req, res) {
         }
     });
 };
+
+exports.getLanguageListWithOutEnglish = async function (req, res) {
+    var languageDB = getModelByShow(config.masterDB, "language", languageModel);
+    languageDB.find(function (err, result) {
+        if (err) {
+            res.status(400).json({
+                apiName: "Language List API",
+                success: false,
+                message: "Some Error Occured",
+            });
+        } else {
+            result.splice(0, 1);
+            res.json({
+                apiName: "Language List API",
+                success: true,
+                message: "Successfully view language list.",
+                languageList: result || []
+            });
+        }
+    });
+};

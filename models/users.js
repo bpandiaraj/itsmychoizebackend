@@ -69,7 +69,7 @@ var userSchema = mongoose.Schema(
             type: Date
         },
         lastLogin: {
-            type: String
+            type: Date
         },
         favoriteContestant: {
             type: mongoose.Types.ObjectId,

@@ -8,6 +8,7 @@ var constant = require("./util/constant")
 var logger = require("./config/logger");
 var morgan = require("morgan");
 var fs = require('fs');
+var { makeUserInactive } = require("./cron/userInvalidate.js");
 
 mongoose.Promise = global.Promise;
 
@@ -38,6 +39,9 @@ var dirImage = './images';
 if (!fs.existsSync(dirImage)) {
     fs.mkdirSync(dirImage);
 }
+
+//For call crons events
+makeUserInactive();
 
 require('./routes/route')(app);
 

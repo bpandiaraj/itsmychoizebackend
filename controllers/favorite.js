@@ -16,7 +16,7 @@ exports.saveFavoriteContestants = function (req, res) {
         });
     }
 
-    if (req.configure.maxFavoriteContestant != req.body.contestants.length) {
+    if (req.configure.maxFavoriteContestant != req.body.contestants.length) { 
         return res.status(400).json({
             apiName: "Contestant Favorite API",
             success: false,
@@ -60,12 +60,22 @@ exports.saveFavoriteContestants = function (req, res) {
                             message: "Error Occurred",
                         });
                     } else {
-                        logger.info(`Contestant has been favorited successfully.`);
-                        res.json({
-                            apiName: "Contestant Favorite API",
-                            success: true,
-                            message: "Contestant has been favorited",
-                        });
+                        userDB.findOne(req.id, function (err, userInfo) {
+                            if (err) {
+                            } else {
+                                var point = userInfo.point - (5 * req.configure.pointToMinus);
+                                userDB.findByIdAndUpdate(req.id, { point: point }, function (err, updatedInfo) {
+                                    logger.info(`Contestant has been favorited successfully.`);
+                                    res.json({
+                                        apiName: "Contestant Favorite API",
+                                        success: true,
+                                        message: "Contestant has been favorited",
+                                        point: `${userInfo.point} - (5 * ${req.configure.pointToMinus}) = ${point}`
+                                    });
+                                })
+                            }
+                        })
+
                     }
                 });
             } else {
@@ -82,8 +92,6 @@ exports.saveFavoriteContestants = function (req, res) {
                 console.log("array check", contestantMatch);
                 console.log("req.configure", req.configure.pointToMinus);
                 if (contestantMatch > 0) {
-
-
                     favoriteDB.findByIdAndUpdate(favoriteInfo._id, {
                         contestants: req.body.contestants,
                         modifiedCount: favoriteInfo.modifiedCount ? favoriteInfo.modifiedCount + 1 : 1
@@ -109,6 +117,7 @@ exports.saveFavoriteContestants = function (req, res) {
                                             apiName: "Contestant Favorite API",
                                             success: true,
                                             message: "Contestant favorite has been updated",
+                                            point: `${userInfo.point} - (${contestantMatch} * ${req.configure.pointToMinus}) = ${point}`
                                         });
                                     })
                                 }
@@ -117,11 +126,19 @@ exports.saveFavoriteContestants = function (req, res) {
                     });
                 } else {
                     logger.info(`Contestants are already favorite.`);
-                    res.json({
-                        apiName: "Contestant Favorite API",
-                        success: true,
-                        message: "Contestants are already favorited",
-                    });
+                    var userDB = getModelByShow(masterDB, "user", userModel);
+                    userDB.findOne(req.id, function (err, userInfo) {
+                        if (err) {
+                        } else {
+                            var point = userInfo.point - (0 * req.configure.pointToMinus);
+                            res.json({
+                                apiName: "Contestant Favorite API",
+                                success: true,
+                                message: "Contestants are already favorited",
+                                point: `${userInfo.point} - (0 * ${req.configure.pointToMinus}) = ${point}`
+                            });
+                        }
+                    })
                 }
             }
         });

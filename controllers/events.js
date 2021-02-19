@@ -6,6 +6,9 @@ const { getModelByShow } = require("../config/db_connection.js");
 const { masterDB, db } = require("../config/config.js");
 const logger = require("../config/logger");
 const moment = require("moment");
+const formidable = require("formidable");
+const path = require("path");
+const fs = require("fs");
 
 exports.eventInfo = async function (req, res) {
     if (!req.query.id) {
@@ -585,113 +588,107 @@ exports.eventImageUpdate = function (req, res) {
                 });
             }
 
-            var translation = {}
-            translation[req.nativeLanguage] = {
-                ...body.translation
-            };
-
             var eventsDataToSave = {
                 name: body.name,
                 language: body.language,
                 rules: body.rules,
                 description: body.description,
-                startedDate: body.startedDate,
-                endDate: body.endDate,
+                startedDate: body.startAt,
+                endDate: body.endAt,
                 status: body.status,
-                createdAt: new Date(),
-                modifiedAt: null,
-                translation: translation
+                modifiedAt: new Date(),
+                translation: body.translation
             };
 
-            var eventData = getModelByShow(req.db, "event", eventModel);
+            var eventData = getModelByShow(masterDB, "event", eventModel);
             eventData.findByIdAndUpdate(req.query.id, eventsDataToSave, function (err, savedData) {
                 if (err) {
                     res.status(400).json({
-                        apiName: "Contestant Update API",
+                        apiName: "Event Update API",
                         success: false,
                         message: "Error Occurred",
                     });
                 } else if (!savedData) {
                     res.status(400).json({
-                        apiName: "Contestant Update API",
+                        apiName: "Event Update API",
                         success: false,
-                        message: "Contestant info not found.",
+                        message: "Event info not found.",
                     });
                 } else {
-                    if (!body.imageChanged && !body.logoChanged) {
-                        updateImages('create', body.imageChanged, files, res, req, eventData);
-                    } else {
-                        fs.unlink("./images/" + savedData.images[0], (err) => {
-                            if (err) {
-                                console.error(err)
-                            }
-                            updateImages('create', body.imageChanged, body.logoChanged, files, res, req, eventData);
-                        })
-                    }
+                    updateImages('create', body.imageChanged, body.logoChanged, files, res, req, eventData, savedData);
                 }
             });
         }
     })
 };
 
-function updateImages(t, banner, logo, files, res, req, db) {
+function updateImages(t, banner, logo, files, res, req, db, savedData) {
+    console.log("banner", banner, logo)
     if (banner || logo) {
         if (banner) {
             let newpath = `./images/shows`;
             let newpath1 = `/shows`;
             let savedDate = moment().startOf('day').format("YMMDDHHmmss");
-            console.log("savedDate", savedDate)
-            fs.rename(files.image.path, newpath + "/banner_" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(), (err) => {
+            console.log("savedDate", savedDate);
+            fs.unlink("./images/shows/" + savedData.banner, (err) => {
                 if (err) {
-                    logger.error(`Error while save image of contestants.`);
-                    console.log("err", err);
-                } else {
-                    db.findByIdAndUpdate(
-                        req.query.id, {
-                        logo: newpath1 + "/banner_" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(),
-                        databaseId: req.query.id
-                    },
-                        function (err, savedData) {
-                            if (err) {
-                                logger.error(`Error while update the image url in event collection.`);
-                                res.status(400).json({
-                                    apiName: "Event Create API",
-                                    success: false,
-                                    message: "Error Occurred"
-                                });
-                            } else {
-                                logger.info(`Event image url updated successfully.`);
-                                res.json({
-                                    apiName: "Event Create API",
-                                    success: true,
-                                    message: "Event has been updated successfully."
-                                });
-                            }
-                        })
+                    console.error(err)
                 }
-            });
+
+                fs.rename(files.image.path, newpath + "/banner_" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(), (err) => {
+                    if (err) {
+                        logger.error(`Error while save image of contestants.`);
+                        console.log("err", err);
+                    } else {
+                        db.findByIdAndUpdate(
+                            req.query.id, {
+                            banner: newpath1 + "/banner_" + req.query.id + '_' + savedDate + "." + files.image.path.split(".").pop().trim(),
+                        },
+                            function (err, savedData) {
+                                if (err) {
+                                    logger.error(`Error while update the image url in event collection.`);
+
+                                } else {
+                                    logger.info(`Event image url updated successfully.`);
+                                }
+                            })
+                    }
+                });
+            })
         }
 
         if (logo) {
             let newpath = `./images/shows`;
             let newpath1 = `/shows`;
             let savedDate = moment().startOf('day').format("YMMDDHHmmss");
-            console.log("savedDate", savedDate)
-            fs.rename(files.logo.path, newpath + "/" + req.query.id + '_' + savedDate + "." + files.logo.path.split(".").pop().trim(), (err) => {
+            console.log("savedDate", savedDate);
+            fs.unlink("./images/shows/" + savedData.logo, (err) => {
                 if (err) {
-                    logger.error(`Error while save image of contestants.`);
-                    console.log("err", err);
-                } else {
-                    db.findByIdAndUpdate(
-                        req.query.id,
-                        {
-                            logo: newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.logo.path.split(".").pop().trim(),
-                            databaseId: req.query.id
-                        },
-                        function (err, savedData) { })
+                    console.error(err)
                 }
+                fs.rename(files.logo.path, newpath + "/" + req.query.id + '_' + savedDate + "." + files.logo.path.split(".").pop().trim(), (err) => {
+                    if (err) {
+                        logger.error(`Error while save image of contestants.`);
+                        console.log("err", err);
+                    } else {
+                        db.findByIdAndUpdate(
+                            req.query.id,
+                            {
+                                logo: newpath1 + "/" + req.query.id + '_' + savedDate + "." + files.logo.path.split(".").pop().trim(),
+                            },
+                            function (err, savedData) { })
+                    }
+                });
             });
         }
+        setTimeout(() => {
+            logger.info(`Event updated successfully with images change.`);
+            res.json({
+                apiName: "Event Create API",
+                success: true,
+                message: "Event has been updated successfully."
+            });
+        }, 1000);
     } else {
         logger.info(`Event updated successfully without images change.`);
         res.json({
@@ -721,16 +718,11 @@ exports.eventStartAndRemainingDay = function (req, res) {
                 message: "Event not found.",
             });
         } else {
-            // if(eventData.eventOccurance){
-
-            // }else{
-
-            // }
             var startDate = moment(eventData.startedDate, "DD.MM.YYYY");
             var endDate = moment(eventData.endDate, "DD.MM.YYYY");
             var today = moment();
             var totalDays = endDate.diff(startDate, 'days');
-            var remainingDays = endDate.diff(today, 'days');
+            var remainingDays = today.diff(startDate, 'days');
             var endDateFormated = moment(endDate).format('DD-MM-YYYY')
             res.json({
                 apiName: "Event Detail API",
