@@ -38,11 +38,12 @@ exports.eventInfo = async function (req, res) {
         } else {
             console.log(eventData);
 
-            var language = req.query.language || req.eventLanguage;
+            var language = req.query.language;
 
-            if (language != 'en' && language != 'both' && language != req.nativeLanguage) {
-                language = 'en';
-            }
+            // if (language != 'en' && language != 'both') {
+            //     language = 'en';
+            // }
+
             var translation;
             var event = eventData._doc;
 
@@ -50,11 +51,6 @@ exports.eventInfo = async function (req, res) {
                 if (language == 'both') {
                     translation = {
                         ...event.translation,
-                        en: {
-                            name: event.name,
-                            rules: event.rules,
-                            description: event.description,
-                        }
                     }
                     event.translation = translation;
                     event = {
@@ -66,9 +62,9 @@ exports.eventInfo = async function (req, res) {
                     event = {
                         ...event,
                         nativeLanguage: req.nativeLanguage,
-                        name: trans[language].name,
-                        rules: trans[language].rules,
-                        description: trans[language].description,
+                        name: trans.name,
+                        rules: trans.rules,
+                        description: trans.description,
                         translation: null
                     }
                     delete event.translation;
@@ -316,6 +312,7 @@ exports.saveFavoriteEvent = function (req, res) {
                                 });
                             } else if (favoriteContestant) {
                                 if (favoriteContestant.contestants) {
+                                    console.log("req.body.defaultLanguage || savedData.defaultLanguage",req.body.defaultLanguage || savedData.defaultLanguage,req.body.defaulted || savedData.defaulted,savedData)
                                     res.json({
                                         apiName: "Event Favorite API",
                                         success: true,

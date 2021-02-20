@@ -1344,3 +1344,413 @@ Error: Route.get() requires a callback function but got a [object Undefined]
     at Function.Module._load (internal/modules/cjs/loader.js:703:12)
     at Function.Module.runMain (internal/modules/cjs/loader.js:999:10)
     at internal/main/run_main_module.js:17:11
+2021-02-20T04:20:08.030Z [logs] error: uncaughtException: favoriteDB is not defined
+ReferenceError: favoriteDB is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\pushnotification.js:72:17
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T04:28:53.183Z [logs] error: uncaughtException: favoriteDB is not defined
+ReferenceError: favoriteDB is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\pushnotification.js:72:17
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T06:12:09.320Z [logs] error: uncaughtException: Cannot read property 'findOne' of undefined
+TypeError: Cannot read property 'findOne' of undefined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:63:32
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at model.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:502:7)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:316:21
+    at next (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:210:27)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:183:9
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:508:38
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T06:25:08.574Z [logs] error: uncaughtException: makeTaskActiveAndInactive is not defined
+ReferenceError: makeTaskActiveAndInactive is not defined
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:45:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:999:10)
+    at internal/main/run_main_module.js:17:11
+2021-02-20T06:25:23.790Z [logs] error: uncaughtException: Identifier 'eventModel' has already been declared
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\cron\makeTaskActive.js:7
+const eventModel = require("../models/event.js");
+      ^
+
+SyntaxError: Identifier 'eventModel' has already been declared
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:12:37)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Function.Module.runMain (internal/modules/cjs/loader.js:999:10)
+    at internal/main/run_main_module.js:17:11
+2021-02-20T06:35:00.061Z [logs] error: uncaughtException: Cannot read property 'deviceId' of null
+TypeError: Cannot read property 'deviceId' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\cron\makeTaskActive.js:57:94
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T06:39:00.654Z [logs] error: uncaughtException: Cannot read property 'deviceId' of null
+TypeError: Cannot read property 'deviceId' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\cron\makeTaskActive.js:58:94
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+    at runNextTicks (internal/process/task_queues.js:62:3)
+    at processImmediate (internal/timers.js:412:9)
+2021-02-20T06:39:01.141Z [logs] error: uncaughtException: Cannot read property 'deviceId' of null
+TypeError: Cannot read property 'deviceId' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\cron\makeTaskActive.js:58:94
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T06:40:08.169Z [logs] error: uncaughtException: Cannot read property 'deviceId' of null
+TypeError: Cannot read property 'deviceId' of null
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\cron\makeTaskActive.js:58:94
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T06:41:27.735Z [logs] error: User token not found 
+2021-02-20T06:41:27.796Z [logs] error: User token not found 
+2021-02-20T06:41:27.805Z [logs] error: User token not found 
+2021-02-20T06:41:28.201Z [logs] error: User token not found 
+2021-02-20T06:41:28.267Z [logs] error: User token not found 
+2021-02-20T06:41:39.374Z [logs] error: User token not found 
+2021-02-20T06:41:39.478Z [logs] error: User token not found 
+2021-02-20T06:41:39.554Z [logs] error: User token not found 
+2021-02-20T06:41:39.772Z [logs] error: User token not found 
+2021-02-20T06:41:39.773Z [logs] error: User token not found 
+2021-02-20T06:41:55.875Z [logs] error: User token not found 
+2021-02-20T06:41:55.959Z [logs] error: User token not found 
+2021-02-20T06:41:56.865Z [logs] error: User token not found 
+2021-02-20T06:41:57.615Z [logs] error: User token not found 
+2021-02-20T06:41:57.691Z [logs] error: User token not found 
+2021-02-20T06:42:26.631Z [logs] error: User token not found 
+2021-02-20T06:42:26.708Z [logs] error: User token not found 
+2021-02-20T06:42:26.833Z [logs] error: User token not found 
+2021-02-20T06:42:27.519Z [logs] error: User token not found 
+2021-02-20T06:42:27.597Z [logs] error: User token not found 
+2021-02-20T06:49:00.374Z [logs] error: uncaughtException: Cannot find module './cron/makeTaskActive.js'
+Require stack:
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js
+Error: Cannot find module './cron/makeTaskActive.js'
+Require stack:
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js
+- D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js
+    at Function.Module._resolveFilename (internal/modules/cjs/loader.js:772:15)
+    at Function.Module._load (internal/modules/cjs/loader.js:677:27)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:10:37)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:3:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+2021-02-20T07:07:10.963Z [logs] error: User token not found 
+2021-02-20T07:07:10.985Z [logs] error: User token not found 
+2021-02-20T07:07:11.002Z [logs] error: User token not found 
+2021-02-20T07:07:11.051Z [logs] error: User token not found 
+2021-02-20T07:07:11.067Z [logs] error: User token not found 
+2021-02-20T07:10:45.012Z [logs] error: User token not found 
+2021-02-20T07:10:45.047Z [logs] error: User token not found 
+2021-02-20T07:10:45.374Z [logs] error: User token not found 
+2021-02-20T07:10:46.327Z [logs] error: User token not found 
+2021-02-20T07:10:46.599Z [logs] error: User token not found 
+2021-02-20T07:12:22.140Z [logs] error: uncaughtException: Cannot read property 'split' of undefined
+TypeError: Cannot read property 'split' of undefined
+    at saveImages (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:86:92)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:75:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at model.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:502:7)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:316:21
+    at next (D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:210:27)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:183:9
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:508:38
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T11:41:57.337Z [logs] error: Error while list the tasks.
+2021-02-20T11:41:57.372Z [logs] error: Error while list the tasks.
+2021-02-20T11:42:23.351Z [logs] error: Error while list the tasks.
+2021-02-20T11:42:23.386Z [logs] error: Error while list the tasks.
+2021-02-20T11:43:45.994Z [logs] error: Error while list the tasks.
+2021-02-20T11:43:46.084Z [logs] error: Error while list the tasks.
+2021-02-20T11:44:26.159Z [logs] error: Error while list the tasks.
+2021-02-20T11:44:26.264Z [logs] error: Error while list the tasks.
+2021-02-20T11:44:34.810Z [logs] error: Error while list the tasks.
+2021-02-20T11:44:34.838Z [logs] error: Error while list the tasks.
+2021-02-20T11:47:14.278Z [logs] error: Error while list the tasks.
+2021-02-20T11:47:14.283Z [logs] error: Error while list the tasks.
+2021-02-20T12:21:13.933Z [logs] error: User token not found 
+2021-02-20T12:21:13.986Z [logs] error: User token not found 
+2021-02-20T12:21:14.019Z [logs] error: User token not found 
+2021-02-20T12:21:14.072Z [logs] error: User token not found 
+2021-02-20T12:21:14.120Z [logs] error: User token not found 
+2021-02-20T13:14:58.242Z [logs] error: Data not found.
+2021-02-20T13:15:46.954Z [logs] error: Error while list the task.
+2021-02-20T13:16:57.892Z [logs] error: Error while list the tasks.
+2021-02-20T13:16:57.895Z [logs] error: Error while list the tasks.
+2021-02-20T13:18:09.164Z [logs] error: Error while list the tasks.
+2021-02-20T13:18:09.168Z [logs] error: Error while list the tasks.
+2021-02-20T13:18:15.662Z [logs] error: Error while list the tasks.
+2021-02-20T13:18:15.795Z [logs] error: Error while list the tasks.
+2021-02-20T13:18:32.716Z [logs] error: Error while list the tasks.
+2021-02-20T13:18:32.729Z [logs] error: Error while list the tasks.
+2021-02-20T13:48:01.203Z [logs] error: Error while list the task.
+2021-02-20T15:46:51.711Z [logs] error: uncaughtException: moment is not defined
+ReferenceError: moment is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\taskPlay.js:36:29
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T16:24:41.248Z [logs] error: uncaughtException: eventModel is not defined
+ReferenceError: eventModel is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:17:61
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T16:26:07.821Z [logs] error: uncaughtException: favoriteEventModel is not defined
+ReferenceError: favoriteEventModel is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:22:87
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T16:27:55.915Z [logs] error: uncaughtException: deviceModel is not defined
+ReferenceError: deviceModel is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:30:92
+    at Array.forEach (<anonymous>)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:29:51
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-02-20T16:29:05.836Z [logs] error: uncaughtException: Identifier 'taskModel' has already been declared
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:6
+const taskModel = require("../models/task.js");
+      ^
+
+SyntaxError: Identifier 'taskModel' has already been declared
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:3:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-02-20T16:29:53.692Z [logs] error: User token not found 
+2021-02-20T16:29:53.695Z [logs] error: User token not found 
+2021-02-20T16:29:53.714Z [logs] error: User token not found 
+2021-02-20T16:29:53.747Z [logs] error: User token not found 
+2021-02-20T16:29:53.750Z [logs] error: User token not found 
+2021-02-20T17:05:00.049Z [logs] error: User token not found 
+2021-02-20T17:05:00.352Z [logs] error: User token not found 
+2021-02-20T17:05:00.361Z [logs] error: User token not found 
+2021-02-20T17:05:01.467Z [logs] error: User token not found 
+2021-02-20T17:05:01.732Z [logs] error: User token not found 
+2021-02-20T17:58:14.162Z [logs] error: Data not found.
+2021-02-20T17:58:35.821Z [logs] error: Data not found.
+2021-02-20T18:02:00.066Z [logs] error: User token not found 
+2021-02-20T18:02:00.071Z [logs] error: User token not found 
+2021-02-20T18:02:00.086Z [logs] error: User token not found 
+2021-02-20T18:02:00.113Z [logs] error: User token not found 
+2021-02-20T18:02:00.126Z [logs] error: User token not found 
+2021-02-20T18:04:23.783Z [logs] error: User token not found 
+2021-02-20T18:04:23.784Z [logs] error: User token not found 
+2021-02-20T18:04:23.787Z [logs] error: User token not found 
+2021-02-20T18:04:23.829Z [logs] error: User token not found 
+2021-02-20T18:04:23.845Z [logs] error: User token not found 
+2021-02-20T18:05:46.529Z [logs] error: Data not found.
+2021-02-20T18:13:00.034Z [logs] error: User token not found 
+2021-02-20T18:13:00.051Z [logs] error: User token not found 
+2021-02-20T18:13:00.057Z [logs] error: User token not found 
+2021-02-20T18:13:00.088Z [logs] error: User token not found 
+2021-02-20T18:13:00.104Z [logs] error: User token not found 
+2021-02-20T18:14:28.957Z [logs] error: User token not found 
+2021-02-20T18:14:28.958Z [logs] error: User token not found 
+2021-02-20T18:14:28.976Z [logs] error: User token not found 
+2021-02-20T18:14:29.009Z [logs] error: User token not found 
+2021-02-20T18:14:29.025Z [logs] error: User token not found 
+2021-02-20T18:17:57.460Z [logs] error: Data not found.
+2021-02-20T18:18:51.893Z [logs] error: Data not found.
+2021-02-20T18:19:00.025Z [logs] error: User token not found 
+2021-02-20T18:19:00.044Z [logs] error: User token not found 
+2021-02-20T18:19:00.063Z [logs] error: User token not found 
+2021-02-20T18:19:00.095Z [logs] error: User token not found 
+2021-02-20T18:19:00.111Z [logs] error: User token not found 
+2021-02-20T18:19:45.410Z [logs] error: Data not found.
+2021-02-20T18:20:35.764Z [logs] error: User token not found 
+2021-02-20T18:20:35.766Z [logs] error: User token not found 
+2021-02-20T18:20:35.784Z [logs] error: User token not found 
+2021-02-20T18:20:35.814Z [logs] error: User token not found 
+2021-02-20T18:20:35.830Z [logs] error: User token not found 
+2021-02-20T18:20:42.665Z [logs] error: Data not found.
+2021-02-20T18:21:25.898Z [logs] error: Data not found.
+2021-02-20T18:23:15.128Z [logs] error: Data not found.
+2021-02-20T18:24:13.786Z [logs] error: Data not found.
+2021-02-20T18:45:00.026Z [logs] error: User token not found 
+2021-02-20T18:45:00.027Z [logs] error: User token not found 
+2021-02-20T18:45:00.032Z [logs] error: User token not found 
+2021-02-20T18:45:00.038Z [logs] error: User token not found 
+2021-02-20T18:45:00.041Z [logs] error: User token not found 
+2021-02-20T19:12:00.026Z [logs] error: User token not found 
+2021-02-20T19:12:00.050Z [logs] error: User token not found 
+2021-02-20T19:12:00.053Z [logs] error: User token not found 
+2021-02-20T19:12:00.104Z [logs] error: User token not found 
+2021-02-20T19:12:00.120Z [logs] error: User token not found 
+2021-02-20T19:19:21.322Z [logs] error: Error while list the tasks.
+2021-02-20T19:19:21.328Z [logs] error: Error while list the tasks.
+2021-02-20T19:21:19.183Z [logs] error: Error while list the tasks.
+2021-02-20T19:21:19.193Z [logs] error: Error while list the tasks.
+2021-02-20T19:21:30.110Z [logs] error: Error while list the tasks.
+2021-02-20T19:21:30.114Z [logs] error: Error while list the tasks.
+2021-02-20T19:33:42.199Z [logs] error: Error while list the tasks.
+2021-02-20T19:33:42.203Z [logs] error: Error while list the tasks.
+2021-02-20T19:40:00.032Z [logs] error: User token not found 
+2021-02-20T19:40:00.038Z [logs] error: User token not found 
+2021-02-20T19:40:00.039Z [logs] error: User token not found 
+2021-02-20T19:40:00.047Z [logs] error: User token not found 
+2021-02-20T19:40:00.052Z [logs] error: User token not found 
+2021-02-20T19:51:56.431Z [logs] error: User token not found 
+2021-02-20T19:51:56.437Z [logs] error: User token not found 
+2021-02-20T19:51:56.438Z [logs] error: User token not found 
+2021-02-20T19:51:56.443Z [logs] error: User token not found 
+2021-02-20T19:51:56.457Z [logs] error: User token not found 
+2021-02-20T20:10:48.680Z [logs] error: Error while list the tasks.
+2021-02-20T20:10:48.695Z [logs] error: Error while list the tasks.
+2021-02-20T20:15:29.611Z [logs] error: Error while list the tasks.
+2021-02-20T20:15:42.629Z [logs] error: Error while list the tasks.
+2021-02-20T20:50:06.556Z [logs] error: Error while list the tasks.
+2021-02-20T20:50:06.566Z [logs] error: Error while list the tasks.
+2021-02-20T20:56:57.590Z [logs] error: Error while list the tasks.
+2021-02-20T20:56:57.614Z [logs] error: Error while list the tasks.
+2021-02-20T21:03:36.165Z [logs] error: Error while list the tasks.
+2021-02-20T21:03:36.177Z [logs] error: Error while list the tasks.
+2021-02-20T21:04:37.951Z [logs] error: Error while list the tasks.
+2021-02-20T21:04:37.977Z [logs] error: Error while list the tasks.
+2021-02-20T21:07:15.615Z [logs] error: Error while list the tasks.
+2021-02-20T21:07:15.623Z [logs] error: Error while list the tasks.
+2021-02-20T21:07:22.070Z [logs] error: Error while list the tasks.
+2021-02-20T21:07:22.076Z [logs] error: Error while list the tasks.
+2021-02-20T21:07:24.089Z [logs] error: Error while list the tasks.
+2021-02-20T21:07:24.094Z [logs] error: Error while list the tasks.
+2021-02-20T21:11:44.961Z [logs] error: Error while list the tasks.
+2021-02-20T21:11:45.002Z [logs] error: Error while list the tasks.
+2021-02-20T21:14:13.770Z [logs] error: Error while list the tasks.
+2021-02-20T21:14:13.781Z [logs] error: Error while list the tasks.
+2021-02-20T21:17:58.546Z [logs] error: Error while list the tasks.
+2021-02-20T21:17:58.552Z [logs] error: Error while list the tasks.
+2021-02-20T21:18:19.731Z [logs] error: Error while list the tasks.
+2021-02-20T21:18:19.743Z [logs] error: Error while list the tasks.
+2021-02-20T21:18:24.684Z [logs] error: Error while list the tasks.
+2021-02-20T21:18:24.690Z [logs] error: Error while list the tasks.
+2021-02-20T21:19:17.677Z [logs] error: Error while list the tasks.
+2021-02-20T21:19:17.688Z [logs] error: Error while list the tasks.
+2021-02-20T21:19:26.778Z [logs] error: Error while list the tasks.
+2021-02-20T21:19:26.800Z [logs] error: Error while list the tasks.
+2021-02-20T21:21:09.198Z [logs] error: Error while list the tasks.
+2021-02-20T21:21:09.211Z [logs] error: Error while list the tasks.
+2021-02-20T21:21:24.860Z [logs] error: Error while list the tasks.
+2021-02-20T21:21:24.869Z [logs] error: Error while list the tasks.
+2021-02-20T21:22:37.264Z [logs] error: Error while list the tasks.
+2021-02-20T21:22:37.278Z [logs] error: Error while list the tasks.
+2021-02-20T21:23:07.070Z [logs] error: Error while list the tasks.
+2021-02-20T21:23:07.075Z [logs] error: Error while list the tasks.
+2021-02-20T21:23:27.328Z [logs] error: Error while list the tasks.
+2021-02-20T21:23:27.345Z [logs] error: Error while list the tasks.
+2021-02-20T21:23:42.683Z [logs] error: Error while list the tasks.
+2021-02-20T21:23:42.703Z [logs] error: Error while list the tasks.
+2021-02-20T21:24:29.965Z [logs] error: Error while list the tasks.
+2021-02-20T21:24:29.983Z [logs] error: Error while list the tasks.
+2021-02-20T21:24:35.787Z [logs] error: Error while list the tasks.
+2021-02-20T21:24:35.800Z [logs] error: Error while list the tasks.
+2021-02-20T21:25:27.154Z [logs] error: Error while list the tasks.
+2021-02-20T21:25:27.168Z [logs] error: Error while list the tasks.
+2021-02-20T21:25:32.866Z [logs] error: Error while list the tasks.
+2021-02-20T21:25:32.877Z [logs] error: Error while list the tasks.
+2021-02-20T21:26:23.869Z [logs] error: Error while list the tasks.
+2021-02-20T21:26:23.879Z [logs] error: Error while list the tasks.
+2021-02-20T21:45:00.082Z [logs] error: User token not found 
+2021-02-20T21:45:00.087Z [logs] error: User token not found 
+2021-02-20T21:45:00.129Z [logs] error: User token not found 
+2021-02-20T21:45:00.188Z [logs] error: User token not found 
+2021-02-20T21:45:00.234Z [logs] error: User token not found 
+2021-02-20T21:50:00.059Z [logs] error: User token not found 
+2021-02-20T21:50:00.061Z [logs] error: User token not found 
+2021-02-20T21:50:00.080Z [logs] error: User token not found 
+2021-02-20T21:50:00.110Z [logs] error: User token not found 
+2021-02-20T21:50:00.114Z [logs] error: User token not found 
+2021-02-20T21:53:20.782Z [logs] error: User token not found 
+2021-02-20T21:53:20.785Z [logs] error: User token not found 
+2021-02-20T21:53:20.802Z [logs] error: User token not found 
+2021-02-20T21:53:20.815Z [logs] error: User token not found 
+2021-02-20T21:53:20.856Z [logs] error: User token not found 

@@ -17,37 +17,43 @@ exports.reportGenerate = (req, res) => {
     var matchQuery = [];
 
     if (byCountry) {
-        var regionQuery = {
-            country: {
-                $regex: byCountry,
-                $options: "i"
+        if (byCountry != 'all') {
+            var regionQuery = {
+                country: {
+                    $regex: byCountry,
+                    $options: "i"
+                }
             }
+            matchQuery.push(regionQuery);
         }
-        matchQuery.push(regionQuery);
     }
     if (byState) {
-        var regionQuery = {
-            state: {
-                $regex: byState,
-                $options: "i"
+        if (byState != 'all') {
+            var regionQuery = {
+                state: {
+                    $regex: byState,
+                    $options: "i"
+                }
             }
+            matchQuery.push(regionQuery);
         }
-        matchQuery.push(regionQuery);
     }
     if (byCity) {
-        var regionQuery = {
-            city: {
-                $regex: byCity,
-                $options: "i"
+        if (byCity != 'all') {
+            var regionQuery = {
+                city: {
+                    $regex: byCity,
+                    $options: "i"
+                }
             }
+            matchQuery.push(regionQuery);
         }
-        matchQuery.push(regionQuery);
     }
 
     if (matchQuery.length > 0) {
         query.push({
             "$match": {
-                "$or": matchQuery
+                "$and": matchQuery
             }
         })
     }
@@ -82,32 +88,32 @@ exports.reportGenerate = (req, res) => {
     var aggregate = userDB.aggregate(query);
 
     var options = {
-      page: req.query.page || 1,
-      limit: parseInt(req.query.limit) || 200,
+        page: req.query.page || 1,
+        limit: parseInt(req.query.limit) || 200,
     };
-  
+
     userDB.aggregatePaginate(aggregate, options, function (
-      err,
-      listdata,
-      pageCount,
-      count
+        err,
+        listdata,
+        pageCount,
+        count
     ) {
-      if (err) {
-        res.json({
-          apiName: "Users List API",
-          success: false,
-          message: "Some Error Occured",
-        });
-      } else {
-        res.json({
-          apiName: "Users List API",
-          success: true,
-          message: "Successfully view users list",
-          userList: listdata,
-          currentPage: req.query.page,
-          totalPages: pageCount,
-          dataCount: count,
-        });
-      }
+        if (err) {
+            res.json({
+                apiName: "Users List API",
+                success: false,
+                message: "Some Error Occured",
+            });
+        } else {
+            res.json({
+                apiName: "Users List API",
+                success: true,
+                message: "Successfully view users list",
+                userList: listdata,
+                currentPage: req.query.page,
+                totalPages: pageCount,
+                dataCount: count,
+            });
+        }
     });
 }

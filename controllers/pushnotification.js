@@ -26,9 +26,9 @@ exports.saveDeviceTokenForUser = function (req, res) {
             message: "Please provide the device token.",
         })
     }
-    console.log("device token",req.body.deviceToken)
+    console.log("device token", req.body.deviceToken)
 
-    var deviceDB = getModelByShow(req.db, "deviecToken", deviceModel);
+    var deviceDB = getModelByShow(req.db, "deviceToken", deviceModel);
 
     deviceDB.findOne(
         { user: req.id },
@@ -51,7 +51,7 @@ exports.saveDeviceTokenForUser = function (req, res) {
 
                 deviceData.save(function (err, savedData) {
                     if (err) {
-                console.log("err", err)
+                        console.log("err", err)
 
                         logger.error(`Error while save device token 2.`);
                         return res.status(400).json({
@@ -69,13 +69,12 @@ exports.saveDeviceTokenForUser = function (req, res) {
                     }
                 });
             } else {
-                favoriteDB.findByIdAndUpdate(
+                deviceDB.findByIdAndUpdate(
                     deviceInfo._id,
                     { deviceId: req.body.deviceToken, updatedOn: new Date() },
                     function (err, doc) {
                         if (err) {
-                console.log("err", err)
-
+                            console.log("err", err);
                             logger.error(`Error while update device token 2`);
                             return res.status(400).json({
                                 apiName: "Push Notification API",

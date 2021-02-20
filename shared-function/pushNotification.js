@@ -2,7 +2,7 @@ var FCM = require('fcm-node');
 const { admin } = require("../shared-datas/fire-base.js");
 
 exports.sendPushNotification = async function (token, title, body) {
-    console.log("messageID", token);
+    console.log("messageID", token, title, body);
     
     var fcm = new FCM('AAAAz5ZkRfs:APA91bG2_xTjLExYwXolxSKU4pvFsHNYmSfnCPWqe-wh004JOtWE9a6X5PYbYRwgxw9EpgZLFsQ3UHoK-z54lIMK3Gwwb8J0T7XLkwRoeaZg7EAS0PhYaxsqFm0VarJaFASefuN7kIZQ');
 

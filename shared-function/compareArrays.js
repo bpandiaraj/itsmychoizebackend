@@ -1,6 +1,7 @@
 
 
 exports.allArrayIsEqual = (a, b) => {
+    console.log("a, b",a,b)
     if (a instanceof Array && b instanceof Array) {
         var differentIds = 0
         for (let i = 0; i < a.length; i++) {

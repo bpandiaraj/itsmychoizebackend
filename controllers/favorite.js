@@ -16,7 +16,7 @@ exports.saveFavoriteContestants = function (req, res) {
         });
     }
 
-    if (req.configure.maxFavoriteContestant != req.body.contestants.length) { 
+    if (req.configure.maxFavoriteContestant != req.body.contestants.length) {
         return res.status(400).json({
             apiName: "Contestant Favorite API",
             success: false,
@@ -60,6 +60,8 @@ exports.saveFavoriteContestants = function (req, res) {
                             message: "Error Occurred",
                         });
                     } else {
+                        var userDB = getModelByShow(masterDB, "user", userModel);
+
                         userDB.findOne(req.id, function (err, userInfo) {
                             if (err) {
                             } else {
@@ -94,6 +96,7 @@ exports.saveFavoriteContestants = function (req, res) {
                 if (contestantMatch > 0) {
                     favoriteDB.findByIdAndUpdate(favoriteInfo._id, {
                         contestants: req.body.contestants,
+                        modifiedAt: new Date(),
                         modifiedCount: favoriteInfo.modifiedCount ? favoriteInfo.modifiedCount + 1 : 1
                     }, function (err, doc) {
                         if (err) {

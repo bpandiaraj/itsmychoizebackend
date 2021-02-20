@@ -9,6 +9,7 @@ var logger = require("./config/logger");
 var morgan = require("morgan");
 var fs = require('fs');
 var { makeUserInactive } = require("./cron/userInvalidate.js");
+var { makeTaskActiveAndInactive } = require("./cron/makeTaskActive.js");
 
 mongoose.Promise = global.Promise;
 
@@ -42,6 +43,7 @@ if (!fs.existsSync(dirImage)) {
 
 //For call crons events
 makeUserInactive();
+// makeTaskActiveAndInactive('2021-02-20T12:09:00.000+05:30','2021-02-21T20:19:04.000+00:00','602397875420f02e60225dad','60124dcfd12b8626d8d3df04','its_my_choize_60124dcfd12b8626d8d3df04')
 
 require('./routes/route')(app);
 

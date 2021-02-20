@@ -7,6 +7,8 @@ const logger = require("../config/logger");
 exports.getTranslation = (req, res) => {
     var translationDB = getModelByShow(config.masterDB, "translation", translationModel);
     var code = req.query.language || "en"
+
+    console.log("req.query.language",req.query.language)
     translationDB.findOne({
         code: code
     }, function (err, translationInfo) {

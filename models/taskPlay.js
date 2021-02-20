@@ -25,6 +25,9 @@ var taskPlaySchema = mongoose.Schema(
         },
         userRanking: {
             type: Number,
+        },
+        status: {
+            type: String,
         }
     }
 );

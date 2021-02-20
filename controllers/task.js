@@ -1,4 +1,5 @@
 const taskModel = require("../models/task.js");
+const taskPlayModel = require("../models/taskPlay.js");
 const ObjectId = require("mongodb").ObjectID;
 const { getModelByShow } = require("../config/db_connection.js");
 const { masterDB } = require("../config/config.js");
@@ -7,6 +8,10 @@ const formidable = require("formidable");
 const path = require("path");
 const fs = require("fs");
 const moment = require("moment");
+var { makeTaskActiveAndInactive } = require("../cron/makeTaskActive.js");
+const { allArrayIsEqual } = require("../shared-function/compareArrays.js");
+const { sendPushNotification } = require("../shared-function/pushNotification.js");
+const { sendNotificationForTaskWinner } = require("../shared-function/sendNotificationForTaskWinner.js");
 
 exports.taskCreate = function (req, res) {
     var form = new formidable.IncomingForm();
@@ -24,8 +29,8 @@ exports.taskCreate = function (req, res) {
             });
         } else {
             var body = JSON.parse(fields.taskInfo);
-
-            if (!body.name || !body.maxContestants || !body.pointToAdd || !body.pointToRemove || !body.totalChangesAccept) {
+            console.log("body", body)
+            if (!body.name || !body.maxContestants || !body.pointToAdd || !body.totalChangesAccept) {
                 logger.error(`Data not found.`);
                 return res.status(400).json({
                     apiName: "Task Create API",
@@ -68,6 +73,9 @@ exports.taskCreate = function (req, res) {
                     });
                 } else {
                     logger.info(`Task created and image will save.`);
+
+                    makeTaskActiveAndInactive(body.startAt, body.endAt, savedData._doc._id, req.show, req.db);
+
                     saveImages('create', savedData, files, res, req, taskData);
                 }
             });
@@ -145,7 +153,7 @@ exports.taskImageUpdate = function (req, res) {
             var body = JSON.parse(fields.taskInfo);
             console.log("body", body);
 
-            if (!body.name || !body.maxContestants || !body.minContestants || !body.pointToAdd || !body.pointToRemove || !body.totalChangesAccept) {
+            if (!body.name || !body.maxContestants || !body.minContestants || !body.pointToAdd || !body.totalChangesAccept) {
                 logger.error(`Data not found.`);
                 return res.status(400).json({
                     apiName: "Task Create API",
@@ -476,7 +484,7 @@ exports.tasksList = function (req, res) {
     } else {
         arr.push({
             $match: {
-                status: 'active'
+                status: 'live'
             },
         });
     }
@@ -647,10 +655,58 @@ exports.taskWinningContestant = function (req, res) {
                 message: "Task not found.",
             });
         } else {
-            res.json({
-                apiName: "Task Winner Contestant Update API",
-                success: true,
-                message: "Task winner contestant has been updated successfully.",
+            console.log("taskInfo", taskInfo)
+            var taskPlayData = getModelByShow(req.db, "taskPlay", taskPlayModel);
+            console.log("task", taskInfo._id)
+            taskPlayData.find({ task: taskInfo._id }, function (err, taskInformation) {
+                if (err) {
+                    logger.error(`Error while list the task.`);
+                    res.status(400).json({
+                        apiName: "Task Play Create API",
+                        success: false,
+                        message: "Error Occurred"
+                    });
+                } else if (!taskInformation) {
+                    res.json({
+                        apiName: "Task Winner Contestant Update API",
+                        success: true,
+                        message: "Task winner contestant has been updated successfully.",
+                    });
+                } else {
+                    var winningContestant = req.body.winningContestants
+                    console.log("taskInformation", taskInformation)
+                    taskInformation.forEach(element => {
+                        var contestantMatch = allArrayIsEqual(winningContestant, element.contestants);
+                        console.log("contestantMatch", contestantMatch)
+                        if (contestantMatch == 0) {
+                            taskPlayData.findByIdAndUpdate(element._id, {
+                                earnPoint: taskInfo.pointToAdd,
+                            }, function (err, doc) {
+                                if (err) {
+                                    logger.error(`Error while list the task.`);
+                                } else {
+                                    logger.info(`Task play Updated.`);
+                                }
+                            });
+                        } else {
+                            taskPlayData.findByIdAndUpdate(element._id, {
+                                earnPoint: 0,
+                            }, function (err, doc) {
+                                if (err) {
+                                    logger.error(`Error while list the task.`);
+                                } else {
+                                    logger.info(`Task play Updated.`);
+                                }
+                            });
+                        }
+                    });
+                    sendNotificationForTaskWinner(taskInfo._id, req.show, req.db)
+                    res.json({
+                        apiName: "Task Winner Contestant Update API",
+                        success: true,
+                        message: "Task winner contestant has been updated successfully.",
+                    });
+                }
             });
         }
     });
