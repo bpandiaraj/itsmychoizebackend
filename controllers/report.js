@@ -60,9 +60,12 @@ exports.reportGenerate = (req, res) => {
 
     if (registerdOn) {
         if (registerdOn == 'today') {
+            var d = new Date();
+            var day = d.getDay(),
+                diff = d.getDate() - 1
             query.push({
                 $match: {
-                    createdAt: { $gte: new Date(), $lt: new Date() }
+                    createdAt: { $gt: new Date(d.setDate(diff)), $lte: new Date() }
                 }
             })
         } else if (registerdOn == 'week') {
