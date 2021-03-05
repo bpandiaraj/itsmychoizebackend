@@ -2,7 +2,8 @@ const { sendPushNotification } = require("../shared-function/pushNotification.js
 const deviceModel = require("../models/deviceToken.js");
 const logger = require("../config/logger");
 const { getModelByShow } = require("../config/db_connection.js");
-
+const notificationModel = require("../models/notification.js");
+const { masterDB } = require("../config/config.js");
 
 exports.sendPushNotificationToMobile = function (req, res) {
 
@@ -93,4 +94,62 @@ exports.saveDeviceTokenForUser = function (req, res) {
             }
         }
     );
+}
+
+exports.getUserNotification = function (req, res) {
+    var d = new Date();
+    var day = d.getDay(),
+        diff = d.getDate() - day + (day == 0 ? -6 : 1)
+    var diffDate = new Date(d.setDate(diff))
+    diffDate.setHours(0)
+    diffDate.setMinutes(0)
+    diffDate.setSeconds(0)
+    console.log("diff", diffDate)
+    var arr = [
+        {
+            $match: {
+                user: req.id,
+                createdAt: { $gte: new Date(diffDate), $lte: new Date() }
+            }
+        },
+        {
+            $sort: {
+                createdAt: 1
+            },
+        }
+    ];
+
+    var notificationData = getModelByShow(masterDB, "notification", notificationModel);
+
+    var aggregate = notificationData.aggregate(arr);
+
+    var options = {
+        page: req.query.page || 1,
+        limit: parseInt(req.query.limit) || 200,
+    };
+
+    notificationData.aggregatePaginate(aggregate, options, function (
+        err,
+        listdata,
+        pageCount,
+        count
+    ) {
+        if (err) {
+            console.log(err);
+            logger.error(`Error while show notification for user ${req.id}`);
+            res.status(400).json({
+                apiName: "Notification List API",
+                success: false,
+                message: "Some Error Occured",
+            });
+        } else {
+            logger.info(`Show notification for user ${req.id}.`);
+            res.json({
+                apiName: "Notification List API",
+                success: true,
+                message: "Successfully view notification list",
+                notificationList: listdata,
+            });
+        }
+    });
 }

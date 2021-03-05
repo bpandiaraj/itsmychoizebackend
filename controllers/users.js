@@ -120,7 +120,20 @@ exports.userProfileUpdate = (req, res) => {
     });
   }
 
+  if (!req.body.policy) {
+    logger.info("Privacy policy is not true");
+    return res.status(400).json({
+      apiName: "User Update API",
+      success: false,
+      message: "Please accept the privacy policy.",
+    });
+  }
+
+
   var updateObject = {
+    // firstName:req.body.firstName ,
+    // lastName:req.body.lastName ,
+    name: req.body.name,
     mobile: req.body.mobile,
     gender: req.body.gender || null,
     state: req.body.state,
@@ -128,8 +141,10 @@ exports.userProfileUpdate = (req, res) => {
     city: req.body.city,
     pincode: req.body.pincode,
     dob: req.body.dob || null,
-    modifiedAt: new Date()
+    modifiedAt: new Date(),
+    privacyPolicy: req.body.policy
   };
+  console.log("updateObject",updateObject)
   var userDB = getModelByShow(config.masterDB, "user", userModel);
   userDB.findOneAndUpdate({
     uid: req.uid

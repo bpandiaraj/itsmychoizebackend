@@ -65,14 +65,14 @@ exports.saveFavoriteContestants = function (req, res) {
                         userDB.findOne(req.id, function (err, userInfo) {
                             if (err) {
                             } else {
-                                var point = userInfo.point - (5 * req.configure.pointToMinus);
+                                var point = userInfo.point - (0 * req.configure.pointToMinus);
                                 userDB.findByIdAndUpdate(req.id, { point: point }, function (err, updatedInfo) {
                                     logger.info(`Contestant has been favorited successfully.`);
                                     res.json({
                                         apiName: "Contestant Favorite API",
                                         success: true,
                                         message: "Contestant has been favorited",
-                                        point: `${userInfo.point} - (5 * ${req.configure.pointToMinus}) = ${point}`
+                                        point: `${userInfo.point} - (0 * ${req.configure.pointToMinus}) = ${point}`
                                     });
                                 })
                             }

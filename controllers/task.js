@@ -59,7 +59,9 @@ exports.taskCreate = function (req, res) {
                 endAt: body.endAt,
                 isFeatured: body.isFeatured,
                 createdBy: req.id,
-                translation: translation
+                translation: translation,
+                event: req.show,
+                week: body.week
             });
 
             taskInfo.save(function (err, savedData) {
@@ -179,7 +181,8 @@ exports.taskImageUpdate = function (req, res) {
                 endAt: body.endAt,
                 isFeatured: body.isFeatured,
                 createdBy: req.id,
-                translation: translation
+                translation: translation,
+                week: body.week
             };
 
             var taskDB = getModelByShow(req.db, "task", taskModel);

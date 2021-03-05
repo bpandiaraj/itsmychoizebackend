@@ -3,6 +3,7 @@ const eventModel = require("../models/event.js");
 const taskPlayModel = require("../models/taskPlay.js");
 const favoriteEventModel = require("../models/favorite_event.js");
 const deviceModel = require("../models/deviceToken.js");
+const notificationModel = require("../models/notification.js");
 
 const { sendPushNotification } = require("./pushNotification.js");
 const { getModelByShow } = require("../config/db_connection.js");
@@ -37,7 +38,18 @@ exports.sendNotificationForTaskWinner = async function (taskId, eventId, db) {
                                         } else if (!useDeviceToken) {
                                             logger.error("User token not found ");
                                         } else {
-                                            sendPushNotification([useDeviceToken.deviceId], eventData.name, 'The task ' + taskData.name + ' is ended and winner is announced.')
+                                            var notificationData = getModelByShow(masterDB, "notification", notificationModel);
+                                            var notificationInfo = new notificationData({
+                                                user: element.user,
+                                                title: eventData.name,
+                                                message: 'The task ' + taskData.name + ' is ended and winner is announced.',
+                                                image: '',
+                                                priority: 'high',
+                                                isReaded: false
+                                            })
+                                            notificationInfo.save(function (err, savedNotificationInfo) {
+                                                sendPushNotification([useDeviceToken.deviceId], eventData.name, 'The task ' + taskData.name + ' is ended and winner is announced.')
+                                            })
                                         }
                                     })
                                 });

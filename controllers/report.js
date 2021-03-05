@@ -72,17 +72,25 @@ exports.reportGenerate = (req, res) => {
             var d = new Date();
             var day = d.getDay(),
                 diff = d.getDate() - day + (day == 0 ? -6 : 1)
+            var diffDate = new Date(d.setDate(diff))
+            diffDate.setHours(0)
+            diffDate.setMinutes(0)
+            diffDate.setSeconds(0)
+            console.log("diff", diffDate)
             query.push({
                 $match: {
-                    createdAt: { $gte: new Date(d.setDate(diff)), $lt: new Date() }
+                    createdAt: { $gte: new Date(diffDate), $lte: new Date() }
                 }
             })
         } else if (registerdOn == 'month') {
             var date = new Date()
-
+            var startDate = new Date(date.getFullYear(), date.getMonth(), 1)
+            startDate.setHours(0)
+            startDate.setMinutes(0)
+            startDate.setSeconds(0)
             query.push({
                 $match: {
-                    createdAt: { $gte: new Date(date.getFullYear(), date.getMonth(), 1), $lt: new Date() }
+                    createdAt: { $gte: new Date(startDate), $lte: new Date() }
                 }
             })
         }

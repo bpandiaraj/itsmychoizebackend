@@ -12,6 +12,14 @@ var userSchema = mongoose.Schema(
             unique: true,
             require: true,
         },
+        // firstName: {
+        //     type: String,
+        //     require: true,
+        // },
+        // lastName: {
+        //     type: String,
+        //     require: true,
+        // },
         name: {
             type: String,
             require: true,
@@ -49,6 +57,9 @@ var userSchema = mongoose.Schema(
             require: true
         },
         isMobileVerified: {
+            type: Boolean
+        },
+        isPolicyAgreed: {
             type: Boolean
         },
         redeemPoint: {

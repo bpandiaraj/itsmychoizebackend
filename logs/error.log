@@ -1774,3 +1774,98 @@ SyntaxError: Identifier 'taskModel' has already been declared
 2021-02-22T10:46:56.314Z [logs] error: Error while list the tasks.
 2021-02-22T11:14:26.432Z [logs] error: Error while list the tasks.
 2021-02-22T11:14:26.437Z [logs] error: Error while list the tasks.
+2021-03-03T09:13:57.430Z [logs] error: User token not found 
+2021-03-03T09:13:57.431Z [logs] error: User token not found 
+2021-03-03T09:13:57.436Z [logs] error: User token not found 
+2021-03-03T09:13:57.484Z [logs] error: User token not found 
+2021-03-03T09:16:08.408Z [logs] error: User token not found 
+2021-03-03T09:16:08.409Z [logs] error: User token not found 
+2021-03-03T09:16:08.415Z [logs] error: User token not found 
+2021-03-03T09:16:08.436Z [logs] error: User token not found 
+2021-03-03T09:16:16.134Z [logs] error: User token not found 
+2021-03-03T09:16:16.136Z [logs] error: User token not found 
+2021-03-03T09:16:16.145Z [logs] error: User token not found 
+2021-03-03T09:16:16.168Z [logs] error: User token not found 
+2021-03-03T09:16:22.729Z [logs] error: User token not found 
+2021-03-03T09:16:22.731Z [logs] error: User token not found 
+2021-03-03T09:16:22.758Z [logs] error: User token not found 
+2021-03-03T09:16:22.781Z [logs] error: User token not found 
+2021-03-03T09:16:29.371Z [logs] error: User token not found 
+2021-03-03T09:16:29.372Z [logs] error: User token not found 
+2021-03-03T09:16:29.376Z [logs] error: User token not found 
+2021-03-03T09:16:29.393Z [logs] error: User token not found 
+2021-03-03T09:16:38.589Z [logs] error: User token not found 
+2021-03-03T09:16:38.590Z [logs] error: User token not found 
+2021-03-03T09:16:38.595Z [logs] error: User token not found 
+2021-03-03T09:16:38.613Z [logs] error: User token not found 
+2021-03-03T09:21:00.029Z [logs] error: User token not found 
+2021-03-03T09:21:00.044Z [logs] error: User token not found 
+2021-03-03T09:21:00.059Z [logs] error: User token not found 
+2021-03-03T09:21:00.106Z [logs] error: User token not found 
+2021-03-03T09:46:43.601Z [logs] error: uncaughtException: Cannot read property 'getTime' of undefined
+TypeError: Cannot read property 'getTime' of undefined
+    at diff_weeks (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:776:37)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:763:29
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-03-03T09:47:25.427Z [logs] error: uncaughtException: Cannot read property 'getTime' of undefined
+TypeError: Cannot read property 'getTime' of undefined
+    at diff_weeks (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:776:37)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:763:29
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-03-03T09:47:46.783Z [logs] error: uncaughtException: Cannot read property 'getTime' of undefined
+TypeError: Cannot read property 'getTime' of undefined
+    at diff_weeks (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:777:37)
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\events.js:764:29
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-03-03T10:53:00.064Z [logs] error: User token not found 
+2021-03-03T10:53:00.064Z [logs] error: User token not found 
+2021-03-03T10:53:00.079Z [logs] error: User token not found 
+2021-03-03T10:53:00.110Z [logs] error: User token not found 
+2021-03-04T10:37:41.075Z [logs] error: Error while list the tasks.
+2021-03-04T10:37:41.136Z [logs] error: Error while list the tasks.
+2021-03-04T10:42:19.601Z [logs] error: User token not found 
+2021-03-04T10:42:19.625Z [logs] error: User token not found 
+2021-03-04T10:42:19.629Z [logs] error: User token not found 
+2021-03-04T10:42:19.675Z [logs] error: User token not found 
+2021-03-04T10:42:53.925Z [logs] error: User token not found 
+2021-03-04T10:42:53.928Z [logs] error: User token not found 
+2021-03-04T10:42:53.940Z [logs] error: User token not found 
+2021-03-04T10:42:53.979Z [logs] error: User token not found 
+2021-03-04T10:43:39.707Z [logs] error: User token not found 
+2021-03-04T10:43:39.709Z [logs] error: User token not found 
+2021-03-04T10:43:39.722Z [logs] error: User token not found 
+2021-03-04T10:43:39.754Z [logs] error: User token not found 
+2021-03-04T10:44:00.378Z [logs] error: User token not found 
+2021-03-04T10:44:00.381Z [logs] error: User token not found 
+2021-03-04T10:44:00.384Z [logs] error: User token not found 
+2021-03-04T10:44:00.432Z [logs] error: User token not found 
+2021-03-04T10:48:38.099Z [logs] error: User token not found 
+2021-03-04T10:48:38.100Z [logs] error: User token not found 
+2021-03-04T10:48:38.113Z [logs] error: User token not found 
+2021-03-04T10:48:38.146Z [logs] error: User token not found 
+2021-03-04T10:50:00.029Z [logs] error: User token not found 
+2021-03-04T10:50:00.031Z [logs] error: User token not found 
+2021-03-04T10:50:00.045Z [logs] error: User token not found 
+2021-03-04T10:50:00.086Z [logs] error: User token not found 
+2021-03-05T05:56:00.070Z [logs] error: User token not found 
+2021-03-05T05:56:00.074Z [logs] error: User token not found 
+2021-03-05T05:56:00.085Z [logs] error: User token not found 
+2021-03-05T05:56:00.109Z [logs] error: User token not found 

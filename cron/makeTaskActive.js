@@ -2,6 +2,7 @@ const taskModel = require("../models/task.js");
 const eventModel = require("../models/event.js");
 const taskPlayModel = require("../models/taskPlay.js");
 const userModel = require("../models/users.js");
+const notificationModel = require("../models/notification.js");
 const deviceModel = require("../models/deviceToken.js");
 const favoriteEventModel = require("../models/favorite_event.js");
 
@@ -54,7 +55,18 @@ exports.makeTaskActiveAndInactive = async function (start, end, taskId, eventId,
                                                     } else if (!useDeviceToken) {
                                                         logger.error("User token not found ");
                                                     } else {
-                                                        sendPushNotification([useDeviceToken.deviceId], eventData.name, taskData.name + ' will start next few minute dont miss the event.')
+                                                        var notificationData = getModelByShow(config.masterDB, "notification", notificationModel);
+                                                        var notificationInfo = new notificationData({
+                                                            user: element.user,
+                                                            title: eventData.name,
+                                                            message: taskData.name + ' will start next few minute dont miss the event.',
+                                                            image: '',
+                                                            priority: 'high',
+                                                            isReaded: false
+                                                        })
+                                                        notificationInfo.save(function (err, savedNotificationInfo) {
+                                                            sendPushNotification([useDeviceToken.deviceId], eventData.name, taskData.name + ' will start next few minute dont miss the event.')
+                                                        })
                                                     }
                                                 })
                                             });

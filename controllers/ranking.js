@@ -10,7 +10,7 @@ exports.getRankingList = function (req, res) {
         {
             "$group": {
                 _id: { user: "$user.userName" },
-                user:{"$push":"$user"},
+                user: { "$push": "$user" },
                 earnPoint: { $sum: "$earnPoint" },
                 tasks: { "$push": "$task" }
             },
@@ -82,7 +82,7 @@ exports.getRankingList = function (req, res) {
                 participants: 1,
                 sameRankCount: 1,
                 profilePicture: "$rank.user.profilePicture",
-                rank:  { $add: [ "$rank.rank", 1] } 
+                rank: { $add: ["$rank.rank", 1] }
             }
         },
         {
@@ -146,10 +146,10 @@ exports.getRankingList = function (req, res) {
 exports.getRankingBannerList = function (req, res) {
     var arr = [];
     arr = [
-       {
+        {
             "$group": {
                 _id: { user: "$user.userName" },
-                user:{"$push":"$user"},
+                user: { "$push": "$user" },
                 earnPoint: { $sum: "$earnPoint" },
                 tasks: { "$push": "$task" }
             },
@@ -233,14 +233,15 @@ exports.getRankingBannerList = function (req, res) {
             arr1 = [
                 {
                     "$group": {
-                        _id: { user: "$user" },
+                        _id: { user: "$user.userName" },
+                        user: { "$push": "$user" },
                         earnPoint: { $sum: "$earnPoint" },
                         tasks: { "$push": "$task" }
                     },
                 },
                 {
                     "$project": {
-                        "user": "$_id.user",
+                        "user": { $arrayElemAt: ["$user", 0] },
                         "_id": 0,
                         "earnPoint": 1,
                         "tasks": 1
@@ -307,6 +308,7 @@ exports.getRankingBannerList = function (req, res) {
                         message: "Some Error Occured",
                     });
                 } else {
+                    var currentUser = [];
                     console.log("listdata", listdata)
                     var bannerListReorder = [];
                     if (bannerList.length > 0) {
@@ -315,6 +317,7 @@ exports.getRankingBannerList = function (req, res) {
                         if (listdata.length > 0) {
                             var alreadyAdded = false;
                             var userIndex;
+                            var userPosition = 0;
                             const found = bannerListReorder.some((el, index) => {
                                 console.log("el.user._id === req.id", el.user._id, req.id, el.user._id.equals(req.id))
                                 if (el.user._id.equals(req.id)) {
@@ -323,16 +326,18 @@ exports.getRankingBannerList = function (req, res) {
                                 }
                             });
                             if (found) {
+                                userPosition = userIndex;
                                 var alreadyAdded = true;
                                 console.log("userIndex", userIndex)
                                 var currentUserRanking = listdata[0];
-                                bannerListReorder.splice(userIndex, 1,currentUserRanking);
-                                console.log("x",bannerListReorder)
+                                bannerListReorder.splice(userIndex, 1, currentUserRanking);
+                                console.log("x", bannerListReorder);
                             } else {
                                 bannerListReorder.forEach((element, index) => {
                                     if (!alreadyAdded) {
                                         console.log("element.earnPoint == listdata[0].earnPoint", element.earnPoint, listdata[0].earnPoint)
                                         if (element.earnPoint == listdata[0].earnPoint) {
+                                            userPosition = index;
                                             bannerListReorder[index] = listdata[0];
                                             console.log("bannerList", bannerListReorder)
                                             alreadyAdded = true;
@@ -353,22 +358,20 @@ exports.getRankingBannerList = function (req, res) {
                             previousRanking = bannerListReorder[index].rank;
                         }
                     });
-
-
-
                     if (listdata.length > 0) {
                         var arr2 = [];
                         arr2 = [
                             {
                                 "$group": {
-                                    _id: { user: "$user" },
+                                    _id: { user: "$user.userName" },
+                                    user: { "$push": "$user" },
                                     earnPoint: { $sum: "$earnPoint" },
                                     tasks: { "$push": "$task" }
                                 },
                             },
                             {
                                 "$project": {
-                                    "user": "$_id.user",
+                                    "user": { $arrayElemAt: ["$user", 0] },
                                     "_id": 0,
                                     "earnPoint": 1,
                                     "tasks": 1
@@ -470,15 +473,20 @@ exports.getRankingBannerList = function (req, res) {
                             } else {
                                 if (!alreadyAdded) {
                                     listdata[0].sameRankCount = listdata2[0].participants.length;
-                                    listdata[0].rank = listdata[0].rank + 1;
+                                    listdata[0].rank = listdata[0].rank;
                                     var currentUserRanking = [listdata[0]];
-                                    bannerListReorder = bannerListReorder.concat(currentUserRanking);
+                                    currentUser = currentUserRanking;
+                                    // bannerListReorder = bannerListReorder.concat(currentUserRanking);
+                                    console.log("currentUser 1",currentUser)
+                                }else{
+                                    currentUser =bannerListReorder[userPosition];
+                                    console.log("currentUser 2",currentUser)
                                 }
                                 res.json({
                                     apiName: "Ranking Banner List API",
                                     success: true,
                                     message: "Successfully view ranking list",
-                                    rankingList: bannerListReorder,
+                                    rankingList: currentUser,
                                 });
                             }
                         })
@@ -487,7 +495,7 @@ exports.getRankingBannerList = function (req, res) {
                             apiName: "Ranking Banner List API",
                             success: true,
                             message: "Successfully view ranking list",
-                            rankingList: bannerListReorder,
+                            rankingList: bannerListReorder[userPosition],
                         });
                     }
 
@@ -503,7 +511,7 @@ exports.getUserCurrentRanking = function (req, res) {
         {
             "$group": {
                 _id: { user: "$user.userName" },
-                user:{"$push":"$user"},
+                user: { "$push": "$user" },
                 earnPoint: { $sum: "$earnPoint" },
                 tasks: { "$push": "$task" }
             },
@@ -593,7 +601,7 @@ exports.getTop3RankingList = function (req, res) {
         {
             "$group": {
                 _id: { user: "$user.userName" },
-                user:{"$push":"$user"},
+                user: { "$push": "$user" },
                 earnPoint: { $sum: "$earnPoint" },
                 tasks: { "$push": "$task" }
             },
@@ -692,7 +700,7 @@ exports.getTop10RankingList = function (req, res) {
         {
             "$group": {
                 _id: { user: "$user.userName" },
-                user:{"$push":"$user"},
+                user: { "$push": "$user" },
                 earnPoint: { $sum: "$earnPoint" },
                 tasks: { "$push": "$task" }
             },
@@ -824,7 +832,7 @@ exports.getOverAllRankingList = function (req, res) {
         {
             "$group": {
                 _id: { user: "$user.userName" },
-                user:{"$push":"$user"},
+                user: { "$push": "$user" },
                 earnPoint: { $sum: "$earnPoint" },
                 tasks: { "$push": "$task" }
             },

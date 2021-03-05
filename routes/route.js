@@ -87,6 +87,7 @@ module.exports = function (app) {
     app.post('/api/v1/event/create', tokenVerify, eventController.eventCreate);
     app.put('/api/v1/event/update', tokenVerify, eventController.eventImageUpdate);
     app.get('/api/v1/event/info', tokenVerify, eventController.eventInfo);
+    app.get('/api/v1/event/weeks', tokenVerify, eventController.eventWeekList);
 
     /*
     Task API.
@@ -145,6 +146,7 @@ module.exports = function (app) {
     1. Notification check
     */
     app.post('/api/v1/deviceToken', tokenVerify, notificationController.saveDeviceTokenForUser);
+    app.get('/api/v1/notification', tokenVerify, notificationController.getUserNotification);
 
     /*
     1. Dashboard

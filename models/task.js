@@ -55,6 +55,12 @@ var taskSchema = mongoose.Schema(
         isFeatured: {
             type: Boolean
         },
+        event: {
+            type: mongoose.Schema.Types.ObjectId
+        },
+        week: {
+            type: String
+        },
         translation: {
             type: Object
         }

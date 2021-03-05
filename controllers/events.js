@@ -312,7 +312,7 @@ exports.saveFavoriteEvent = function (req, res) {
                                 });
                             } else if (favoriteContestant) {
                                 if (favoriteContestant.contestants) {
-                                    console.log("req.body.defaultLanguage || savedData.defaultLanguage",req.body.defaultLanguage || savedData.defaultLanguage,req.body.defaulted || savedData.defaulted,savedData)
+                                    console.log("req.body.defaultLanguage || savedData.defaultLanguage", req.body.defaultLanguage || savedData.defaultLanguage, req.body.defaulted || savedData.defaulted, savedData)
                                     res.json({
                                         apiName: "Event Favorite API",
                                         success: true,
@@ -732,3 +732,45 @@ exports.eventStartAndRemainingDay = function (req, res) {
         }
     });
 };
+
+exports.eventWeekList = function (req, res) {
+    var eventDB = getModelByShow(masterDB, "event", eventModel);
+
+    eventDB.findById(req.show, function (err, eventData) {
+        if (err) {
+            console.log("err", err);
+            res.status(400).json({
+                apiName: "Event Week API",
+                success: false,
+                message: "Error Occurred",
+            });
+        } else if (!eventData) {
+            res.status(400).json({
+                apiName: "Event Week API",
+                success: false,
+                message: "Event not found.",
+            });
+        } else {
+            console.log("eventData",eventData)
+            if(eventData.startedDate && eventData.endDate){
+                var weeks = diff_weeks(new Date(eventData.startedDate) , new Date(eventData.endDate));
+                var weeksList =[];
+                for(let i=1;i<=weeks;i++){
+                    weeksList.push(`week ${i}`)
+                }
+                res.json({
+                    apiName: "Event Week API",
+                    success: true,
+                    message: "Event week has been found successfully.",
+                    weekList: weeksList
+                });
+            }
+        }
+    });
+}
+
+function diff_weeks(dt2, dt1) {
+    var diff = (dt2.getTime() - dt1.getTime()) / 1000;
+    diff /= (60 * 60 * 24 * 7);
+    return Math.abs(Math.round(diff));
+}
