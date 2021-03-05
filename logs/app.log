@@ -11022,3 +11022,5 @@ TypeError: Cannot read property 'getTime' of undefined
 
 2021-03-05T12:49:16.867Z [logs] info: ::ffff:192.168.86.45 - - [05/Mar/2021:12:49:16 +0000] "GET /api/v1/ranking/banner?language=ta HTTP/1.1" 200 950 "-" "Dart/2.10 (dart:io)"
 
+2021-03-05T13:21:52.154Z [logs] info: User inactive status change event has called
+2021-03-05T13:22:32.925Z [logs] info: User inactive status change event has called
