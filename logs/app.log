@@ -11024,3 +11024,184 @@ TypeError: Cannot read property 'getTime' of undefined
 
 2021-03-05T13:21:52.154Z [logs] info: User inactive status change event has called
 2021-03-05T13:22:32.925Z [logs] info: User inactive status change event has called
+2021-03-08T01:10:34.557Z [logs] info: User inactive status change event has called
+2021-03-08T01:11:28.842Z [logs] info: User inactive status change event has called
+2021-03-08T01:11:55.781Z [logs] info: ::1 - - [08/Mar/2021:01:11:55 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 403 87 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:13:38.211Z [logs] info: User inactive status change event has called
+2021-03-08T01:13:44.440Z [logs] info: User inactive status change event has called
+2021-03-08T01:14:15.737Z [logs] info: User inactive status change event has called
+2021-03-08T01:14:51.318Z [logs] info: User inactive status change event has called
+2021-03-08T01:16:22.706Z [logs] info: User inactive status change event has called
+2021-03-08T01:16:43.879Z [logs] info: User inactive status change event has called
+2021-03-08T01:16:46.455Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:16:46.555Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:16:46.584Z [logs] error: Error while list the tasks.
+2021-03-08T01:16:46.599Z [logs] info: ::1 - - [08/Mar/2021:01:16:46 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 400 90 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:18:00.657Z [logs] info: User inactive status change event has called
+2021-03-08T01:19:53.438Z [logs] info: User inactive status change event has called
+2021-03-08T01:20:20.950Z [logs] error: Error while list the tasks.
+2021-03-08T01:20:20.998Z [logs] info: ::1 - - [08/Mar/2021:01:20:20 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 400 90 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:20:30.857Z [logs] error: Could not connect to the database. Exiting now...
+2021-03-08T01:20:40.937Z [logs] error: Could not connect to the database. Exiting now...
+2021-03-08T01:21:23.859Z [logs] info: User inactive status change event has called
+2021-03-08T01:21:27.208Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:21:27.403Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:21:27.507Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:21:27.538Z [logs] info: ::1 - - [08/Mar/2021:01:21:27 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 150 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:22:10.339Z [logs] info: User inactive status change event has called
+2021-03-08T01:22:11.981Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:22:12.130Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:22:12.160Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:22:12.198Z [logs] info: ::1 - - [08/Mar/2021:01:22:12 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 150 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:22:32.658Z [logs] info: User inactive status change event has called
+2021-03-08T01:22:33.551Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:22:33.619Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:22:33.637Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:22:33.655Z [logs] info: ::1 - - [08/Mar/2021:01:22:33 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 5890 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:23:40.416Z [logs] info: User inactive status change event has called
+2021-03-08T01:23:43.130Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:23:43.284Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:23:43.323Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:23:43.352Z [logs] info: ::1 - - [08/Mar/2021:01:23:43 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 5890 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:25:42.558Z [logs] info: User inactive status change event has called
+2021-03-08T01:25:43.858Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:25:43.987Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:25:44.022Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:25:44.049Z [logs] info: ::1 - - [08/Mar/2021:01:25:44 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 150 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:25:56.094Z [logs] info: User inactive status change event has called
+2021-03-08T01:25:58.553Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:25:58.720Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:25:58.756Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:25:58.782Z [logs] info: ::1 - - [08/Mar/2021:01:25:58 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 5890 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:26:14.759Z [logs] info: User inactive status change event has called
+2021-03-08T01:26:18.715Z [logs] info: User inactive status change event has called
+2021-03-08T01:26:20.278Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:26:20.333Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:26:20.349Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:26:20.363Z [logs] info: ::1 - - [08/Mar/2021:01:26:20 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 150 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:26:54.434Z [logs] info: User inactive status change event has called
+2021-03-08T01:26:57.265Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:26:57.297Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:26:57.306Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:26:57.316Z [logs] info: ::1 - - [08/Mar/2021:01:26:57 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 570 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:27:57.688Z [logs] info: User inactive status change event has called
+2021-03-08T01:28:01.911Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:28:01.942Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:28:01.951Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:28:01.957Z [logs] info: ::1 - - [08/Mar/2021:01:28:01 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 474 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:28:25.181Z [logs] info: User inactive status change event has called
+2021-03-08T01:28:29.658Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:28:29.693Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:28:29.712Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:28:29.720Z [logs] info: ::1 - - [08/Mar/2021:01:28:29 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 3893 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:29:07.714Z [logs] info: User inactive status change event has called
+2021-03-08T01:29:09.919Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:29:09.945Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:29:09.961Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:29:09.968Z [logs] info: ::1 - - [08/Mar/2021:01:29:09 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 482 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:29:57.918Z [logs] info: User inactive status change event has called
+2021-03-08T01:30:00.641Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:30:00.672Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:30:00.684Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:30:00.689Z [logs] info: ::1 - - [08/Mar/2021:01:30:00 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 150 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:30:06.780Z [logs] info: User inactive status change event has called
+2021-03-08T01:30:10.082Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:30:10.110Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:30:10.125Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:30:10.132Z [logs] info: ::1 - - [08/Mar/2021:01:30:10 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 463 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:30:38.326Z [logs] info: User inactive status change event has called
+2021-03-08T01:30:50.139Z [logs] info: User inactive status change event has called
+2021-03-08T01:30:51.882Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:30:51.914Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:30:51.928Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:30:51.937Z [logs] info: ::1 - - [08/Mar/2021:01:30:51 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 150 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:31:56.820Z [logs] info: User inactive status change event has called
+2021-03-08T01:31:59.390Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:31:59.423Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:31:59.438Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:31:59.444Z [logs] info: ::1 - - [08/Mar/2021:01:31:59 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 3885 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:32:20.213Z [logs] info: User inactive status change event has called
+2021-03-08T01:32:23.419Z [logs] info: User inactive status change event has called
+2021-03-08T01:32:25.317Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:32:25.343Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:32:25.360Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:32:25.368Z [logs] info: ::1 - - [08/Mar/2021:01:32:25 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 4816 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:33:48.667Z [logs] info: User inactive status change event has called
+2021-03-08T01:33:50.528Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:33:50.559Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:33:50.583Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:33:50.593Z [logs] info: ::1 - - [08/Mar/2021:01:33:50 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 4880 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:34:24.073Z [logs] info: User inactive status change event has called
+2021-03-08T01:34:25.902Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:34:25.933Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:34:25.951Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:34:25.959Z [logs] info: ::1 - - [08/Mar/2021:01:34:25 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 4880 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:35:14.280Z [logs] info: User inactive status change event has called
+2021-03-08T01:35:23.576Z [logs] info: User inactive status change event has called
+2021-03-08T01:35:28.492Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:35:28.525Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:35:28.541Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:35:28.547Z [logs] info: ::1 - - [08/Mar/2021:01:35:28 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 4837 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:35:43.692Z [logs] info: User inactive status change event has called
+2021-03-08T01:35:45.543Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:35:45.581Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:35:45.598Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:35:45.606Z [logs] info: ::1 - - [08/Mar/2021:01:35:45 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 4836 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:38:02.107Z [logs] info: User inactive status change event has called
+2021-03-08T01:38:54.543Z [logs] info: User inactive status change event has called
+2021-03-08T01:40:23.849Z [logs] info: User inactive status change event has called
+2021-03-08T01:40:37.869Z [logs] info: User inactive status change event has called
+2021-03-08T01:40:40.795Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:40:40.824Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:40:40.845Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:40:40.852Z [logs] info: ::1 - - [08/Mar/2021:01:40:40 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 435 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:40:49.062Z [logs] info: User inactive status change event has called
+2021-03-08T01:40:50.923Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:40:50.966Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:40:50.990Z [logs] error: Error while list the tasks.
+2021-03-08T01:40:50.996Z [logs] info: ::1 - - [08/Mar/2021:01:40:50 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 400 78 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:40:58.062Z [logs] info: User inactive status change event has called
+2021-03-08T01:41:05.394Z [logs] info: User inactive status change event has called
+2021-03-08T01:41:05.904Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:41:05.964Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:41:05.981Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:41:05.990Z [logs] info: ::1 - - [08/Mar/2021:01:41:05 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 4836 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:41:33.004Z [logs] info: User inactive status change event has called
+2021-03-08T01:41:35.464Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:41:35.497Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:41:35.525Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:41:35.529Z [logs] info: ::1 - - [08/Mar/2021:01:41:35 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 3888 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:42:08.187Z [logs] info: User inactive status change event has called
+2021-03-08T01:42:10.126Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema event
+2021-03-08T01:42:10.157Z [logs] info: Successfully created and connected to the database with DB its_my_choize_60124dcfd12b8626d8d3df04 schema taskplay
+2021-03-08T01:42:10.175Z [logs] info: Ranking has been listed successfully.
+2021-03-08T01:42:10.183Z [logs] info: ::1 - - [08/Mar/2021:01:42:10 +0000] "GET /api/v1/user/taskplay HTTP/1.1" 200 18716 "-" "PostmanRuntime/7.26.10"
+
+2021-03-08T01:42:52.882Z [logs] info: User inactive status change event has called
