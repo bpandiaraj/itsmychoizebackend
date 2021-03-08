@@ -1869,3 +1869,20 @@ TypeError: Cannot read property 'getTime' of undefined
 2021-03-05T05:56:00.074Z [logs] error: User token not found 
 2021-03-05T05:56:00.085Z [logs] error: User token not found 
 2021-03-05T05:56:00.109Z [logs] error: User token not found 
+2021-03-08T01:16:46.584Z [logs] error: Error while list the tasks.
+2021-03-08T01:20:20.950Z [logs] error: Error while list the tasks.
+2021-03-08T01:20:30.857Z [logs] error: Could not connect to the database. Exiting now...
+2021-03-08T01:20:40.937Z [logs] error: Could not connect to the database. Exiting now...
+2021-03-08T01:40:50.990Z [logs] error: Error while list the tasks.
+2021-03-08T04:23:02.467Z [logs] error: User token not found 
+2021-03-08T04:23:02.468Z [logs] error: User token not found 
+2021-03-08T04:23:02.475Z [logs] error: User token not found 
+2021-03-08T04:23:02.513Z [logs] error: User token not found 
+2021-03-08T04:23:19.031Z [logs] error: User token not found 
+2021-03-08T04:23:19.031Z [logs] error: User token not found 
+2021-03-08T04:23:19.044Z [logs] error: User token not found 
+2021-03-08T04:23:19.065Z [logs] error: User token not found 
+2021-03-08T04:23:35.291Z [logs] error: User token not found 
+2021-03-08T04:23:35.298Z [logs] error: User token not found 
+2021-03-08T04:23:35.307Z [logs] error: User token not found 
+2021-03-08T04:23:35.358Z [logs] error: User token not found 

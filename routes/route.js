@@ -1,3 +1,4 @@
+//Controller
 const authenticationController = require('../controllers/authentication.js');
 const contestantsController = require('../controllers/contestants.js');
 const taskController = require('../controllers/task.js');
@@ -22,7 +23,6 @@ const configuration = require('../middlewares/configurationData.js');
 const myFavorite = require('../middlewares/myfavorites.js');
 
 module.exports = function (app) {
-
     app.use(function (req, res, next) {
         res.setHeader("Access-Control-Allow-Methods", "POST,GET,PUT,DELETE,OPTION")
         res.header("Access-Control-Allow-Origin", "*");
@@ -108,6 +108,7 @@ module.exports = function (app) {
         1. Task List
     */
     app.post('/api/v1/taskplay', tokenVerify, showLanguage, taskPlayController.taskPlayCreate);
+    app.get('/api/v1/user/taskplay', tokenVerify, showLanguage, taskPlayController.getUserPalyedTask);
 
     /*
     Configuration API.
