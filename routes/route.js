@@ -137,6 +137,7 @@ module.exports = function (app) {
     app.get('/api/v1/ranking/banner', tokenVerify, rankingController.getRankingBannerList);
     app.get('/api/v1/ranking/user', tokenVerify, rankingController.getUserCurrentRanking);
     app.get('/api/v1/ranking/all', tokenVerify, rankingController.getOverAllRankingList);
+    app.get('/api/v1/ranking/number', tokenVerify, rankingController.getOverAllRanksNumberList);
 
     /*
     1. User active count

@@ -211,6 +211,9 @@ exports.taskImageUpdate = function (req, res) {
                             updateImages('create', body.imageChanged, files, res, req, taskDB);
                         })
                     }
+                    // if(body.winningContestant){
+                    //     taskWinningContestantSend(body.winningContestant, taskDB, req.db, req.query.id);
+                    // }
                 }
             });
         }
@@ -503,7 +506,7 @@ exports.tasksList = function (req, res) {
 
     arr.push({
         $sort: {
-            status: 1
+            week: 1
         },
     });
 
@@ -532,11 +535,25 @@ exports.tasksList = function (req, res) {
             });
         } else {
             logger.info(`Tasks has been listed successfully.`);
+            var activeList = [];
+            var liveList = [];
+            var inActiveList = [];
+            for (let i = 0; i < listdata.length; i++) {
+                if (listdata[i].status == "active") {
+                    activeList.push(listdata[i])
+                } else if (listdata[i].status == "inactive") {
+                    inActiveList.push(listdata[i])
+                } else if (listdata[i].status == "live") {
+                    liveList.push(listdata[i])
+                }
+            }
+            var finalList = liveList.concat(activeList);
+            finalList = finalList.concat(inActiveList);
             res.json({
                 apiName: "Tasks List API",
                 success: true,
                 message: "Successfully view tasks list",
-                taskList: listdata,
+                taskList: finalList,
                 currentPage: req.query.page,
                 totalPages: pageCount,
                 dataCount: count,
@@ -711,6 +728,63 @@ exports.taskWinningContestant = function (req, res) {
                     });
                 }
             });
+        }
+    });
+};
+
+function taskWinningContestantSend(winningContestants, taskDB, db, id) {
+    if (!Array.isArray(winningContestants)) {
+        return res.status(400).json({
+            apiName: "Task Winner Contestant Update API",
+            success: false,
+            message: "Please provide the Winning Contestants list.",
+        });
+    }
+ 
+    var taskPlayData = getModelByShow(db, "taskPlay", taskPlayModel);
+    console.log("task", id)
+    taskPlayData.find({ task: id }, function (err, taskInformation) {
+        if (err) {
+            logger.error(`Error while list the task.`);
+            res.status(400).json({
+                apiName: "Task Play Create API",
+                success: false,
+                message: "Error Occurred"
+            });
+        } else if (!taskInformation) {
+            res.json({
+                apiName: "Task Winner Contestant Update API",
+                success: true,
+                message: "Task winner contestant has been updated successfully.",
+            });
+        } else {
+            var winningContestant = req.body.winningContestants
+            console.log("taskInformation", taskInformation)
+            taskInformation.forEach(element => {
+                var contestantMatch = allArrayIsEqual(winningContestant, element.contestants);
+                if (contestantMatch == 0) {
+                    taskPlayData.findByIdAndUpdate(element._id, {
+                        earnPoint: taskInfo.pointToAdd,
+                    }, function (err, doc) {
+                        if (err) {
+                            logger.error(`Error while list the task.`);
+                        } else {
+                            logger.info(`Task play Updated.`);
+                        }
+                    });
+                } else {
+                    taskPlayData.findByIdAndUpdate(element._id, {
+                        earnPoint: 0,
+                    }, function (err, doc) {
+                        if (err) {
+                            logger.error(`Error while list the task.`);
+                        } else {
+                            logger.info(`Task play Updated.`);
+                        }
+                    });
+                }
+            });
+            sendNotificationForTaskWinner(taskInfo._id, req.show, req.db)
         }
     });
 };

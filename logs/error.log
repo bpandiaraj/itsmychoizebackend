@@ -1886,3 +1886,78 @@ TypeError: Cannot read property 'getTime' of undefined
 2021-03-08T04:23:35.298Z [logs] error: User token not found 
 2021-03-08T04:23:35.307Z [logs] error: User token not found 
 2021-03-08T04:23:35.358Z [logs] error: User token not found 
+2021-03-10T10:39:00.056Z [logs] error: User token not found 
+2021-03-10T10:39:00.097Z [logs] error: User token not found 
+2021-03-10T10:39:00.107Z [logs] error: User token not found 
+2021-03-10T10:39:00.130Z [logs] error: User token not found 
+2021-03-10T10:53:00.053Z [logs] error: User token not found 
+2021-03-10T10:53:00.059Z [logs] error: User token not found 
+2021-03-10T10:53:00.069Z [logs] error: User token not found 
+2021-03-10T10:53:00.104Z [logs] error: User token not found 
+2021-03-10T11:00:00.051Z [logs] error: uncaughtException: taskData.findByIdAndUpdate is not a function
+TypeError: taskData.findByIdAndUpdate is not a function
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\cron\makeTaskActive.js:100:26
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-03-10T11:03:00.046Z [logs] error: User token not found 
+2021-03-10T11:03:00.050Z [logs] error: User token not found 
+2021-03-10T11:03:00.060Z [logs] error: User token not found 
+2021-03-10T11:03:00.102Z [logs] error: User token not found 
+2021-03-10T11:10:32.661Z [logs] error: User token not found 
+2021-03-10T11:10:32.662Z [logs] error: User token not found 
+2021-03-10T11:10:32.669Z [logs] error: User token not found 
+2021-03-10T11:10:32.690Z [logs] error: User token not found 
+2021-03-10T14:14:18.567Z [logs] error: Error while list the tasks.
+2021-03-10T14:14:39.546Z [logs] error: uncaughtException: Unexpected identifier
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\ranking.js:928
+                participants: 0,
+                ^^^^^^^^^^^^
+
+SyntaxError: Unexpected identifier
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:12:27)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:48:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-10T14:14:44.834Z [logs] error: Error while list the tasks.
+2021-03-10T14:15:08.352Z [logs] error: Error while list the tasks.
+2021-03-10T14:15:33.899Z [logs] error: Error while list the tasks.
+2021-03-10T14:15:35.663Z [logs] error: Error while list the tasks.
+2021-03-10T14:25:00.199Z [logs] error: uncaughtException: Unexpected token }
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\ranking.js:937
+            }
+            ^
+
+SyntaxError: Unexpected token }
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:12:27)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:48:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)

@@ -82,26 +82,26 @@ exports.makeTaskActiveAndInactive = async function (start, end, taskId, eventId,
     });
 
     var endDate, endDay, endMonth, endHour, endMinute;
-
     endDate = new Date(end);
-    endDay = startDate.getDate();
-    endMonth = startDate.getMonth() + 1;
-    endHour = startDate.getHours();
-    endMinute = startDate.getMinutes();
+    endDay = endDate.getDate();
+    endMonth = endDate.getMonth() + 1;
+    endHour = endDate.getHours();
+    endMinute = endDate.getMinutes();
 
     var stopCron = cron.schedule(`${endMinute} ${endHour} ${endDay} ${endMonth} *`, () => {
         var taskDB = getModelByShow(db, "task", taskModel);
+        console.log("taskid",taskId)
         taskDB.findOne({ _id: taskId }, function (err, taskData) {
             if (err) {
-                logger.error("Error while find the task. ");
-            } else if (taskData) {
+                logger.error("Error while find the task1. ");
+            } else if (!taskData) {
                 logger.info("task not found " + taskId);
             } else {
-                taskData.findByIdAndUpdate(taskId, { "status": "Inactive" }, function (err, taskUpdatedDate) {
+                taskDB.findByIdAndUpdate(taskId, { "status": "inactive" }, function (err, taskUpdatedDate) {
                     if (err) {
-                        logger.error("Error while update the task. ");
+                        logger.error("Error while update the task1. ");
                     } else {
-                        logger.info("task has been updated found " + taskId);
+                        logger.info("task has been updated found1 " + taskId);
                     }
                 })
             }
