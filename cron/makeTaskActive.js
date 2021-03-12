@@ -34,13 +34,11 @@ exports.makeTaskActiveAndInactive = async function (start, end, taskId, eventId,
                         logger.error("Error while update the task. ");
                     } else {
                         logger.info("task has been updated found " + taskId);
-
                         var eventDB = getModelByShow(config.masterDB, "event", eventModel);
                         eventDB.findById(eventId, function (err, eventData) {
                             if (err) {
                             } else {
                                 var favoriteEventData = getModelByShow(config.masterDB, "favoriteEvent", favoriteEventModel);
-
                                 favoriteEventData.find({ event: eventData._id }, function (err, favoriteEventInfo) {
                                     if (err) {
                                         logger.error("Error while update the task. ");
@@ -55,17 +53,38 @@ exports.makeTaskActiveAndInactive = async function (start, end, taskId, eventId,
                                                     } else if (!useDeviceToken) {
                                                         logger.error("User token not found ");
                                                     } else {
+                                                        var eventMessage = '';
+                                                        var eventName = ''
+                                                        if (element.defaultLanguage != "en") {
+                                                            if (taskData.translation[element.defaultLanguage]) {
+                                                                eventMessage = taskData.translation[element.defaultLanguage].startNotification
+                                                            } else {
+                                                                eventMessage = taskData.startNotification;
+                                                            }
+
+                                                            if (eventData.translation.name) {
+                                                                eventName = eventData.translation.name
+                                                            } else {
+                                                                eventName = eventData.name;
+                                                            }
+
+                                                        } else {
+                                                            eventMessage = taskData.startNotification;
+                                                            eventName = eventData.name;
+                                                        }
+
                                                         var notificationData = getModelByShow(config.masterDB, "notification", notificationModel);
                                                         var notificationInfo = new notificationData({
                                                             user: element.user,
-                                                            title: eventData.name,
-                                                            message: taskData.name + ' will start next few minute dont miss the event.',
+                                                            title: eventName,
+                                                            message: eventMessage,
+                                                            // message: taskData.name + ' will start next few minute dont miss the event.',
                                                             image: '',
                                                             priority: 'high',
                                                             isReaded: false
                                                         })
                                                         notificationInfo.save(function (err, savedNotificationInfo) {
-                                                            sendPushNotification([useDeviceToken.deviceId], eventData.name, taskData.name + ' will start next few minute dont miss the event.')
+                                                            sendPushNotification([useDeviceToken.deviceId], eventName, eventMessage)
                                                         })
                                                     }
                                                 })
@@ -90,7 +109,7 @@ exports.makeTaskActiveAndInactive = async function (start, end, taskId, eventId,
 
     var stopCron = cron.schedule(`${endMinute} ${endHour} ${endDay} ${endMonth} *`, () => {
         var taskDB = getModelByShow(db, "task", taskModel);
-        console.log("taskid",taskId)
+        console.log("taskid", taskId)
         taskDB.findOne({ _id: taskId }, function (err, taskData) {
             if (err) {
                 logger.error("Error while find the task1. ");

@@ -1961,3 +1961,316 @@ SyntaxError: Unexpected token }
     at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:48:1)
     at Module._compile (internal/modules/cjs/loader.js:936:30)
     at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T06:23:00.038Z [logs] error: User token not found 
+2021-03-12T06:23:00.064Z [logs] error: User token not found 
+2021-03-12T06:23:00.085Z [logs] error: User token not found 
+2021-03-12T06:30:00.022Z [logs] error: User token not found 
+2021-03-12T06:30:00.026Z [logs] error: User token not found 
+2021-03-12T06:30:00.053Z [logs] error: User token not found 
+2021-03-12T07:04:00.040Z [logs] error: User token not found 
+2021-03-12T07:04:00.066Z [logs] error: User token not found 
+2021-03-12T07:04:00.086Z [logs] error: User token not found 
+2021-03-12T07:10:00.023Z [logs] error: User token not found 
+2021-03-12T07:10:00.044Z [logs] error: User token not found 
+2021-03-12T07:10:00.065Z [logs] error: User token not found 
+2021-03-12T07:28:00.047Z [logs] error: User token not found 
+2021-03-12T07:28:00.065Z [logs] error: User token not found 
+2021-03-12T07:28:00.083Z [logs] error: User token not found 
+2021-03-12T08:19:00.043Z [logs] error: User token not found 
+2021-03-12T08:19:00.063Z [logs] error: User token not found 
+2021-03-12T08:19:00.113Z [logs] error: User token not found 
+2021-03-12T08:30:00.038Z [logs] error: User token not found 
+2021-03-12T08:30:00.057Z [logs] error: User token not found 
+2021-03-12T08:30:00.132Z [logs] error: User token not found 
+2021-03-12T08:51:31.722Z [logs] error: uncaughtException: Unexpected token if
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:52
+                                                    if (taskPlayInfo.earnPoint > 0) {
+                                                    ^^
+
+SyntaxError: Unexpected token if
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T08:51:37.500Z [logs] error: uncaughtException: Unexpected token if
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:52
+                                                    if (taskPlayInfo.earnPoint > 0) {
+                                                    ^^
+
+SyntaxError: Unexpected token if
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T08:51:41.253Z [logs] error: uncaughtException: Unexpected token if
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:52
+                                                    if (taskPlayInfo.earnPoint > 0) {
+                                                    ^^
+
+SyntaxError: Unexpected token if
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T08:51:44.377Z [logs] error: uncaughtException: Unexpected token if
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:52
+                                                    if (taskPlayInfo.earnPoint > 0) {
+                                                    ^^
+
+SyntaxError: Unexpected token if
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T08:52:37.420Z [logs] error: uncaughtException: Unexpected token if
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:52
+                                                    if(taskPlayInfo.earnPoint > 0) {
+                                                    ^^
+
+SyntaxError: Unexpected token if
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T08:53:03.109Z [logs] error: uncaughtException: Unexpected token if
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:52
+                                                    if(taskPlayInfo.earnPoint > 0) {
+                                                    ^^
+
+SyntaxError: Unexpected token if
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T08:53:43.245Z [logs] error: uncaughtException: Unexpected token if
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:52
+                                                    if(taskPlayInfo?.earnPoint > 0) {
+                                                    ^^
+
+SyntaxError: Unexpected token if
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T08:53:53.160Z [logs] error: uncaughtException: Unexpected token .
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\shared-function\sendNotificationForTaskWinner.js:51
+                                                    if(taskPlayInfo?.earnPoint > 0) {
+                                                                    ^
+
+SyntaxError: Unexpected token .
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\task.js:14:43)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:4:24)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T09:01:05.087Z [logs] error: User token not found 
+2021-03-12T09:01:05.103Z [logs] error: User token not found 
+2021-03-12T09:01:05.135Z [logs] error: User token not found 
+2021-03-12T09:04:08.574Z [logs] error: User token not found 
+2021-03-12T09:04:08.582Z [logs] error: User token not found 
+2021-03-12T09:04:08.612Z [logs] error: User token not found 
+2021-03-12T09:05:17.118Z [logs] error: User token not found 
+2021-03-12T09:05:17.121Z [logs] error: User token not found 
+2021-03-12T09:05:17.141Z [logs] error: User token not found 
+2021-03-12T09:06:59.699Z [logs] error: User token not found 
+2021-03-12T09:06:59.705Z [logs] error: User token not found 
+2021-03-12T09:06:59.755Z [logs] error: User token not found 
+2021-03-12T09:07:54.366Z [logs] error: User token not found 
+2021-03-12T09:07:54.375Z [logs] error: User token not found 
+2021-03-12T09:07:54.411Z [logs] error: User token not found 
+2021-03-12T09:10:34.895Z [logs] error: User token not found 
+2021-03-12T09:10:34.912Z [logs] error: User token not found 
+2021-03-12T09:10:34.933Z [logs] error: User token not found 
+2021-03-12T09:13:13.981Z [logs] error: User token not found 
+2021-03-12T09:13:14.025Z [logs] error: User token not found 
+2021-03-12T09:13:14.048Z [logs] error: User token not found 
+2021-03-12T09:14:39.927Z [logs] error: User token not found 
+2021-03-12T09:14:39.937Z [logs] error: User token not found 
+2021-03-12T09:14:39.961Z [logs] error: User token not found 
+2021-03-12T09:18:19.563Z [logs] error: User token not found 
+2021-03-12T09:18:19.591Z [logs] error: User token not found 
+2021-03-12T09:18:19.600Z [logs] error: User token not found 
+2021-03-12T09:38:54.091Z [logs] error: uncaughtException: eventLanguage is not defined
+ReferenceError: eventLanguage is not defined
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\taskPlay.js:110:46
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4863:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\helpers\promiseOrCallback.js:24:16
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\model.js:4886:21
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\mongoose\lib\query.js:4397:11
+    at D:\Bigg Boss\Backend\Its-My-Choize-Backend\node_modules\kareem\index.js:136:16
+    at processTicksAndRejections (internal/process/task_queues.js:75:11)
+2021-03-12T10:00:43.958Z [logs] error: uncaughtException: Unexpected token ]
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\favorite.js:18
+            message: translation[],
+                                 ^
+
+SyntaxError: Unexpected token ]
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:9:28)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:48:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T10:38:00.049Z [logs] error: User token not found 
+2021-03-12T10:38:00.096Z [logs] error: User token not found 
+2021-03-12T10:38:00.149Z [logs] error: User token not found 
+2021-03-12T10:44:20.201Z [logs] error: User token not found 
+2021-03-12T10:44:20.210Z [logs] error: User token not found 
+2021-03-12T10:44:20.220Z [logs] error: User token not found 
+2021-03-12T10:48:00.033Z [logs] error: User token not found 
+2021-03-12T10:48:00.041Z [logs] error: User token not found 
+2021-03-12T10:48:00.052Z [logs] error: User token not found 
+2021-03-12T11:08:00.029Z [logs] error: User token not found 
+2021-03-12T11:08:00.051Z [logs] error: User token not found 
+2021-03-12T11:08:00.070Z [logs] error: User token not found 
+2021-03-12T11:19:19.804Z [logs] error: Error while list the tasks.
+2021-03-12T12:01:00.682Z [logs] error: uncaughtException: Unexpected token {
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\taskPlay.js:169
+        {
+        ^
+
+SyntaxError: Unexpected token {
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:5:28)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:48:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-12T12:03:58.654Z [logs] error: uncaughtException: Unexpected token ]
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\taskPlay.js:163
+                        }]
+                         ^
+
+SyntaxError: Unexpected token ]
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:5:28)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:48:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)

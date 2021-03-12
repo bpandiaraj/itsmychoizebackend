@@ -60,6 +60,8 @@ exports.taskCreate = function (req, res) {
                 isFeatured: body.isFeatured,
                 createdBy: req.id,
                 translation: translation,
+                startNotification: body.startNotification,
+                stopNotification: body.stopNotification,
                 event: req.show,
                 week: body.week
             });
@@ -182,6 +184,8 @@ exports.taskImageUpdate = function (req, res) {
                 isFeatured: body.isFeatured,
                 createdBy: req.id,
                 translation: translation,
+                startNotification: body.startNotification,
+                stopNotification: body.stopNotification,
                 week: body.week
             };
 
@@ -740,7 +744,7 @@ function taskWinningContestantSend(winningContestants, taskDB, db, id) {
             message: "Please provide the Winning Contestants list.",
         });
     }
- 
+
     var taskPlayData = getModelByShow(db, "taskPlay", taskPlayModel);
     console.log("task", id)
     taskPlayData.find({ task: id }, function (err, taskInformation) {

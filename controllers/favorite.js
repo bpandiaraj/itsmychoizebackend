@@ -5,22 +5,27 @@ const { masterDB } = require("../config/config.js");
 const { allArrayIsEqual } = require("../shared-function/compareArrays.js");
 const logger = require("../config/logger");
 const userModel = require("../models/users.js");
+const translation = require("../util/translation.json")
 
 exports.saveFavoriteContestants = function (req, res) {
     var favoriteDB = getModelByShow(req.db, "favorite", favoriteModel);
+    eventLanguage = req.eventLanguage || 'en';
+
     if (!(req.body.contestants instanceof Array)) {
         return res.status(400).json({
             apiName: "Contestant Favorite API",
             success: false,
-            message: "Please provide contestant list.",
+            message: translation[eventLanguage].contestantFavoriteListEmpty,
         });
     }
 
     if (req.configure.maxFavoriteContestant != req.body.contestants.length) {
+        var text = translation[eventLanguage].contestantFavoriteListLengthMismatch.replace("$LENGTH$", req.configure.maxFavoriteContestant)
+
         return res.status(400).json({
             apiName: "Contestant Favorite API",
             success: false,
-            message: `Please favorite the ${req.configure.maxFavoriteContestant} contestants.`,
+            message: text
         });
     }
 
@@ -32,14 +37,14 @@ exports.saveFavoriteContestants = function (req, res) {
                 return res.status(400).json({
                     apiName: "Contestant Favorite API",
                     success: false,
-                    message: "Error Occurred",
+                    message: translation[eventLanguage].contestantFavoriteError
                 });
             } else if (!favoriteInfo) {
                 if (req.body.contestants.length == 0) {
                     return res.status(400).json({
                         apiName: "Contestant Favorite API",
                         success: false,
-                        message: "Please provide contestant list.",
+                        message:translation[eventLanguage].contestantFavoriteListEmpty,
                     });
                 }
 
@@ -57,7 +62,7 @@ exports.saveFavoriteContestants = function (req, res) {
                         return res.status(400).json({
                             apiName: "Contestant Favorite API",
                             success: false,
-                            message: "Error Occurred",
+                            message: translation[eventLanguage].contestantFavoriteError
                         });
                     } else {
                         var userDB = getModelByShow(masterDB, "user", userModel);
@@ -71,7 +76,7 @@ exports.saveFavoriteContestants = function (req, res) {
                                     res.json({
                                         apiName: "Contestant Favorite API",
                                         success: true,
-                                        message: "Contestant has been favorited",
+                                        message: translation[eventLanguage].contestantFavoriteSuccess,
                                         point: `${userInfo.point} - (0 * ${req.configure.pointToMinus}) = ${point}`
                                     });
                                 })
@@ -86,7 +91,7 @@ exports.saveFavoriteContestants = function (req, res) {
                     return res.status(400).json({
                         apiName: "Contestant Favorite API",
                         success: false,
-                        message: "Please provide contestant list.",
+                        message:translation[eventLanguage].contestantFavoriteListEmpty,
                     });
                 }
 
@@ -104,7 +109,7 @@ exports.saveFavoriteContestants = function (req, res) {
                             return res.status(400).json({
                                 apiName: "Contestant Update Favorite API",
                                 success: false,
-                                message: "Error Occurred",
+                                message: translation[eventLanguage].contestantFavoriteError
                             });
                         } else {
 
@@ -119,7 +124,7 @@ exports.saveFavoriteContestants = function (req, res) {
                                         res.json({
                                             apiName: "Contestant Favorite API",
                                             success: true,
-                                            message: "Contestant favorite has been updated",
+                                            message: translation[eventLanguage].contestantFavoriteSuccess,
                                             point: `${userInfo.point} - (${contestantMatch} * ${req.configure.pointToMinus}) = ${point}`
                                         });
                                     })
@@ -137,7 +142,7 @@ exports.saveFavoriteContestants = function (req, res) {
                             res.json({
                                 apiName: "Contestant Favorite API",
                                 success: true,
-                                message: "Contestants are already favorited",
+                                message: translation[eventLanguage].contestantFavoriteSuccess,
                                 point: `${userInfo.point} - (0 * ${req.configure.pointToMinus}) = ${point}`
                             });
                         }

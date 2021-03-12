@@ -5,14 +5,17 @@ const { masterDB } = require("../config/config.js");
 const logger = require("../config/logger");
 const taskModel = require("../models/task.js");
 const moment = require("moment");
+const translation = require("../util/translation.json")
 
 exports.taskPlayCreate = function (req, res) {
     var taskPlayData = getModelByShow(req.db, "taskPlay", taskPlayModel);
+    eventLanguage = req.eventLanguage || 'en';
+
     if (!req.body.task || (Array.isArray(req.body.contestants) && req.body.contestants.length == 0)) {
         return res.status(400).json({
             apiName: "Task Play Create API",
             success: false,
-            message: "Please provide the task ID and contestant list to play the task"
+            message: translation[eventLanguage].taskIdMissing
         });
     }
 
@@ -23,20 +26,22 @@ exports.taskPlayCreate = function (req, res) {
             res.status(400).json({
                 apiName: "Task Play Create API",
                 success: false,
-                message: "Error Occurred"
+                message: translation[eventLanguage].taskPlayError
             });
         } else if (!taskInfo) {
             logger.error(`Task not found`);
             res.status(400).json({
                 apiName: "Task Play Create API",
                 success: false,
-                message: "Task not found"
+                message: translation[eventLanguage].taskNotFound
             });
         } else {
             if (taskInfo.status == 'live') {
                 var today = moment();
                 var isBefore = moment(today).isBefore(taskInfo.endAt);
                 if (isBefore) {
+                    console.log(req.body.contestants)
+                    console.log("req.body.contestants.length == taskInfo.maxContestants", req.body.contestants.length, taskInfo.maxContestants)
                     if (req.body.contestants.length == taskInfo.maxContestants) {
                         taskPlayData.findOne({ "user._id": req.id, task: req.body.task }, function (err, taskInformation) {
                             if (err) {
@@ -44,7 +49,7 @@ exports.taskPlayCreate = function (req, res) {
                                 res.status(400).json({
                                     apiName: "Task Play Create API",
                                     success: false,
-                                    message: "Error Occurred"
+                                    message: translation[eventLanguage].taskPlayError
                                 });
                             } else if (!taskInformation) {
                                 console.log("taskInformation", taskInformation)
@@ -61,14 +66,14 @@ exports.taskPlayCreate = function (req, res) {
                                         res.status(400).json({
                                             apiName: "Task Play Create API",
                                             success: false,
-                                            message: "Error Occurred"
+                                            message: translation[eventLanguage].taskPlayError
                                         });
                                     } else {
                                         logger.info(`Task play created.`);
                                         res.json({
                                             apiName: "Task Play Create API",
                                             success: true,
-                                            message: "Task play has been saved successfully."
+                                            message: translation[eventLanguage].taskPlayError
                                         });
                                     }
                                 });
@@ -81,38 +86,39 @@ exports.taskPlayCreate = function (req, res) {
                                         res.status(400).json({
                                             apiName: "Task Play Updated API",
                                             success: false,
-                                            message: "Error Occurred"
+                                            message: translation[eventLanguage].taskPlayError
                                         });
                                     } else {
                                         logger.info(`Task play Updated.`);
                                         res.json({
                                             apiName: "Task Play Updated API",
                                             success: true,
-                                            message: "Task play has been saved successfully."
+                                            message: translation[eventLanguage].taskPlayError
                                         });
                                     }
                                 });
                             }
                         });
                     } else {
+                        var text = translation[eventLanguage].taskPlayContestantCount.replace("$CONTESTANTCOUNT$", taskInfo.maxContestants)
                         res.status(400).json({
                             apiName: "Task Play Create API",
                             success: false,
-                            message: `Please select the ${taskInfo.maxContestants} contestants.`
+                            message: text
                         });
                     }
-                }else{
+                } else {
                     res.status(400).json({
                         apiName: "Task Play Create API",
                         success: false,
-                        message: "Task play time is ended."
+                        message: translation[eventLanguage].taskPlayTimeout
                     });
                 }
             } else {
                 res.status(400).json({
                     apiName: "Task Play Create API",
                     success: false,
-                    message: "You cannot play this task."
+                    message: translation[eventLanguage].taskInactive
                 });
             }
 
@@ -125,7 +131,7 @@ exports.getUserPalyedTask = function (req, res) {
     var arr = [];
     arr = [
         {
-            $lookup:{
+            $lookup: {
                 from: "tasks",
                 localField: "task",
                 foreignField: "_id",
@@ -133,13 +139,13 @@ exports.getUserPalyedTask = function (req, res) {
             }
         },
         {
-            $project:{
-                user:1,
-                contestants:1,
-                createdAt:1,
-                earnPoint:1,
-                status:1,
-                userRanking:1,
+            $project: {
+                user: 1,
+                contestants: 1,
+                createdAt: 1,
+                earnPoint: 1,
+                status: 1,
+                userRanking: 1,
                 task: { $arrayElemAt: ["$task", 0] }
             }
         },
@@ -147,8 +153,17 @@ exports.getUserPalyedTask = function (req, res) {
             "$group": {
                 _id: { user: "$user.userName" },
                 user: { "$push": "$user" },
+                // taskPlay:{ "$push": {
+                //     "earnPoint":"$earnPoint"
+                // }},
+                tasks: {
+                    "$push": {
+                        $mergeObjects: ["$task", {
+                            wonPoint: { $ifNull: ["$earnPoint", 0] }
+                        }]
+                    }
+                },
                 earnPoint: { $sum: "$earnPoint" },
-                tasks: { "$push": "$task" }
             },
         },
         {
@@ -156,7 +171,8 @@ exports.getUserPalyedTask = function (req, res) {
                 "user": { $arrayElemAt: ["$user", 0] },
                 "_id": 0,
                 "earnPoint": 1,
-                "tasks": 1
+                "tasks": 1,
+                // "taskPlay":1
             }
         },
         {
@@ -164,7 +180,7 @@ exports.getUserPalyedTask = function (req, res) {
                 "earnPoint": -1
             }
         },
-        { 
+        {
             $group: {
                 _id: "",
                 rankings: {
@@ -172,7 +188,7 @@ exports.getUserPalyedTask = function (req, res) {
                 }
             }
         },
-        { 
+        {
             $unwind: {
                 path: "$rankings",
                 includeArrayIndex: "rank"
@@ -186,22 +202,29 @@ exports.getUserPalyedTask = function (req, res) {
                 "user": "$rankings.user",
                 "earnPoint": "$rankings.earnPoint",
                 "rank": 1,
+                "taskPlay": "$rankings.taskPlay"
                 // "sameRankCount": { $size: "$rankings.participants" }
             }
         },
         {
-            $match: { "user._id": ObjectId(req.id)  }
+            $match: { "user._id": ObjectId(req.id) }
         },
-        { 
+        {
             $unwind: {
                 path: "$tasks",
             }
         },
+        // {
+        //     $unwind: {
+        //         path: "$taskPlay",
+        //     }
+        // },
         {
             $addFields: {
+                "point": "$tasks.wonPoint",
                 "week": "$tasks.week",
                 "winningContestants": "$tasks.winningContestants"
-            } 
+            }
         },
         {
             $lookup: {
@@ -212,12 +235,25 @@ exports.getUserPalyedTask = function (req, res) {
             },
         },
         {
+            "$project": {
+                "userId": 1,
+                "tasks": 1,
+                "user": 1,
+                "earnPoint": "$point",
+                "rank": 1,
+                "taskPlay": 1,
+                "week": 1,
+                "winningContestants": 1
+                // "sameRankCount": { $size: "$rankings.participants" }
+            }
+        },
+        {
             "$sort": {
                 "week": 1
             }
         },
         {
-            $match : {"tasks.status":"inactive"}
+            $match: { "tasks.status": "inactive" }
         }
     ]
 

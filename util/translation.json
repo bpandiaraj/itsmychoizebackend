@@ -1,11 +1,37 @@
 {
     "en": {
+        "taskEndWon": "TASKNAME has been ended and you won POINT.",
+        "taskEndLost": "TASKNAME has been ended and you lost the task.",
+
+        "taskPlaySuccess": "Task play has been saved successfully.",
+        "taskPlayError": "Error Occurred",
+        "taskNotFound": "Task not found",
+        "taskPlayContestantCount": "Please select the $CONTESTANTCOUNT$ contestants.",
+        "taskPlayTimeout": "Task play time is ended.",
+        "taskInactive": "You cannot play this task.",
+        "taskIdMissing": "Please provide the task ID and contestant list to play the task.",
         
+        "contestantFavoriteListEmpty": "Please provide contestant list.",
+        "contestantFavoriteListLengthMismatch": "Please favorite the $LENGTH$ contestants.",
+        "contestantFavoriteSuccess": "Contestant has been favorited.",
+        "contestantFavoriteError": "Error Occurred."
     },
-    "ta":{
+    "ta": {
+        "taskEndWon": "TASKNAME முடிந்தது மற்றும் நீங்கள் POINT ஐ வென்றீர்கள்.",
+        "taskEndLost": "TASKNAME முடிந்தது மற்றும் நீங்கள் தேர்வை இழந்தீர்கள்.",
 
+        "taskPlaySuccess": "தேர்வு வெற்றிகரமாக சேமிக்கப்பட்டது.",
+        "taskPlayError": "பிழை ஏற்பட்டுவிட்டது",
+        "taskNotFound": "தேர்வு கிடைக்கவில்லை",
+        "taskPlayContestantCount": "$CONTESTANTCOUNT$ போட்டியாளர்களைத் தேர்ந்தெடுக்கவும்.",
+        "taskPlayTimeout": "தேர்வு விளையாட்டு நேரம் முடிந்தது.",
+        "taskInactive": "இந்த தேர்வை நீங்கள் செய்ய முடியாது.",
+        "taskIdMissing": "தேர்வை இயக்க தேர்வு ஐடி மற்றும் போட்டியாளர் பட்டியலை வழங்கவும்.",
+
+        "contestantFavoriteListEmpty": "போட்டியாளர் பட்டியலை வழங்கவும்.",
+        "contestantFavoriteListLengthMismatch": "$LENGTH$ போட்டியாளர்களைத் தேர்ந்தெடுக்கவும்.",
+        "contestantFavoriteSuccess": "போட்டியாளர் தேர்ந்தெடுக்கப்பட்டது.",
+        "contestantFavoriteError": "பிழை ஏற்பட்டுவிட்டது."
     },
-    "tl":{
-
-    }
+    "tl": {}
 }

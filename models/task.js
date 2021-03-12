@@ -61,6 +61,12 @@ var taskSchema = mongoose.Schema(
         week: {
             type: String
         },
+        startNotification:{
+            type: String
+        },
+        stopNotification:{
+            type: String
+        },
         translation: {
             type: Object
         }

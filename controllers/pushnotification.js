@@ -7,7 +7,7 @@ const { masterDB } = require("../config/config.js");
 
 exports.sendPushNotificationToMobile = function (req, res) {
 
-    sendPushNotification(req.body.messageId);
+    sendPushNotification(req.body.messageId,"Notification Test","Checking the notification");
 
     setTimeout(() => {
         res.json({

@@ -54,7 +54,7 @@ module.exports = function (app) {
     app.put('/api/v1/contestants', tokenVerify, showLanguage, contestantsController.contestantsImageUpdate);
     app.delete('/api/v1/contestants', tokenVerify, contestantsController.contestantsDelete);
     app.post('/api/v1/contestants/status', tokenVerify, contestantsController.contestantsStatus);
-    app.post('/api/v1/contestants/favorite', tokenVerify, configuration, favoriteController.saveFavoriteContestants);
+    app.post('/api/v1/contestants/favorite', tokenVerify, configuration, favoriteshowLanguage, favoriteController.saveFavoriteContestants);
     app.get('/api/v1/contestants/favorite/list', tokenVerify, showLanguage, favoriteshowLanguage, favoriteController.getMyFavoriteContestants);
 
     /*
@@ -107,7 +107,7 @@ module.exports = function (app) {
     Task Play API.
         1. Task List
     */
-    app.post('/api/v1/taskplay', tokenVerify, showLanguage, taskPlayController.taskPlayCreate);
+    app.post('/api/v1/taskplay', tokenVerify, showLanguage, favoriteshowLanguage, taskPlayController.taskPlayCreate);
     app.get('/api/v1/user/taskplay', tokenVerify, showLanguage, taskPlayController.getUserPalyedTask);
 
     /*
@@ -149,6 +149,7 @@ module.exports = function (app) {
     */
     app.post('/api/v1/deviceToken', tokenVerify, notificationController.saveDeviceTokenForUser);
     app.get('/api/v1/notification', tokenVerify, notificationController.getUserNotification);
+    app.post('/api/v1/notification/check', tokenVerify, notificationController.sendPushNotificationToMobile);
 
     /*
     1. Dashboard
