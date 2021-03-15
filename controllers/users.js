@@ -43,7 +43,8 @@ exports.userCheckAndCreate = (req, res) => {
               profilePicture: userInfo.photoURL || null,
               userName: uniqueName,
               status: 'active',
-              point: req.configure.entryPointForUser || 0
+              point: req.configure.entryPointForUser || 0,
+              createdAt:new Date()
             });
             userData.save(function (err, savedData) {
               if (err) {

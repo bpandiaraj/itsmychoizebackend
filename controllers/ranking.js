@@ -477,10 +477,10 @@ exports.getRankingBannerList = function (req, res) {
                                     var currentUserRanking = [listdata[0]];
                                     currentUser = currentUserRanking;
                                     // bannerListReorder = bannerListReorder.concat(currentUserRanking);
-                                    console.log("currentUser 1",currentUser)
-                                }else{
-                                    currentUser =bannerListReorder[userPosition];
-                                    console.log("currentUser 2",currentUser)
+                                    console.log("currentUser 1", currentUser)
+                                } else {
+                                    currentUser = bannerListReorder[userPosition];
+                                    console.log("currentUser 2", currentUser)
                                 }
                                 res.json({
                                     apiName: "Ranking Banner List API",
@@ -673,23 +673,32 @@ exports.getTop3RankingList = function (req, res) {
                 message: "Some Error Occured",
             });
         } else {
-            var previousRanking = 0;
-            var firstRanking = listdata[0].earnPoint;
-            listdata.forEach((element, index) => {
-                if (firstRanking == element.earnPoint) {
-                    listdata[index].rank = previousRanking;
-                } else {
-                    firstRanking = element.earnPoint;
-                    previousRanking = listdata[index].rank;
-                }
-            });
-            console.log("listData", listdata);
-            res.json({
-                apiName: "Top 3 Ranking List API",
-                success: true,
-                message: "Successfully view ranking list",
-                rankingList: listdata,
-            });
+            if (listdata.length > 0) {
+                var previousRanking = 0;
+                var firstRanking = listdata[0].earnPoint;
+                listdata.forEach((element, index) => {
+                    if (firstRanking == element.earnPoint) {
+                        listdata[index].rank = previousRanking;
+                    } else {
+                        firstRanking = element.earnPoint;
+                        previousRanking = listdata[index].rank;
+                    }
+                });
+                console.log("listData", listdata);
+                res.json({
+                    apiName: "Top 3 Ranking List API",
+                    success: true,
+                    message: "Successfully view ranking list",
+                    rankingList: listdata,
+                });
+            } else {
+                res.json({
+                    apiName: "Top 3 Ranking List API",
+                    success: true,
+                    message: "No data found",
+                    rankingList: [],
+                });
+            }
         }
     });
 };
@@ -805,23 +814,33 @@ exports.getTop10RankingList = function (req, res) {
                 message: "Some Error Occured",
             });
         } else {
-            var previousRanking = 0;
-            var firstRanking = listdata[0].earnPoint;
-            listdata.forEach((element, index) => {
-                if (firstRanking == element.earnPoint) {
-                    listdata[index].rank = previousRanking;
-                } else {
-                    firstRanking = element.earnPoint;
-                    previousRanking = listdata[index].rank;
-                }
-            });
-            console.log("listData", listdata);
-            res.json({
-                apiName: "Top 10 Ranking List API",
-                success: true,
-                message: "Successfully view ranking list",
-                rankingList: listdata,
-            });
+            if (listdata.length > 0) {
+                var previousRanking = 0;
+                var firstRanking = listdata[0].earnPoint;
+                listdata.forEach((element, index) => {
+                    if (firstRanking == element.earnPoint) {
+                        listdata[index].rank = previousRanking;
+                    } else {
+                        firstRanking = element.earnPoint;
+                        previousRanking = listdata[index].rank;
+                    }
+                });
+                console.log("listData", listdata);
+                res.json({
+                    apiName: "Top 10 Ranking List API",
+                    success: true,
+                    message: "Successfully view ranking list",
+                    rankingList: listdata,
+                });
+            }else{
+                res.json({
+                    apiName: "Top 10 Ranking List API",
+                    success: true,
+                    message: "No data found",
+                    rankingList: [],
+                });
+
+            }
         }
     });
 };
@@ -923,17 +942,17 @@ exports.getOverAllRankingList = function (req, res) {
                 earnPoint: 1,
                 sameRankCount: 1,
                 rank: 1,
-                tasks:"$participants.tasks",
-                user:"$participants.user",
+                tasks: "$participants.tasks",
+                user: "$participants.user",
                 // participants: 1,
             }
         },
     ]
 
-    if(req.query.rank && req.query.rank != 'all'){
+    if (req.query.rank && req.query.rank != 'all') {
         var filter = [{
-            $match:{
-                rank : Number(req.query.rank)
+            $match: {
+                rank: Number(req.query.rank)
             }
         }]
         arr = arr.concat(filter);
@@ -957,7 +976,7 @@ exports.getOverAllRankingList = function (req, res) {
     ) {
         if (err) {
             logger.error(`Error while list the tasks.`);
-            console.log("err",err)
+            console.log("err", err)
             res.status(400).json({
                 apiName: "Ranking List API",
                 success: false,

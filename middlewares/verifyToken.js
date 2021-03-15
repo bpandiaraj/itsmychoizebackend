@@ -36,6 +36,8 @@ module.exports = function (req, res, next) {
                                     uid: user.uid,
                                     name: user.name,
                                     userName: user.userName,
+                                    email: user.email,
+                                    mobile: user.mobile,
                                     profilePicture: user.profilePicture
                                 };
                                 req.user = 'user';

@@ -2274,3 +2274,41 @@ SyntaxError: Unexpected token ]
     at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:48:1)
     at Module._compile (internal/modules/cjs/loader.js:936:30)
     at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+2021-03-15T10:27:11.328Z [logs] error: Error while list the tasks.
+2021-03-15T10:27:11.333Z [logs] error: Error while list the tasks.
+2021-03-15T10:27:12.433Z [logs] error: Error while list the tasks.
+2021-03-15T10:27:12.436Z [logs] error: Error while list the tasks.
+2021-03-15T10:27:56.938Z [logs] error: Error while list the tasks.
+2021-03-15T10:27:56.940Z [logs] error: Error while list the tasks.
+2021-03-15T10:30:08.465Z [logs] error: Error while list the tasks.
+2021-03-15T10:58:11.827Z [logs] error: Error while list the tasks.
+2021-03-15T10:58:16.274Z [logs] error: Error while list the tasks.
+2021-03-15T10:58:18.227Z [logs] error: Error while list the tasks.
+2021-03-15T10:58:21.453Z [logs] error: Error while list the tasks.
+2021-03-15T10:58:28.325Z [logs] error: Error while list the tasks.
+2021-03-15T10:58:38.526Z [logs] error: Error while list the tasks.
+2021-03-15T10:59:15.648Z [logs] error: Error while list the tasks.
+2021-03-15T10:59:52.878Z [logs] error: Error while list the tasks.
+2021-03-15T10:59:53.877Z [logs] error: Error while list the tasks.
+2021-03-15T11:29:00.645Z [logs] error: uncaughtException: Unexpected token .
+D:\Bigg Boss\Backend\Its-My-Choize-Backend\controllers\report.js:79
+            console.log("day",day)
+                   ^
+
+SyntaxError: Unexpected token .
+    at Module._compile (internal/modules/cjs/loader.js:872:18)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\routes\route.js:14:26)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
+    at Module.load (internal/modules/cjs/loader.js:790:32)
+    at Function.Module._load (internal/modules/cjs/loader.js:703:12)
+    at Module.require (internal/modules/cjs/loader.js:830:19)
+    at require (internal/modules/cjs/helpers.js:68:18)
+    at Object.<anonymous> (D:\Bigg Boss\Backend\Its-My-Choize-Backend\server.js:48:1)
+    at Module._compile (internal/modules/cjs/loader.js:936:30)
+    at Object.Module._extensions..js (internal/modules/cjs/loader.js:947:10)
