@@ -479,7 +479,7 @@ exports.getRankingBannerList = function (req, res) {
                                     // bannerListReorder = bannerListReorder.concat(currentUserRanking);
                                     console.log("currentUser 1", currentUser)
                                 } else {
-                                    currentUser = bannerListReorder[userPosition];
+                                    currentUser = [bannerListReorder[userPosition]];
                                     console.log("currentUser 2", currentUser)
                                 }
                                 res.json({
@@ -495,7 +495,7 @@ exports.getRankingBannerList = function (req, res) {
                             apiName: "Ranking Banner List API",
                             success: true,
                             message: "Successfully view ranking list",
-                            rankingList: bannerListReorder[userPosition],
+                            rankingList: [bannerListReorder[userPosition]],
                         });
                     }
 

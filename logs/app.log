@@ -27217,3 +27217,12 @@ SyntaxError: Unexpected token .
 2021-03-15T12:00:43.645Z [logs] info: ::ffff:192.168.86.49 - - [15/Mar/2021:12:00:43 +0000] "GET /api/v1/report?byCountry=all&byState=all&byCity=&registerdOn=month HTTP/1.1" 200 1646 "http://localhost:4200/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/89.0.4389.82 Safari/537.36"
 
 2021-03-15T12:15:23.902Z [logs] info: User inactive status change event has called
+2021-03-15T12:15:30.598Z [logs] info: User inactive status change event has called
+2021-03-15T12:38:38.359Z [logs] info: Successfully created and connected to the database with DB its_my_choize schema configuration
+2021-03-15T12:38:38.382Z [logs] info: Successfully connected to the database with DB its_my_choize schema user
+2021-03-15T12:38:38.386Z [logs] info: User create api
+2021-03-15T12:38:38.405Z [logs] info: User found and profile not updated
+2021-03-15T12:38:38.412Z [logs] info: ::ffff:192.168.86.20 - - [15/Mar/2021:12:38:38 +0000] "GET /api/v1/user/create?uid=vrEXhZsjaxOHh7OiGSgpL2hSut22 HTTP/1.1" 200 93 "-" "Dart/2.10 (dart:io)"
+
+2021-03-15T12:38:39.307Z [logs] info: ::ffff:192.168.86.20 - - [15/Mar/2021:12:38:39 +0000] "GET /api/v1/user/profile HTTP/1.1" 200 504 "-" "Dart/2.10 (dart:io)"
+
